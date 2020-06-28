@@ -4,77 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hazart</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style/style.css">
 </head>
 <body>
     <div class="app">
         <div class="main">
-            <div class="wallet">
-                <span class="money-icon"></span>
-                <span class="money">10</span>
-                <span class="dolar"><sub>PLN</sub></span>
-            </div>
-            <div class="game">
-                <div class="hazard">
-                </div>
-                <div class="invest">
-                    <div class="invest-container">
-                        <ul class="invest-list">
-                        </ul>
-                    </div>
-                </div>
-                <div class="work"></div>
-            </div>
-        </div>
-        <div class="tools-bar">
-            <div class="status">
-                <div class="energy">
+            <div class="wallet"></div>
+            <div class="energy">
+                <div class="energy-status">
                     <span class="energy-actual">50</span>
                     <span class="energy-on">/</span>
-                    <span class="energy-full">100</span>
-                    <span class="energy-fill">Uzupełnij energię</span>
+                    <span class="energy-max">100</span>
+                </div>
+                <div class="energy-fill"></div>
+            </div>
+        </div>
+        <div class="tools">
+            <div class="character-upgrades">
+                <div class="flex">
+                    <div class="upgrades-box"></div>
+                    <div class="upgrades-box"></div>
+                </div>
+                <div class="flex">
+                    <div class="upgrades-box"></div>
+                    <div class="upgrades-box"></div>
                 </div>
             </div>
-            <div class="upgrade">
-                <div class="character-upgrade-container">
-                    <ul>
-                        <span class="character-upgrade">Postać</span>
-                        <li>
-                            <span class="text" title="Zwiększ szczęscie w hazardzie">Zwiększ szczęście</span>
-                            <span class="upgrade-luck">(0,01%)</span>
-                            <span class="upgrade-luck-actual-level">1</span>
-                            <span class="upgrade-slash">/</span>
-                            <span class="upgrade-luck-maximum-level">100</span>
-                            <span class="upgrade-luck-cost">10</span>
-                            <span class="upgrade-luck-cost-sign">PLN</span>
-                        </li> 
-                        <li>
-                            <span class="text" title="Zwiększ ilość swojej energii">Zwiększ energię</span>
-                            <span class="upgrade-energy">100</span>
-                            <span class="upgrade-energy-actual-level">1</span>
-                            <span class="upgrade-slash">/</span>
-                            <span class="upgrade-energy-maximum-level">100</span>
-                            <span class="upgrade-energy-cost">10 </span>
-                            <span class="upgrade-energy-cost-sign">PLN</span>
-                        </li> 
-                        <li>
-                            <span class="text" title="Płać mniej za wszystko w grze">Zmniejsz podatek</span>
-                            <span class="upgrade-tax">(0,01%)</span>
-                            <span class="upgrade-tax-actual-level">1</span>
-                            <span class="upgrade-slash">/</span>
-                            <span class="upgrade-tax-maximum-level">100</span>
-                            <span class="upgrade-tax-cost">10 </span>
-                            <span class="upgrade-tax-cost-sign">PLN</span>
-                        </li> 
-                    </ul>
-                </div>
+            <div class="investments">
                 
             </div>
             <div class="settings">
-                <div class="save-game">Zapisz grę</div>
-                <div class="load-game">Wczytaj grę</div>
-                <div class="sound">Dźwięk: ON</div>
-                <div class="how-to-play">Poradnik jak grać</div>
+                <div class="upgrade-character"></div>
             </div>
         </div>
     </div>
