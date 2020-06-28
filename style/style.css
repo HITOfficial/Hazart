@@ -57,18 +57,30 @@ body > .app > .tools > .character-upgrades {
     width: 100%;
     height: 40%;
     background-color: indianred;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flex-box {
+    width: 100%;
+    height: 80%;
 }
 .upgrades-box {
     width: 10vw;
-    height: 5vw;
+    height: 8vw;
     background-color: hotpink;
     border-radius: 5%;
+    border: 2px solid seashell;
+    position: relative;
+}
+.upgrades-box:hover {
+    box-shadow: 1px 1px 1px 1px #313131;
 }
 .upgrades-box + .upgrades-box {
     margin-left: 20px;
 
 }
-body > .app > .tools > .character-upgrades >.flex:nth-child(1){
+body > .app > .tools > .character-upgrades > .flex-box >.flex:nth-child(1){
     margin-bottom: 10px;
 }
 .upgrades-box:first-child {
@@ -76,4 +88,58 @@ body > .app > .tools > .character-upgrades >.flex:nth-child(1){
 }
 .upgrades-box:nth-child(2) {
     margin-right: 10x;
+}
+body > .app > .tools > .character-upgrades >.flex-box > .flex:nth-child(1) > .upgrades-box:nth-child(1) {
+    background-color: silver;
+    background-image: url('../images/icons/icons8-money-64.png');
+    background-repeat: no-repeat ;
+    background-position: center;
+    
+}
+body > .app > .tools > .character-upgrades >.flex-box > .flex:nth-child(1) > .upgrades-box:nth-child(2) {
+    background-color: silver;
+    background-image: url('../images/icons/icons8-clover-100.png');
+    background-repeat: no-repeat ;
+    background-position: center;
+}
+body > .app > .tools > .character-upgrades >.flex-box > .flex:nth-child(2) > .upgrades-box:nth-child(1) {
+    background-color: silver;
+    background-image: url('../images/icons/icons8-tax-64.png');
+    background-repeat: no-repeat ;
+    background-position: center;
+}
+.bonus-level {
+    font-size: 0,1vw;
+    text-align: right;
+}
+.upgrade {
+    position: absolute;
+    bottom: -3px;
+    left: 50%;
+    font-size: 1vw;
+    transform: translate(-50%, -50%);
+}
+body > .app > .tools > .investments {
+    width: 100%;
+    height: 40%;
+    background-color: rgb(219, 233, 24);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body > .app > .tools > .settings {
+    width: 100%;
+    height: 20%;
+    background-color: rgb(187, 123, 123);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body > .app > .tools > .settings > .setting-box {
+    width: 25%;
+    height: 50%;
+    background-color: greenyellow;
+}
+body > .app > .tools > .settings > .setting-box + .setting-box {
+    margin-left: 20px;
 }
