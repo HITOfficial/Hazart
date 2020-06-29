@@ -1,6 +1,8 @@
 body {
     margin: 0;
     padding: 0;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
 }
 body > .app {
     width: 100vw;
@@ -31,6 +33,9 @@ li {
 }
 .relative {
     position: relative;
+}
+.block {
+    display: block;
 }
 body > .app > .main {
     height: 100vh;
@@ -113,27 +118,6 @@ body > .app > .main > .top-container > .tab-skills .multiple-luck-skill:hover {
     animation-duration: 1s;
     background-color: turquoise;
 }
-body > .app > .main > .energy {
-    width: 10vw;
-    height: 3vw;
-    background-color: greenyellow;
-    font-size: 2vw;
-    display: flex;
-    justify-items: center;
-    align-items: center;
-}
-body > .app > .main > .energy > .energy-status {
-    width: 80%;
-    height: 100%;
-}
-
-body > .app > .main > .energy > .energy-fill {
-    background-image: url("../images/icons/icons8-plus-64.png");
-    width: 20%;
-    height: 70%;
-    background-size: contain;
-    background-repeat: no-repeat;
-} 
 body > .app > .tools > .character-upgrades {
     width: 100%;
     height: 40%;
@@ -328,12 +312,50 @@ body > .app > .tools > .investments > .auto-container > .auto-shop > .auto-box {
     background-color: tomato;
     border-radius: 5%;
 }
+body > .app > .tools > .investments > .auto-container > .auto-shop > .auto-box > .auto-description {
+    text-align: center;
+    font-size: 2vw;
+    padding-top: 2vw;
+}
+body > .app > .tools > .investments > .auto-container > .auto-shop > .auto-box > .auto-description  > .auto-skill-cost {
+    font-size: 1vw;
+}
+body > .app > .tools > .investments > .auto-container > .auto-shop > .auto-box > .auto-description  > .auto-clicker-cost {
+    font-size: 1vw;
+}
 body > .app > .tools > .investments > .skill-shop > .flex > .upgrades-box {
     text-align: right;
     background-color: #DAF7A6;
     transform: scale(0.8);
     height: 10vh;
     width: 10vw;
+}
+body > .app > .tools > .investments > .skill-shop > .flex .upgrade {
+    transform: translate(-50%, -2%);
+}
+body > .app > .tools > .investments > .skill-shop > .flex > .reset-skills-upgrade {
+    background-image: url('../images/icons/icons8-reset-64.png');
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+body > .app > .tools > .investments > .skill-shop > .flex > .multiple-click-skill {
+    background-image: url('../images/icons/icons8-left-click-64.png');
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+body > .app > .tools > .investments > .skill-shop > .flex > .multiple-money-skill {
+    background-image: url('../images/icons/icons8-profit-64.png');
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+body > .app > .tools > .investments > .skill-shop > .flex > .multiple-luck-skill {
+    background-image: url('../images/icons/icons8-gift-64.png');
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 .cursor-pointer {
     cursor: pointer;
@@ -381,10 +403,13 @@ body > .app > .main > .upgrades-container > .content-box > .sort >  .auto-machin
     background-image: url('../images/icons/factory.png');
     background-size: cover;
 }
-/* body > .app > .main > .upgrades-container > .content-box > .sort >  .worker-machine {
+body > .app > .main > .upgrades-container > .content-box > .sort >  .worker-machine {
     background-image: url('../images/icons/baby-icon.png');
     background-size: cover;
-} */
+}
+body > .app > .main > .upgrades-container > .content-box > .sort   .worker-active{
+    box-shadow: 0 0 0 0 , -0.2vh 0.3vh 1.2vh 0.6vh rgb(199, 51, 51);
+}
 body > .app > .main > .upgrades-container > .content-box > .sort >  .buy-worker {
     background-color: #ff3342;
 }
@@ -393,11 +418,19 @@ body > .app > .main > .upgrades-container > .content-box > .sort >  .buy-worker:
     content: 'Buy worker';
     transform: translate(20%,250%);
 }
+body > .app > .main > .upgrades-container > .content-box > .sort >  .auto-machine::after {
+    position: absolute;
+    content: 'Buy fatory';
+    transform: translate(20%,250%);
+}
 body > .app > .main > .upgrades-container > .content-box > .sort >  .auto-machine .cost-auto-container,
 body > .app > .main > .upgrades-container > .content-box > .sort >  .worker-machine .cost-auto-container {
+    width: 100%;
+    height: 100%;
     position: absolute;
-    transform: translate(80%);
+    background-color: rgba(105, 105, 105, 0.6);
 }
+
 body > .app > .main > .buttons-container > .buttons > .game-box > .game-upgrades {
     width: 100%;
     height: 50%;
@@ -452,10 +485,7 @@ body > .app > .main > .buttons-container > .buttons > .game-box > .game-upgrades
     height: 20%;
     margin: 0 auto;
 }
-.buy-factory {
-    content : 'BUY FACTORY';
-    background-color: bisque;
-}
+
 
 
 
