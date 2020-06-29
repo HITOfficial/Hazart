@@ -303,10 +303,6 @@ body > .app > .main > .upgrades-container > .content-box {
     height: 40%;
     background-color: peru;
 }
-.cost-auto-container {
-    position: absolute;
-    transform: translate(80%);
-}
 .click-machine {
     width: 30%;
     height: 80%;
@@ -385,8 +381,22 @@ body > .app > .main > .upgrades-container > .content-box > .sort >  .auto-machin
     background-image: url('../images/icons/factory.png');
     background-size: cover;
 }
-.game-box {
-    background-color: thistle;
+/* body > .app > .main > .upgrades-container > .content-box > .sort >  .worker-machine {
+    background-image: url('../images/icons/baby-icon.png');
+    background-size: cover;
+} */
+body > .app > .main > .upgrades-container > .content-box > .sort >  .buy-worker {
+    background-color: #ff3342;
+}
+body > .app > .main > .upgrades-container > .content-box > .sort >  .buy-worker::after {
+    position: absolute;
+    content: 'Buy worker';
+    transform: translate(20%,250%);
+}
+body > .app > .main > .upgrades-container > .content-box > .sort >  .auto-machine .cost-auto-container,
+body > .app > .main > .upgrades-container > .content-box > .sort >  .worker-machine .cost-auto-container {
+    position: absolute;
+    transform: translate(80%);
 }
 body > .app > .main > .buttons-container > .buttons > .game-box > .game-upgrades {
     width: 100%;
@@ -427,6 +437,24 @@ body > .app > .main > .buttons-container > .buttons > .game-box > .game-upgrades
 body > .app > .main > .buttons-container > .buttons > .game-box > .game-upgrades > .workers-upgrade:hover {
     box-shadow: 2px 2px 5px 4px rgb(205, 50, 166);
     z-index: 1;
+}
+body > .app > .main > .buttons-container > .buttons > .game-box > .game-upgrades > .upgrade-game > .content-upgrade {
+    text-align: center;
+    padding-top: 7vh;
+}
+body > .app > .main > .buttons-container > .buttons > .game-box > .game-upgrades .upgrade-description {
+    font-size: 2vh;
+}
+body > .app > .main > .buttons-container > .buttons > .game-box > .game-upgrades .upgrade-cost {
+    padding-top: 3vh;
+    font-size: 1vw;
+    width: 50%;
+    height: 20%;
+    margin: 0 auto;
+}
+.buy-factory {
+    content : 'BUY FACTORY';
+    background-color: bisque;
 }
 
 
