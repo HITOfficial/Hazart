@@ -9,18 +9,18 @@
 <body>
     <div class="app">
         <div class="main">
-            <div class="top-container">
+            <div class="top-container no-select">
                 <div class="tab-skills">
-                    <div class="skill reset-skills"></div>
-                    <div class="skill multile-click-skill"></div>
+                    <div class="skill reset-skills cursor-pointer"></div>
+                    <div class="skill multile-click-skill cursor-pointer"></div>
                 </div>
                 <div class="wallet">
                     <span class="money">1000</span>
                     <span class="money-sign">$</span>
                 </div>
                 <div class="tab-skills">
-                    <div class="skill multiple-money-skill"></div>
-                    <div class="skill multiple-luck-skill"></div>
+                    <div class="skill multiple-money-skill cursor-pointer"></div>
+                    <div class="skill multiple-luck-skill cursor-pointer"></div>
                 </div>
             </div>
             <div class="buttons-container">
@@ -36,51 +36,81 @@
             <div class="upgrades-container">
                 <div class="content-box">
                     <div class="sort">
-                        <div class="auto-machine upgrade-box"></div>
-                        <div class="auto-machine upgrade-box"></div>
-                        <div class="auto-machine upgrade-box"></div>
-                        <div class="click-machine click-times"></div>
+                        <div class="auto-machine upgrade-box cursor-pointer"></div>
+                        <div class="auto-machine upgrade-box cursor-pointer"></div>
+                        <div class="auto-machine upgrade-box cursor-pointer"></div>
+                        <div class="click-machine click-times cursor-pointer"></div>
                     </div>
                     <div class="sort">
-                        <div class="auto-machine upgrade-box"></div>
-                        <div class="auto-machine upgrade-box"></div>
-                        <div class="auto-machine upgrade-box"></div>
-                        <div class="click-machine click-multiply"></div>
+                        <div class="auto-machine upgrade-box cursor-pointer"></div>
+                        <div class="auto-machine upgrade-box cursor-pointer"></div>
+                        <div class="auto-machine upgrade-box cursor-pointer"></div>
+                        <div class="click-machine click-multiply cursor-pointer"></div>
                     </div>    
                 </div>
                 <div class="slot-machine-upgrades content-box">
-                    <div class="machine-upgrade"></div>
-                    <div class="machine-upgrade"></div>
+                    <div class="machine-upgrade cursor-pointer"></div>
+                    <div class="machine-upgrade cursor-pointer"></div>
                 </div>
             </div>
         </div>
         <div class="tools">
-            <div class="character-upgrades">
+            <div class="character-upgrades no-select">
                 <div class="flex-box">
                     <div class="flex">
-                        <div class="upgrades-box">
+                        <div class="upgrades-box cursor-pointer">
                             <div class="bonus-level">
                                 <span class="bonus-money-level-currently">1</span>
                                 <span class="box-dash">/</span>
                                 <span class="bonus-money-level-max">100</span>
                             </div>
                             <div class="upgrade">
-                                <span class="upgrade-cost">500</span>
+                                <span class="upgrade-cost cash">500</span>
                                 <span class="upgrade-cost-sign">$</span>
                             </div>
                         </div>
-                        <div class="upgrades-box"></div>
+                        <div class="upgrades-box cursor-pointer">
+                            <div class="bonus-level">
+                                <span class="bonus-luck-level-currently">1</span>
+                                <span class="box-dash">/</span>
+                                <span class="bonus-luck-level-max">100</span>
+                            </div>
+                            <div class="upgrade">
+                                <span class="upgrade-cost luck">500</span>
+                                <span class="upgrade-cost-sign">$</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="flex">
-                        <div class="upgrades-box"></div>
-                        <div class="upgrades-box"></div>
+                        <div class="upgrades-box cursor-pointer">
+                            <div class="bonus-level">
+                                <span class="bonus-tax-level-currently">1</span>
+                                <span class="box-dash">/</span>
+                                <span class="bonus-tax-level-max">100</span>
+                            </div>
+                            <div class="upgrade">
+                                <span class="upgrade-cost tax">500</span>
+                                <span class="upgrade-cost-sign">$</span>
+                            </div>
+                        </div>
+                        <div class="upgrades-box cursor-pointer">
+                            <div class="bonus-level">
+                                <span class="bonus-cooldown-level-currently">1</span>
+                                <span class="box-dash">/</span>
+                                <span class="bonus-cooldown-level-max">100</span>
+                            </div>
+                            <div class="upgrade">
+                                <span class="upgrade-cooldown luck">500</span>
+                                <span class="upgrade-cooldown-sign">$</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="investments">
+            <div class="investments no-select">
                 <div class="skill-shop">
                     <div class="flex">
-                        <div class="upgrades-box">
+                        <div class="upgrades-box cursor-pointer">
                             <div class="skill-box">
                                 <span class="bonus-money-level-currently">1</span>
                                 <span class="box-dash">/</span>
@@ -91,7 +121,7 @@
                                 <span class="upgrade-cost-sign">$</span>
                             </div>
                         </div>
-                        <div class="upgrades-box">
+                        <div class="upgrades-box cursor-pointer">
                             <div class="skill-box">
                                 <span class="bonus-money-level-currently">1</span>
                                 <span class="box-dash">/</span>
@@ -104,7 +134,7 @@
                         </div>
                     </div>
                     <div class="flex">
-                        <div class="upgrades-box">
+                        <div class="upgrades-box cursor-pointer">
                             <div class="skill-box">
                                 <span class="bonus-money-level-currently">1</span>
                                 <span class="box-dash">/</span>
@@ -115,7 +145,7 @@
                                 <span class="upgrade-cost-sign">$</span>
                             </div>
                         </div>
-                        <div class="upgrades-box">
+                        <div class="upgrades-box cursor-pointer">
                             <div class="skill-box">
                                 <span class="bonus-money-level-currently">1</span>
                                 <span class="box-dash">/</span>
@@ -130,15 +160,15 @@
                 </div>
                 <div class="auto-container">
                     <div class="auto-shop">
-                        <div class="auto-clicker auto-box"></div>
-                        <div class="auto-skill auto-box"></div>
+                        <div class="auto-clicker auto-box auto-box-clicked cursor-pointer"></div>
+                        <div class="auto-skill auto-box auto-box-clicked cursor-pointer"></div>
                     </div>
                 </div>
             </div>
             <div class="settings">
-                <div class="save-game setting-box"></div>
-                <div class="load-game setting-box"></div>
-                <div class="sound setting-box"></div>
+                <div class="save-game setting-box cursor-pointer"></div>
+                <div class="load-game setting-box cursor-pointer"></div>
+                <div class="sound setting-box cursor-pointer"></div>
             </div>
         </div>
     </div>
