@@ -385,10 +385,49 @@ body > .app > .main > .upgrades-container > .content-box > .sort >  .auto-machin
     background-image: url('../images/icons/factory.png');
     background-size: cover;
 }
-
-
-
-
+.game-box {
+    background-color: thistle;
+}
+body > .app > .main > .buttons-container > .buttons > .game-box > .game-upgrades {
+    width: 100%;
+    height: 50%;
+    background-color: wheat;
+}
+body > .app > .main > .buttons-container > .buttons > .game-box > .game-upgrades > .upgrade-game {
+    width: 50%;
+    height: 100%;
+}
+body > .app > .main > .buttons-container > .buttons > .game-box > .game-upgrades > .transition-upgrade {
+    transition: box-shadow 0.4s linear;
+}
+body > .app > .main > .buttons-container > .buttons > .game-box > .game-upgrades > .multipler-click {
+    background-color: rgb(236, 186, 46);
+}
+body > .app > .main > .buttons-container > .buttons > .game-box > .game-upgrades > .value-click {
+    background-color: rgb(50, 200, 205);
+}
+body > .app > .main > .buttons-container > .buttons > .game-box > .game-upgrades > .factories-upgrade {
+    background-color: rgb(148, 50, 205);
+}
+body > .app > .main > .buttons-container > .buttons > .game-box > .game-upgrades > .workers-upgrade {
+    background-color: rgb(205, 50, 166);
+}
+body > .app > .main > .buttons-container > .buttons > .game-box > .game-upgrades > .multipler-click:hover {
+    box-shadow: 2px 2px 5px 4px rgb(236, 186, 46);
+    z-index: 1;
+}
+body > .app > .main > .buttons-container > .buttons > .game-box > .game-upgrades > .value-click:hover {
+    box-shadow: 2px 2px 5px 4px rgb(50, 200, 205);
+    z-index: 1;
+}
+body > .app > .main > .buttons-container > .buttons > .game-box > .game-upgrades > .factories-upgrade:hover {
+    box-shadow: 2px 2px 5px 4px rgb(148, 50, 205);
+    z-index: 1;
+}
+body > .app > .main > .buttons-container > .buttons > .game-box > .game-upgrades > .workers-upgrade:hover {
+    box-shadow: 2px 2px 5px 4px rgb(205, 50, 166);
+    z-index: 1;
+}
 
 
 
