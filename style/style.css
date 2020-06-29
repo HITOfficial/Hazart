@@ -17,6 +17,12 @@ body > .app {
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
+.visibility-hidden {
+    visibility: hidden;
+}
+.visibility-visible {
+    visibility: visible;
+}
 li {
     list-style-type: none;
 }
@@ -72,8 +78,40 @@ body > .app > .main > .top-container > .tab-skills .skill {
     background-repeat: no-repeat;
     background-position: center;
 }
-body > .app > .main > .top-container > .tab-skills .skill {
-    background-image: url("../images/icons/icons8-plus-64.png");
+body > .app > .main > .top-container > .tab-skills .reset-skills {
+    background-image: url("../images/icons/icons8-reset-64.png");
+    transition: background-color 1s linear, transform 0.5s ease-in-out;
+}
+body > .app > .main > .top-container > .tab-skills .reset-skills:hover {
+    transform: rotate(360deg);
+    background-color: turquoise;
+}
+body > .app > .main > .top-container > .tab-skills .multiple-click-skill {
+    background-image: url("../images/icons/icons8-left-click-64.png");
+    transition: background-color 1s linear;
+}
+body > .app > .main > .top-container > .tab-skills .multiple-click-skill:hover {
+    animation-name: mouse-move;
+    animation-duration: 1s;
+    background-color: turquoise;
+}
+body > .app > .main > .top-container > .tab-skills .multiple-money-skill {
+    background-image: url("../images/icons/icons8-profit-64.png");
+    transition: background-color 1s linear;
+}
+body > .app > .main > .top-container > .tab-skills .multiple-money-skill:hover {
+    animation-name: mouse-move;
+    animation-duration: 1s;
+    background-color: turquoise;
+}
+body > .app > .main > .top-container > .tab-skills .multiple-luck-skill {
+    background-image: url("../images/icons/icons8-gift-64.png");
+    transition: background-color 1s linear;
+}
+body > .app > .main > .top-container > .tab-skills .multiple-luck-skill:hover {
+    animation-name: mouse-move;
+    animation-duration: 1s;
+    background-color: turquoise;
 }
 body > .app > .main > .energy {
     width: 10vw;
@@ -117,6 +155,14 @@ body > .app > .tools > .character-upgrades {
     border: 2px solid seashell;
     position: relative;
     transition: box-shadow 2.3s, border-color 1s ;
+}
+.upgrade-border {
+    border-radius: 5%;
+    transition: box-shadow 2.3s, border-color 1s ;
+}
+.upgrade-border:hover {
+    box-shadow: 1px 1px 5px 2px rgb(52, 223, 0);
+    border-color: rgb(52, 223, 0);
 }
 .upgrades-box:hover {
     box-shadow: 1px 1px 5px 2px rgb(52, 223, 0);
@@ -250,27 +296,21 @@ body > .app > .main > .upgrades-container > .content-box {
 .upgrade-box {
     width: 15%;
     height: 80%;
-    background-color: peru;
+    position: relative;
 }
 .click-box {
     width: 35%;
     height: 40%;
     background-color: peru;
 }
+.cost-auto-container {
+    position: absolute;
+    transform: translate(80%);
+}
 .click-machine {
     width: 30%;
     height: 80%;
     background-color: peru;
-}
-body > .app > .main > .upgrades-container > .slot-machine-upgrades {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-.machine-upgrade {
-    width: 40%;
-    height: 90%;
-    background-color: rebeccapurple;
 }
 body > .app > .tools > .investments > .auto-container {
     width: 100%;
@@ -340,4 +380,72 @@ body > .app > .main > .buttons-container > .buttons > .game-box > .clicker-box:a
 }
 body > .app > .main > .buttons-container > .buttons > .game-box > .auto-box:hover {
     box-shadow: 1px 1px 5px 2px whitesmoke;
+}
+body > .app > .main > .upgrades-container > .content-box > .sort >  .auto-machine {
+    background-image: url('../images/icons/factory.png');
+    background-size: cover;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* key-frames */
+
+@keyframes mouse-move {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(20deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+    75% {
+        transform: rotate(-20deg);
+    }
+} 
+@keyframes up-animation {
+    0% {
+        transform: translateY(0vh);
+    }
+    25% {
+        transform: translateY(1vh);
+    }
+    50% {
+        transform: translateY(0vh);
+    }
+    75% {
+        transform: translateY(1vh);
+    }
 }
