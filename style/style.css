@@ -63,7 +63,14 @@ body > .app > .tools > .investments .skill  {
     margin-top: 4vh;
     padding: 3vw;
     border-radius: 50%;
-    background-color: silver;
+    background-color: #DAF7F1;
+}
+body > .app > .main > .top-container > .tab-skills .skill {
+    background-repeat: no-repeat;
+    background-position: center;
+}
+body > .app > .main > .top-container > .tab-skills .skill {
+    background-image: url("../images/icons/icons8-plus-64.png");
 }
 body > .app > .main > .energy {
     width: 10vw;
@@ -145,6 +152,12 @@ body > .app > .tools > .character-upgrades >.flex-box > .flex:nth-child(1) > .up
 body > .app > .tools > .character-upgrades >.flex-box > .flex:nth-child(2) > .upgrades-box:nth-child(1) {
     background-color: silver;
     background-image: url('../images/icons/icons8-tax-64.png');
+    background-repeat: no-repeat ;
+    background-position: center;
+}
+body > .app > .tools > .character-upgrades >.flex-box > .flex:nth-child(2) > .upgrades-box:nth-child(2) {
+    background-color: silver;
+    background-image: url('../images/icons/icons8-hourglass-64.png');
     background-repeat: no-repeat ;
     background-position: center;
 }
@@ -275,7 +288,7 @@ body > .app > .tools > .investments > .auto-container > .auto-shop > .auto-box {
 }
 body > .app > .tools > .investments > .skill-shop > .flex > .upgrades-box {
     text-align: right;
-    background-color: tomato;
+    background-color: #DAF7A6;
     transform: scale(0.8);
     height: 10vh;
     width: 10vw;
@@ -285,4 +298,7 @@ body > .app > .tools > .investments > .skill-shop > .flex > .upgrades-box {
 }
 body > .app > .tools > .investments > .auto-container > .auto-shop > .auto-box-clicked:hover {
     box-shadow: 0 0 0 0 , -0.2vh 0.3vh 1.2vh 0.6vh rgb(199, 51, 51);
+}
+.pickaxe {
+    cursor: url('../images/icons/icons8-minecraft-pickaxe-30.png'), auto;
 }
