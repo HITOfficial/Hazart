@@ -5,8 +5,10 @@
   "main": "server.js",
   "dependencies": {
     "express": "^4.17.1",
-    "fs": "^0.0.1-security",
+    "fs": "0.0.1-security",
     "mongoose": "^5.9.20",
+    "mysql": "^2.18.1",
+    "mysqli": "^3.0.11",
     "nodemon": "^2.0.4",
     "path": "^0.12.7"
   },
