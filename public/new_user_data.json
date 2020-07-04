@@ -9,6 +9,10 @@
         "valueClickBonus": 1.00,
         "factoriesBonus": 100,
         "workersBonus": 100,
+        "resetSkills": {"visible": false, "cooldown": 30000 },
+        "multipleClickSkill": {"visible": false, "cooldown": 15000, "bonus": 1.2},
+        "multipleMoneySkill": {"visible": false, "cooldown": 15000, "bonus": 1.2},
+        "multipleLuckSkill": {"visible": false, "cooldown": 15000, "bonus": 1.2 },
         "autoMachine" : [
             {"id" : 1, "bought": false, "cost" : 1000, "effectivity" : 100},
             {"id" : 2, "bought": false, "cost" : 2000, "effectivity" : 100},
@@ -22,16 +26,17 @@
             {"id" : 10, "bought": false, "cost" : 10000, "effectivity" : 100}
         ],
         "workerMachine" : [
-            {"id" : 1, "bought": false, "cost" : 1000, "effectivity" : 100, "level" : 1},
-            {"id" : 1, "bought": false, "cost" : 1000, "effectivity" : 100, "level" : 1},
-            {"id" : 1, "bought": false, "cost" : 1000, "effectivity" : 100, "level" : 1},
-            {"id" : 1, "bought": false, "cost" : 1000, "effectivity" : 100, "level" : 1},
-            {"id" : 1, "bought": false, "cost" : 1000, "effectivity" : 100, "level" : 1},
-            {"id" : 1, "bought": false, "cost" : 1000, "effectivity" : 100, "level" : 1},
-            {"id" : 1, "bought": false, "cost" : 1000, "effectivity" : 100, "level" : 1},
-            {"id" : 1, "bought": false, "cost" : 1000, "effectivity" : 100, "level" : 1},
-            {"id" : 1, "bought": false, "cost" : 1000, "effectivity" : 100, "level" : 1},
-            {"id" : 1, "bought": false, "cost" : 1000, "effectivity" : 100, "level" : 1}
+            {"id" : 1, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "upgradeCost": 12000},
+            {"id" : 2, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "upgradeCost": 12000},
+            {"id" : 3, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "upgradeCost": 12000},
+            {"id" : 4, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "upgradeCost": 12000},
+            {"id" : 5, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "upgradeCost": 12000},
+            {"id" : 6, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "upgradeCost": 12000},
+            {"id" : 7, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "upgradeCost": 12000},
+            {"id" : 8, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "upgradeCost": 12000},
+            {"id" : 9, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "upgradeCost": 12000},
+            {"id" : 10, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "upgradeCost": 12000}
         ]
+
     }
 ]

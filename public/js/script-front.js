@@ -31,10 +31,13 @@ const loadUser = () => {
   document.querySelector('.value-click-bonus').innerHTML = userData[0].valueClickBonus;
   document.querySelector('.factories-bonus').innerHTML = userData[0].factoriesBonus;
   document.querySelector('.workers-bonus').innerHTML = userData[0].workersBonus;
-  userData[0].autoMachine.forEach(machine =>{
-    document.querySelectorAll('.machine-cost')[machine.id -1].innerHTML = machine.cost
-  })
 
+  userData[0].autoMachine.forEach( machine => {
+    document.querySelectorAll('.machine-cost')[machine.id -1].innerHTML = machine.cost
+  });
+  userData[0].workerMachine.forEach( worker => {
+    document.querySelectorAll('.worker-cost')[worker.id -1].innerHTML = worker.cost
+  });
 
 
 
