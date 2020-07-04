@@ -3,6 +3,7 @@ const path = require('path');
 const app = express();
 const mysql = require('mysql');
 const port = 3000;
+const fs = require('fs')
 app.use(express.static('public')); // adding 'public' folder to use
 app.use(express.json({limit: '1mb'}));
 app.use(express.urlencoded({extendet: true}))
@@ -14,6 +15,14 @@ var con = mysql.createConnection({
     database: "Hazart"
   });
   //database conn
+
+// fs
+// fs.readFileSync('readme.txt', 'utf8', (error, data) => {
+//     console.log(data);
+// });
+// fs.writeFileSync('writeme.txt','Siema')
+
+
   con.connect((error) => {
     if (error) console.log('FailedConnecttoDB');
     else console.log("Connected!");
@@ -37,7 +46,8 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  console.log(req.body)
+  fs.writeFileSync('user_data.json', JSON.stringify(req.body))
+  console.log('Saved data of user', req.body[0].login)
 })
 
 app.listen(port, () => {
