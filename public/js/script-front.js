@@ -1,26 +1,20 @@
 // let userData , money, moneyPerClick, moneyPerAuto, valueMultiplerBonus, valueMultiplerBonusCost, valueClickBonus, valueClickBonusCost, factoriesBonusCost, workersBonus, workersBonusCost, machineCost, workerC
- var dataToSend = [
+let money = document.querySelector('.money')
+var dataToSend = [
   {
       "login": "login1",
       "money": 1000
   }
 ]
 //fetch GET
-fetch("./new_user_data.json")
+fetch("./user_data.json")
   .then(response => response.json())
   .then(data => {
     console.log(data);
     userData = data;
   })
   .catch(error => console.log(error))
-  //fetch POST
-fetch('/',{
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(dataToSend)
-})
+
 
 const loadUser = () => {
   // main => show bonuses
@@ -90,16 +84,44 @@ const clickerUpdate = () => {
   moneyPerClick = Math.floor(moneyPerClick * 100) / 100;
   userData[0].money = Math.round(userData[0].money + moneyPerClick);
   console.log(userData[0].money);
-  document.querySelector('.money').innerHTML = userData[0].money;
+  money.innerHTML = userData[0].money;
  })
 }
+
+// updating curently money every second function
+const moneyEverySec = () => {
+  moneyTime = (userData[0].moneyPerAuto * userData[0].moneyBoost.bonus ) 
+  if(userData[0].multipleMoneySkill.active) {
+    moneyTime *= userData[0].multipleMoneySkillUpgrade.bonus
+  }
+  userData[0].money = Math.round(userData[0].money + moneyTime)
+  money.innerHTML =userData[0].money; 
+}
+
+// updating curently money every second function included in interval function 
 const autoMoneyUpdate = () => {
-  moneyTime 
+  setInterval(moneyEverySec, 1000)
+}
+
+// exporting data to the server with fetch POST, and then on a server automaticaly save as JSON file
+const saveUserData = () => {
+  document.querySelector('.save-game').addEventListener('click', () => {
+    fetch('/',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData)
+    })
+    .catch(error => console.log(error))
+  })
 }
 
 //starting game
 const startGame = () =>{
   loadUser();
   clickerUpdate();
+  autoMoneyUpdate();
+  saveUserData();
 }
 window.onload = startGame

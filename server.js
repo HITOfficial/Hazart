@@ -46,7 +46,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  fs.writeFileSync('user_data.json', JSON.stringify(req.body))
+  fs.writeFileSync('./public/user_data.json', JSON.stringify(req.body))
   console.log('Saved data of user', req.body[0].login)
 })
 
