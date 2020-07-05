@@ -317,10 +317,8 @@ body > .app > .tools > .investments > .auto-container > .auto-shop > .auto-box >
     font-size: 2vw;
     padding-top: 2vw;
 }
-body > .app > .tools > .investments > .auto-container > .auto-shop > .auto-box > .auto-description  > .auto-skill-cost {
-    font-size: 1vw;
-}
-body > .app > .tools > .investments > .auto-container > .auto-shop > .auto-box > .auto-description  > .auto-clicker-cost {
+body > .app > .tools > .investments > .auto-container > .auto-shop > .auto-box > .auto-description .auto-skills-cost-container,
+body > .app > .tools > .investments > .auto-container > .auto-shop > .auto-box > .auto-description .auto-clicker-cost-container {
     font-size: 1vw;
 }
 body > .app > .tools > .investments > .skill-shop > .flex > .upgrades-box {
@@ -333,7 +331,7 @@ body > .app > .tools > .investments > .skill-shop > .flex > .upgrades-box {
 body > .app > .tools > .investments > .skill-shop > .flex .upgrade {
     transform: translate(-50%, -2%);
 }
-body > .app > .tools > .investments > .skill-shop > .flex > .reset-skills-upgrade {
+body > .app > .tools > .investments > .skill-shop > .flex > .reset-skills {
     background-image: url('../images/icons/icons8-reset-64.png');
     background-size: auto;
     background-position: center;
