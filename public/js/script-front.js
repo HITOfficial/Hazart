@@ -1,4 +1,4 @@
-let userData
+// let userData , money, moneyPerClick, moneyPerAuto, valueMultiplerBonus, valueMultiplerBonusCost, valueClickBonus, valueClickBonusCost, factoriesBonusCost, workersBonus, workersBonusCost, machineCost, workerC
  var dataToSend = [
   {
       "login": "login1",
@@ -76,10 +76,30 @@ const loadUser = () => {
   document.querySelector('.auto-clicker-cost').innerHTML = userData[0].autoClicker.cost;
   document.querySelector('.auto-skills-cost').innerHTML = userData[0].autoSkills.cost;
 }
-const Clicker = () => {
-  document.querySelector('.clicker').addEventListener('click', () => {
-    console.log(document.querySelector('.money-per-click').innerHTML)
-  })
+
+// Cliker Function with skills
+const clickerUpdate = () => {
+ document.querySelector('.clicker-box').addEventListener('click', () =>{
+  moneyPerClick = (userData[0].moneyPerClick * userData[0].valueClickBonus.bonus * userData[0].valueMultiplerBonus.bonus * userData[0].moneyBoost.bonus);
+  if(userData[0].multipleClickSkill.active) {
+    moneyPerClick *= userData[0].multipleClickSkillUpgrade.bonus;
+  }
+  if(userData[0].multipleMoneySkill.active) {
+    moneyPerClick *= userData[0].multipleMoneySkillUpgrade.bonus;
+  }
+  moneyPerClick = Math.floor(moneyPerClick * 100) / 100;
+  userData[0].money = Math.round(userData[0].money + moneyPerClick);
+  console.log(userData[0].money);
+  document.querySelector('.money').innerHTML = userData[0].money;
+ })
+}
+const autoMoneyUpdate = () => {
+  moneyTime 
 }
 
-window.onload = loadUser
+//starting game
+const startGame = () =>{
+  loadUser();
+  clickerUpdate();
+}
+window.onload = startGame
