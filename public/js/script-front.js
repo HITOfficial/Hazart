@@ -22,7 +22,6 @@ fetch('/',{
   body: JSON.stringify(dataToSend)
 })
 
-
 const loadUser = () => {
   // main => show bonuses
   document.querySelector('.money').innerHTML = userData[0].money;
@@ -44,8 +43,6 @@ const loadUser = () => {
   userData[0].workerMachine.forEach( worker => {
     document.querySelectorAll('.worker-cost')[worker.id -1].innerHTML = worker.cost
   });
-  //
-  
   // tools => upgrades status
   document.querySelector('.bonus-money-actual-level').innerHTML = userData[0].moneyBoost.actualLevel;
   document.querySelector('.bonus-money-max-level').innerHTML = userData[0].moneyBoost.maxLevel;
@@ -78,11 +75,11 @@ const loadUser = () => {
   // tools => clickers
   document.querySelector('.auto-clicker-cost').innerHTML = userData[0].autoClicker.cost;
   document.querySelector('.auto-skills-cost').innerHTML = userData[0].autoSkills.cost;
-
-
 }
-document.querySelector('body').addEventListener('click', () => {
-  console.log(userData)
-  loadUser()
-})
+const Clicker = () => {
+  document.querySelector('.clicker').addEventListener('click', () => {
+    console.log(document.querySelector('.money-per-click').innerHTML)
+  })
+}
 
+window.onload = loadUser
