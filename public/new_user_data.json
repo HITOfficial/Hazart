@@ -19,7 +19,7 @@
         "multipleGiftSkillUpgrade": {"actualLevel": 0, "maxLevel": 50, "upgradeCost": 1000, "bonus": 1.1, "duration": 5000},
         "autoClicker": {"bought": false, "cost": 1000000, "active": false},
         "autoSkills": {"bought": false, "cost": 1000000, "active": false},
-        "resetSkills": {"visible": false, "cooldown": 30000 },
+        "resetSkills": {"visible": false, "cooldown": 60000 },
         "multipleClickSkill": {"visible": false, "cooldown": 15000, "active" :false},
         "multipleMoneySkill": {"visible": false, "cooldown": 15000, "active" : false},
         "multipleGiftSkill": {"visible": false, "cooldown": 15000, "active" : false},
