@@ -41,16 +41,16 @@ const loadUser = () => {
   document.querySelector('.bonus-money-actual-level').innerHTML = userData[0].moneyBoost.actualLevel;
   document.querySelector('.bonus-money-max-level').innerHTML = userData[0].moneyBoost.maxLevel;
   document.querySelector('.bonus-money-cost').innerHTML = userData[0].moneyBoost.upgradeCost;
-  document.querySelector('.bonus-luck-actual-level').innerHTML = userData[0].moneyBoost.actualLevel;
-  document.querySelector('.bonus-luck-max-level').innerHTML = userData[0].moneyBoost.maxLevel;
-  document.querySelector('.luck-cost').innerHTML = userData[0].moneyBoost.upgradeCost;
+  document.querySelector('.bonus-gift-actual-level').innerHTML = userData[0].moneyBoost.actualLevel;
+  document.querySelector('.bonus-gift-max-level').innerHTML = userData[0].moneyBoost.maxLevel;
+  document.querySelector('.gift-cost').innerHTML = userData[0].moneyBoost.upgradeCost;
   document.querySelector('.bonus-tax-actual-level').innerHTML = userData[0].moneyBoost.actualLevel;
   document.querySelector('.bonus-tax-max-level').innerHTML = userData[0].moneyBoost.maxLevel;
   document.querySelector('.tax-cost').innerHTML = userData[0].moneyBoost.upgradeCost;
   document.querySelector('.bonus-cooldown-actual-level').innerHTML = userData[0].moneyBoost.actualLevel;
   document.querySelector('.bonus-cooldown-max-level').innerHTML = userData[0].moneyBoost.maxLevel;
   document.querySelector('.cooldown-cost').innerHTML = userData[0].moneyBoost.upgradeCost;
-  document.querySelector('.luck-cost').innerHTML = userData[0].luck.upgradeCost;
+  document.querySelector('.gift-cost').innerHTML = userData[0].gift.upgradeCost;
   document.querySelector('.tax-cost').innerHTML = userData[0].tax.upgradeCost;
   document.querySelector('.cooldown-cost').innerHTML = userData[0].cooldown.upgradeCost;
   // tools => upgrades skills
@@ -63,9 +63,9 @@ const loadUser = () => {
   document.querySelector('.multiple-money-skill-actual-level').innerHTML = userData[0].multipleMoneySkillUpgrade.actualLevel
   document.querySelector('.multiple-money-skill-max-level').innerHTML = userData[0].multipleMoneySkillUpgrade.maxLevel;
   document.querySelector('.multiple-money-skill-upgrade-cost').innerHTML = userData[0].multipleMoneySkillUpgrade.upgradeCost;
-  document.querySelector('.multiple-luck-skill-actual-level').innerHTML = userData[0].multipleLuckSkillUpgrade.actualLevel
-  document.querySelector('.multiple-luck-skill-max-level').innerHTML = userData[0].multipleLuckSkillUpgrade.maxLevel;
-  document.querySelector('.multiple-luck-skill-upgrade-cost').innerHTML = userData[0].multipleLuckSkillUpgrade.upgradeCost;
+  document.querySelector('.multiple-gift-skill-actual-level').innerHTML = userData[0].multipleGiftSkillUpgrade.actualLevel
+  document.querySelector('.multiple-gift-skill-max-level').innerHTML = userData[0].multipleGiftSkillUpgrade.maxLevel;
+  document.querySelector('.multiple-gift-skill-upgrade-cost').innerHTML = userData[0].multipleGiftSkillUpgrade.upgradeCost;
   // tools => clickers
   document.querySelector('.auto-clicker-cost').innerHTML = userData[0].autoClicker.cost;
   document.querySelector('.auto-skills-cost').innerHTML = userData[0].autoSkills.cost;
@@ -83,7 +83,6 @@ const clickerUpdate = () => {
   }
   moneyPerClick = Math.floor(moneyPerClick * 100) / 100;
   userData[0].money = Math.round(userData[0].money + moneyPerClick);
-  console.log(userData[0].money);
   money.innerHTML = userData[0].money;
  })
 }
@@ -113,7 +112,6 @@ const saveUserData = () => {
       },
       body: JSON.stringify(userData)
     })
-    .catch(error => console.log(error))
   })
 }
 

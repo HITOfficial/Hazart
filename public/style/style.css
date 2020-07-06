@@ -109,11 +109,11 @@ body > .app > .main > .top-container > .tab-skills .multiple-money-skill:hover {
     animation-duration: 1s;
     background-color: turquoise;
 }
-body > .app > .main > .top-container > .tab-skills .multiple-luck-skill {
+body > .app > .main > .top-container > .tab-skills .multiple-gift-skill {
     background-image: url("../images/icons/icons8-gift-64.png");
     transition: background-color 1s linear;
 }
-body > .app > .main > .top-container > .tab-skills .multiple-luck-skill:hover {
+body > .app > .main > .top-container > .tab-skills .multiple-gift-skill:hover {
     animation-name: mouse-move;
     animation-duration: 1s;
     background-color: turquoise;
@@ -349,7 +349,7 @@ body > .app > .tools > .investments > .skill-shop > .flex > .multiple-money-skil
     background-position: center;
     background-repeat: no-repeat;
 }
-body > .app > .tools > .investments > .skill-shop > .flex > .multiple-luck-skill {
+body > .app > .tools > .investments > .skill-shop > .flex > .multiple-gift-skill {
     background-image: url('../images/icons/icons8-gift-64.png');
     background-size: auto;
     background-position: center;
