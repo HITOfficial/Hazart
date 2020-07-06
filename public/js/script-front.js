@@ -1,4 +1,4 @@
-let valuePerClick, moneyPerAuto
+let valuePerClick, moneyPerAuto, moneyPerClick, moneyTime
 let moneyObject = document.querySelector('.money');
 let valuePerClickObject = document.querySelector('.money-per-click');
 let moneyPerAutoObject = document.querySelector('.money-per-auto');
@@ -6,18 +6,15 @@ let moneyPerAutoObject = document.querySelector('.money-per-auto');
 fetch("./user_data.json")
   .then(response => response.json())
   .then(data => {
-    console.log(data);
     userData = data;
     tax = userData[0].tax.bonus
     money = userData[0].money
-    console.log(tax)
   })
   .catch(error => console.log(error))
 // fetch GET upgrade_data
 fetch("./update_data.json")
   .then(response => response.json())
   .then(updateDataJson => {
-    console.log(updateDataJson);
     updateData = updateDataJson;
   })
 
@@ -79,10 +76,9 @@ const loadUser = () => {
   valuePerClickObject.innerHTML = valuePerClick;
   moneyPerAutoObject.innerHTML = userData[0].moneyPerAuto;
 }
-
-// Cliker Function with skills
-const clickerUpdate = () => {
- document.querySelector('.clicker-box').addEventListener('click', () =>{
+//////////////////////////////////////////////////////////////////////
+// Clicker Function with skills
+const clickerUpdateFunctionWithotAddingMoney = () => {
   moneyPerClick = (userData[0].moneyPerClick * userData[0].valueClickBonus.bonus * userData[0].valueMultiplerBonus.bonus * userData[0].moneyBoost.bonus);
   if(userData[0].multipleClickSkill.active) {
     moneyPerClick *= userData[0].multipleClickSkillUpgrade.bonus;
@@ -90,33 +86,48 @@ const clickerUpdate = () => {
   if(userData[0].multipleMoneySkill.active) {
     moneyPerClick *= userData[0].multipleMoneySkillUpgrade.bonus;
   }
-  valuePerClickObject.innerHTML = Math.round(moneyPerClick)
+  valuePerClickObject.innerHTML = Math.round(moneyPerClick);
+}
+// Seperated updating money, becouse clickerUpdateFunctionWithotAddingMoney I'll need later to use also in upgrades
+const clickerUpdateFunctionAddingMoney = () => {
   money = Math.round(money + moneyPerClick);
   moneyObject.innerHTML = money;
- })
 }
-
-// updating curently money every second function
-const moneyEverySec = () => {
+const clickerUpdateFunction = () => {
+  clickerUpdateFunctionWithotAddingMoney();
+  clickerUpdateFunctionAddingMoney();
+}
+// Runing Clicker Function with skills
+const clickerUpdate = () => {
+ document.querySelector('.clicker-box').addEventListener('click', clickerUpdateFunction)
+}
+//////////////////////////////////////////////////////////////////////
+const moneyEverySecFunctionWithoutAddingMoney = () => {
   moneyTime = (userData[0].moneyPerAuto * userData[0].moneyBoost.bonus) 
   if(userData[0].multipleMoneySkill.active) {
     moneyTime *= userData[0].multipleMoneySkillUpgrade.bonus;
   }
   moneyPerAutoObject.innerHTML = Math.round(moneyTime);
+}
+// Seperated updating money, becouse moneyEverySecFunctionWithoutAddingMoney I'll need later to use also in upgrades
+const moneyEverySecFunctionAddingMoney = () => {
   money = Math.round(money + moneyTime);
   moneyObject.innerHTML = money; 
 }
-
+// updating curently money every second function
+const moneyEverySecFunction = () => {
+  moneyEverySecFunctionWithoutAddingMoney();
+  moneyEverySecFunctionAddingMoney();
+}
 // updating curently money every second function included in interval function 
 const autoMoneyUpdate = () => {
-  setInterval(moneyEverySec, 1000)
+  setInterval(moneyEverySecFunction, 1000)
 }
-
+//////////////////////////////////////////////////////////////////////
 // exporting data to the server with fetch POST, and then on a server automaticaly save as JSON file
 const saveUserData = () => {
   document.querySelector('.save-game').addEventListener('click', () => {
     userData[0].money = money
-    console.log(userData[0].money)
     fetch('/',{
       method: 'POST',
       headers: {
@@ -135,8 +146,9 @@ const valueMultiplerBonusUpgrade = () => {
       money = Math.round(money - (userData[0].valueMultiplerBonus.upgradeCost - (userData[0].valueMultiplerBonus.upgradeCost * tax)))
       moneyObject.innerHTML = money
       userData[0].valueMultiplerBonus = updateData.valueMultiplerBonus[userData[0].valueMultiplerBonus.actualLevel ++];
-      document.querySelector('.upgrade-multipler-click-bonus-cost').innerHTML = userData[0].valueMultiplerBonus.upgradeCost
+      document.querySelector('.upgrade-multipler-click-bonus-cost').innerHTML = userData[0].valueMultiplerBonus.upgradeCost;
       document.querySelector('.value-multipler-bonus').innerHTML = userData[0].valueMultiplerBonus.bonus;
+      clickerUpdateFunctionWithotAddingMoney();
     }
   })
 }
