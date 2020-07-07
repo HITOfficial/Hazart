@@ -22,52 +22,52 @@ fetch("./update_data.json")
 const loadUser = () => {
   // main => upgrades (four squares)
   document.querySelector('.value-multipler-bonus').innerHTML = userData[0].valueMultiplerBonus.bonus;
-  document.querySelector('.upgrade-multipler-click-bonus-cost').innerHTML = userData[0].valueMultiplerBonus.upgradeCost;
+  document.querySelector('.upgrade-multipler-click-bonus-cost').innerHTML = Math.round(userData[0].valueMultiplerBonus.upgradeCost- (userData[0].valueMultiplerBonus.upgradeCost * tax));
   document.querySelector('.value-click-bonus').innerHTML = userData[0].valueClickBonus.bonus;
-  document.querySelector('.upgrade-value-click-bonus-cost').innerHTML = userData[0].valueClickBonus.upgradeCost;
-  document.querySelector('.factories-bonus').innerHTML = userData[0].factoriesBonus.bonus;
-  document.querySelector('.upgrade-factories-bonus-cost').innerHTML = userData[0].factoriesBonus.upgradeCost;
-  document.querySelector('.workers-bonus').innerHTML = userData[0].workersBonus.bonus;
-  document.querySelector('.upgrade-workers-bonus-cost').innerHTML = userData[0].workersBonus.upgradeCost;
+  document.querySelector('.upgrade-value-click-bonus-cost').innerHTML = Math.round(userData[0].valueClickBonus.upgradeCost - (userData[0].valueClickBonus.upgradeCost * tax));
+  document.querySelector('.factories-bonus').innerHTML = userData[0].factories.bonus;
+  document.querySelector('.upgrade-factories-bonus-cost').innerHTML = Math.round(userData[0].factories.upgradeCost - (userData[0].factories.upgradeCost * tax));
+  document.querySelector('.workers-bonus').innerHTML = userData[0].workers.bonus;
+  document.querySelector('.upgrade-workers-bonus-cost').innerHTML = Math.round(userData[0].workers.upgradeCost - (userData[0].workers.upgradeCost * tax));
   // main => machines and workers
   userData[0].autoMachine.forEach( machine => {
-    document.querySelectorAll('.machine-cost')[machine.id -1].innerHTML = machine.cost
+    document.querySelectorAll('.machine-cost')[machine.id -1].innerHTML = Math.round(machine.cost - (machine.cost * tax));
   });
   userData[0].workerMachine.forEach( worker => {
-    document.querySelectorAll('.worker-cost')[worker.id -1].innerHTML = worker.cost
+    document.querySelectorAll('.worker-cost')[worker.id -1].innerHTML = Math.round(worker.cost - (worker.cost * tax));
   });
   // tools => upgrades status
   document.querySelector('.bonus-money-actual-level').innerHTML = userData[0].moneyBoost.actualLevel;
   document.querySelector('.bonus-money-max-level').innerHTML = userData[0].moneyBoost.maxLevel;
-  document.querySelector('.bonus-money-cost').innerHTML = userData[0].moneyBoost.upgradeCost;
+  document.querySelector('.bonus-money-cost').innerHTML = Math.round(userData[0].moneyBoost.upgradeCost - (userData[0].moneyBoost.upgradeCost * tax)) ;
   document.querySelector('.bonus-gift-actual-level').innerHTML = userData[0].moneyBoost.actualLevel;
   document.querySelector('.bonus-gift-max-level').innerHTML = userData[0].moneyBoost.maxLevel;
-  document.querySelector('.gift-cost').innerHTML = userData[0].moneyBoost.upgradeCost;
+  document.querySelector('.gift-cost').innerHTML = Math.round(userData[0].moneyBoost.upgradeCost - (userData[0].moneyBoost.upgradeCost * tax));
   document.querySelector('.bonus-tax-actual-level').innerHTML = userData[0].moneyBoost.actualLevel;
   document.querySelector('.bonus-tax-max-level').innerHTML = userData[0].moneyBoost.maxLevel;
-  document.querySelector('.tax-cost').innerHTML = userData[0].moneyBoost.upgradeCost;
+  document.querySelector('.tax-cost').innerHTML = Math.round(userData[0].moneyBoost.upgradeCost - (userData[0].moneyBoost.upgradeCost * tax));
   document.querySelector('.bonus-cooldown-actual-level').innerHTML = userData[0].moneyBoost.actualLevel;
   document.querySelector('.bonus-cooldown-max-level').innerHTML = userData[0].moneyBoost.maxLevel;
-  document.querySelector('.cooldown-cost').innerHTML = userData[0].moneyBoost.upgradeCost;
-  document.querySelector('.gift-cost').innerHTML = userData[0].gift.upgradeCost;
-  document.querySelector('.tax-cost').innerHTML = userData[0].tax.upgradeCost;
-  document.querySelector('.cooldown-cost').innerHTML = userData[0].cooldown.upgradeCost;
+  document.querySelector('.cooldown-cost').innerHTML = Math.round(userData[0].moneyBoost.upgradeCost - (userData[0].moneyBoost.upgradeCost * tax));
+  document.querySelector('.gift-cost').innerHTML = Math.round(userData[0].gift.upgradeCost - (userData[0].gift.upgradeCost * tax));
+  document.querySelector('.tax-cost').innerHTML = Math.round(userData[0].tax.upgradeCost - (userData[0].tax.upgradeCost * tax));
+  document.querySelector('.cooldown-cost').innerHTML = Math.round(userData[0].cooldown.upgradeCost - (userData[0].cooldown.upgradeCost * tax));
   // tools => upgrades skills
   document.querySelector('.reset-skills-actual-level').innerHTML = userData[0].resetSkillsUpgrade.actualLevel
   document.querySelector('.reset-skills-max-level').innerHTML = userData[0].resetSkillsUpgrade.maxLevel;
-  document.querySelector('.reset-skills-upgrade-cost').innerHTML = userData[0].resetSkillsUpgrade.upgradeCost;
+  document.querySelector('.reset-skills-upgrade-cost').innerHTML = Math.round(userData[0].resetSkillsUpgrade.upgradeCost - (userData[0].resetSkillsUpgrade.upgradeCost * tax));
   document.querySelector('.multiple-click-skill-actual-level').innerHTML = userData[0].multipleClickSkillUpgrade.actualLevel
   document.querySelector('.multiple-click-skill-max-level').innerHTML = userData[0].multipleClickSkillUpgrade.maxLevel;
-  document.querySelector('.multiple-click-skill-upgrade-cost').innerHTML = userData[0].multipleClickSkillUpgrade.upgradeCost;
+  document.querySelector('.multiple-click-skill-upgrade-cost').innerHTML = Math.round(userData[0].multipleClickSkillUpgrade.upgradeCost - (userData[0].multipleClickSkillUpgrade.upgradeCost * tax));
   document.querySelector('.multiple-money-skill-actual-level').innerHTML = userData[0].multipleMoneySkillUpgrade.actualLevel
   document.querySelector('.multiple-money-skill-max-level').innerHTML = userData[0].multipleMoneySkillUpgrade.maxLevel;
-  document.querySelector('.multiple-money-skill-upgrade-cost').innerHTML = userData[0].multipleMoneySkillUpgrade.upgradeCost;
+  document.querySelector('.multiple-money-skill-upgrade-cost').innerHTML = Math.round(userData[0].multipleMoneySkillUpgrade.upgradeCost - (userData[0].multipleMoneySkillUpgrade.upgradeCost * tax));
   document.querySelector('.multiple-gift-skill-actual-level').innerHTML = userData[0].multipleGiftSkillUpgrade.actualLevel
   document.querySelector('.multiple-gift-skill-max-level').innerHTML = userData[0].multipleGiftSkillUpgrade.maxLevel;
-  document.querySelector('.multiple-gift-skill-upgrade-cost').innerHTML = userData[0].multipleGiftSkillUpgrade.upgradeCost;
+  document.querySelector('.multiple-gift-skill-upgrade-cost').innerHTML = Math.round(userData[0].multipleGiftSkillUpgrade.upgradeCost - (userData[0].multipleGiftSkillUpgrade.upgradeCost * tax));
   // tools => clickers
-  document.querySelector('.auto-clicker-cost').innerHTML = userData[0].autoClicker.cost;
-  document.querySelector('.auto-skills-cost').innerHTML = userData[0].autoSkills.cost;
+  document.querySelector('.auto-clicker-cost').innerHTML = Math.round(userData[0].autoClicker.cost - (userData[0].autoClicker.cost * tax));
+  document.querySelector('.auto-skills-cost').innerHTML = Math.round(userData[0].autoSkills.cost - (userData[0].autoSkills.cost * tax));
   // valuePerClick and moneyPerAuto with included bonuses
   valuePerClick = Math.round((userData[0].moneyPerClick * userData[0].valueClickBonus.bonus * userData[0].valueMultiplerBonus.bonus * userData[0].moneyBoost.bonus));
   MoneyPerClick = Math.round((userData[0].moneyPerAuto * userData[0].moneyBoost.bonus));
@@ -139,25 +139,70 @@ const saveUserData = () => {
 }
 
 //                      UPGRADES
-// valueMultiplerBonusUpgrade
 const valueMultiplerBonusUpgrade = () => {
-  document.querySelector('.value-multipler-bonus-container').addEventListener('click', () => {
+  document.querySelector('.multipler-click').addEventListener('click', () => {
     if(money >= (userData[0].valueMultiplerBonus.upgradeCost - (userData[0].valueMultiplerBonus.upgradeCost * tax))) {
       money = Math.round(money - (userData[0].valueMultiplerBonus.upgradeCost - (userData[0].valueMultiplerBonus.upgradeCost * tax)))
       moneyObject.innerHTML = money
       userData[0].valueMultiplerBonus = updateData.valueMultiplerBonus[userData[0].valueMultiplerBonus.actualLevel ++];
-      document.querySelector('.upgrade-multipler-click-bonus-cost').innerHTML = userData[0].valueMultiplerBonus.upgradeCost;
+      document.querySelector('.upgrade-multipler-click-bonus-cost').innerHTML = Math.round(userData[0].valueMultiplerBonus.upgradeCost - (userData[0].valueMultiplerBonus.upgradeCost * tax));
       document.querySelector('.value-multipler-bonus').innerHTML = userData[0].valueMultiplerBonus.bonus;
+      clickerUpdateFunctionWithotAddingMoney();
+      moneyEverySecFunctionWithoutAddingMoney();
+    }
+  })
+}
+const valueClickBonusUpgrade = () => {
+  document.querySelector('.value-click').addEventListener('click', () => {
+    if(money >= (userData[0].valueClickBonus.upgradeCost - (userData[0].valueClickBonus.upgradeCost * tax))) {
+      money = Math.round(money - (userData[0].valueClickBonus.upgradeCost - (userData[0].valueClickBonus.upgradeCost * tax)));
+      moneyObject.innerHTML = money;
+      userData[0].valueClickBonus = updateData.valueClickBonus[userData[0].valueClickBonus.actualLevel ++];
+      document.querySelector('.upgrade-value-click-bonus-cost').innerHTML = Math.round(userData[0].valueClickBonus.upgradeCost - (userData[0].valueClickBonus.upgradeCost * tax));
+      document.querySelector('.value-click-bonus').innerHTML = userData[0].valueClickBonus.bonus;
       clickerUpdateFunctionWithotAddingMoney();
     }
   })
 }
+factoriesBonusUpgrade = () => {
+  document.querySelector('.factories-upgrade').addEventListener('click', () => {
+    if(money >= (userData[0].factories.upgradeCost - (userData[0].factories.upgradeCost *tax))) {
+      money = Math.round(money - (userData[0].factories.upgradeCost - (userData[0].factories.upgradeCost * tax)));
+      moneyObject.innerHTML = money;
+      userData[0].factories = updateData.factories[userData[0].factories.actualLevel ++];
+      document.querySelector('.factories-bonus').innerHTML = userData[0].factories.bonus;
+      document.querySelector('.upgrade-factories-bonus-cost').innerHTML = Math.round(userData[0].factories.upgradeCost - (userData[0].factories.upgradeCost * tax));
+      moneyEverySecFunctionWithoutAddingMoney();
+    }
+  })
+}
+workersBonusUpgrade = () => {
+  document.querySelector('.workers-upgrade').addEventListener('click', () => {
+    if(money >= (userData[0].workers.upgradeCost - (userData[0].workers.upgradeCost *tax))) {
+      money = Math.round(money - (userData[0].workers.upgradeCost - (userData[0].workers.upgradeCost * tax)));
+      moneyObject.innerHTML = money;
+      userData[0].workers = updateData.workers[userData[0].workers.actualLevel ++];
+      document.querySelector('.workers-bonus').innerHTML = userData[0].workers.bonus;
+      document.querySelector('.upgrade-workers-bonus-cost').innerHTML = Math.round(userData[0].workers.upgradeCost - (userData[0].workers.upgradeCost * tax));
+      moneyEverySecFunctionWithoutAddingMoney();
+    }
+  })
+}
+
+// packing all updating functions inside one
+const upgrades= () => {
+  valueMultiplerBonusUpgrade();
+  valueClickBonusUpgrade();
+  factoriesBonusUpgrade();
+  workersBonusUpgrade();
+}
+
 //starting game
 const startGame = () =>{
   loadUser();
   clickerUpdate();
   autoMoneyUpdate();
   saveUserData();
-  valueMultiplerBonusUpgrade();
+  upgrades();
 }
 window.onload = startGame

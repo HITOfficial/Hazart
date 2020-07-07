@@ -73,7 +73,7 @@
         {"actualLevel": 34, "maxLevel": 35, "upgradeCost": 100000000, "bonus": 5000},
         {"actualLevel": 35, "maxLevel": "MAX", "upgradeCost": false, "bonus": 10000}
     ],
-    "factoriesBonus": [
+    "factories": [
         {"actualLevel": 1, "maxLevel": 20, "upgradeCost": 10000, "bonus": 100},
         {"actualLevel": 2, "maxLevel": 20, "upgradeCost": 15000, "bonus": 110},
         {"actualLevel": 3, "maxLevel": 20, "upgradeCost": 20000, "bonus": 125},
@@ -95,7 +95,7 @@
         {"actualLevel": 19, "maxLevel": 20, "upgradeCost": 4000000, "bonus": 700},
         {"actualLevel": 20, "maxLevel": "MAX", "upgradeCost": 10000000, "bonus": 1000}
     ],
-    "workersBonus": [
+    "workers": [
         {"actualLevel": 1, "maxLevel": 20, "upgradeCost": 10000, "bonus": 100},
         {"actualLevel": 2, "maxLevel": 20, "upgradeCost": 15000, "bonus": 110},
         {"actualLevel": 3, "maxLevel": 20, "upgradeCost": 20000, "bonus": 125},
