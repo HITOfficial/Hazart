@@ -188,6 +188,25 @@ workersBonusUpgrade = () => {
     }
   })
 }
+const factoriesUpgrade = () => {
+  userData[0].autoMachine.forEach(factory => {
+    document.querySelectorAll('.auto-machine')[factory.id -1].addEventListener('click', () => {
+      console.log(userData[0].autoMachine[factory.id -1].cost);
+      if((money >= (userData[0].autoMachine[factory.id -1].cost - (userData[0].autoMachine[factory.id -1].cost * tax))) && (userData[0].autoMachine[factory.id -1].bought == false)) {
+        money = Math.round( money - (userData[0].autoMachine[factory.id -1].cost - (userData[0].autoMachine[factory.id -1].cost * tax)));
+        document.querySelectorAll('.auto-machine')[factory.id -1].style.setProperty("background-image","url('../images/icons/factory.gif')");
+        userData[0].autoMachine[factory.id -1].bought = true;
+        moneyObject.innerHTML = money;
+        moneyEverySecFunctionWithoutAddingMoney();
+        document.querySelectorAll('.auto-machine')[factory.id -1].classList.remove('upgrade-border');
+        document.querySelectorAll('.auto-machine')[factory.id -1].classList.add('upgrades-box');
+      }
+    })
+  })
+}
+// const factorytoGif = () => {
+//   document.q
+// }
 
 // packing all updating functions inside one
 const upgrades= () => {
@@ -195,6 +214,7 @@ const upgrades= () => {
   valueClickBonusUpgrade();
   factoriesBonusUpgrade();
   workersBonusUpgrade();
+  factoriesUpgrade();
 }
 
 //starting game
