@@ -132,25 +132,32 @@ body > .app > .tools > .character-upgrades {
     height: 80%;
 }
 .upgrades-box {
-    /* width: 10vw;
-    height: 15vh; */
-    /* border-radius: 5%; */
-    /* position: relative; */
+    width: 10vw;
+    height: 15vh;
+    background-color: hotpink;
+    border-radius: 5%;
+    border: 2px solid seashell;
+    position: relative;
     transition: box-shadow 2.3s, border-color 1s ;
-    box-shadow: 1px 1px 5px 2px rgb(52, 223, 0);
-    /* border-color: rgb(52, 223, 0); */
 }
 .upgrade-border {
     border-radius: 5%;
     transition: box-shadow 2.3s, border-color 1s ;
 }
+.upgrade-border-red {
+    border-radius: 5%;
+    transition: box-shadow 2.3s, border-color 1s ;
+    box-shadow: 1px 1px 5px 2px rgb(223, 0, 86);
+    border-color: rgb(223, 0, 86);
+}
 .upgrade-border:hover {
     box-shadow: 1px 1px 5px 2px rgb(52, 223, 0);
     border-color: rgb(52, 223, 0);
 }
-/* .upgrades-box:hover {
-   
-} */
+.upgrades-box:hover {
+    box-shadow: 1px 1px 5px 2px rgb(52, 223, 0);
+    border-color: rgb(52, 223, 0);
+}
 /* .upgrades-box:hover {
     box-shadow: 1px 1px 5px 2px rgb(223, 15, 0);
     border-color: rgb(223, 15, 0);
@@ -400,6 +407,10 @@ body > .app > .main > .upgrades-container > .content-box > .sort >  .auto-machin
     background-image: url('../images/icons/factory.png');
     background-size: cover;
 }
+body > .app > .main > .upgrades-container > .content-box > .sort >  .factory-gif {
+    background-image: url('../images/icons/factory.gif');
+    background-size: cover;
+}
 body > .app > .main > .upgrades-container > .content-box > .sort >  .worker-machine {
     background-image: url('../images/icons/baby-icon.png');
     background-size: cover;
@@ -415,9 +426,9 @@ body > .app > .main > .upgrades-container > .content-box > .sort >  .buy-worker:
     content: 'Buy worker';
     transform: translate(20%,250%);
 }
-body > .app > .main > .upgrades-container > .content-box > .sort >  .auto-machine::after {
+body > .app > .main > .upgrades-container > .content-box > .sort >  .buy-factory::after {
     position: absolute;
-    content: 'Buy fatory';
+    content: 'Buy factory';
     transform: translate(20%,250%);
 }
 body > .app > .main > .upgrades-container > .content-box > .sort >  .auto-machine .cost-auto-container,

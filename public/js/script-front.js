@@ -188,25 +188,30 @@ workersBonusUpgrade = () => {
     }
   })
 }
-const factoriesUpgrade = () => {
+const buyFactory = () => {
   userData[0].autoMachine.forEach(factory => {
     document.querySelectorAll('.auto-machine')[factory.id -1].addEventListener('click', () => {
-      console.log(userData[0].autoMachine[factory.id -1].cost);
-      if((money >= (userData[0].autoMachine[factory.id -1].cost - (userData[0].autoMachine[factory.id -1].cost * tax))) && (userData[0].autoMachine[factory.id -1].bought == false)) {
-        money = Math.round( money - (userData[0].autoMachine[factory.id -1].cost - (userData[0].autoMachine[factory.id -1].cost * tax)));
-        document.querySelectorAll('.auto-machine')[factory.id -1].style.setProperty("background-image","url('../images/icons/factory.gif')");
-        userData[0].autoMachine[factory.id -1].bought = true;
-        moneyObject.innerHTML = money;
+      if(factory.bought == true) return 0;
+      else {
+        buy(userData[0].autoMachine[factory.id -1], document.querySelectorAll('.auto-machine')[factory.id -1],'factory-gif','buy-factory');
         moneyEverySecFunctionWithoutAddingMoney();
-        document.querySelectorAll('.auto-machine')[factory.id -1].classList.remove('upgrade-border');
-        document.querySelectorAll('.auto-machine')[factory.id -1].classList.add('upgrades-box');
+        borderDuringUpdate(document.querySelectorAll('.auto-machine')[factory.id -1]);
       }
     })
   })
 }
-// const factorytoGif = () => {
-//   document.q
-// }
+const buyWorker = () => {
+  userData[0].workerMachine.forEach(worker => {
+    document.querySelectorAll('.worker-machine')[worker.id -1].addEventListener('click', () => {
+      if(worker.bought == true) return 0;
+      else {
+        buy(userData[0].workerMachine[worker.id -1], document.querySelectorAll('.worker-machine')[worker.id -1], null, 'buy-worker');
+        moneyEverySecFunctionWithoutAddingMoney();
+        borderDuringUpdate(document.querySelectorAll('.worker-machine')[worker.id -1]);
+      }
+    })
+  })
+}
 
 // packing all updating functions inside one
 const upgrades= () => {
@@ -214,9 +219,35 @@ const upgrades= () => {
   valueClickBonusUpgrade();
   factoriesBonusUpgrade();
   workersBonusUpgrade();
-  factoriesUpgrade();
+  buyFactory();
+  buyWorker();
 }
-
+//////////////////////////////////////////////////////////////////////
+// functions wchih could be use more time:
+const borderDuringUpdate = (actual) => {
+  setTimeout(() => {
+    actual.classList.remove('upgrade-border');
+    actual.classList.add('upgrade-border-red');
+    setTimeout(() => {
+      actual.classList.remove('upgrade-border-red');
+    }, 1200)
+  }, 200)
+}
+const buy = (item, ObjectToManipulate, classAdd, classRemove) => {
+  if((money >= (item.cost - (item.cost * tax))) && (item.bought == false)) {
+    money = Math.round( money - (item.cost - (item.cost * tax)));
+    item.bought = true;
+    moneyObject.innerHTML = money;
+    if(classAdd === !null){
+      setTimeout(() => {
+        ObjectToManipulate.classList.add(classAdd);
+      },900)
+    }
+    setTimeout(() => {
+      ObjectToManipulate.classList.remove(classRemove);
+    }, 700)
+  }
+}
 //starting game
 const startGame = () =>{
   loadUser();
