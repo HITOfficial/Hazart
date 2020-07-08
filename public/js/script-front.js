@@ -193,7 +193,7 @@ const buyFactory = () => {
     document.querySelectorAll('.auto-machine')[factory.id -1].addEventListener('click', () => {
       if(factory.bought == true) return 0;
       else {
-        buy(userData[0].autoMachine[factory.id -1], document.querySelectorAll('.auto-machine')[factory.id -1],'factory-gif','buy-factory');
+        buy(userData[0].autoMachine[factory.id -1], document.querySelectorAll('.auto-machine')[factory.id -1], 'factory-gif', 'buy-factory', document.querySelectorAll('.cost-auto-container-factory')[factory.id -1]);
         moneyEverySecFunctionWithoutAddingMoney();
         borderDuringUpdate(document.querySelectorAll('.auto-machine')[factory.id -1]);
       }
@@ -205,7 +205,7 @@ const buyWorker = () => {
     document.querySelectorAll('.worker-machine')[worker.id -1].addEventListener('click', () => {
       if(worker.bought == true) return 0;
       else {
-        buy(userData[0].workerMachine[worker.id -1], document.querySelectorAll('.worker-machine')[worker.id -1], null, 'buy-worker');
+        buy(userData[0].workerMachine[worker.id -1], document.querySelectorAll('.worker-machine')[worker.id -1], null, 'buy-worker', document.querySelectorAll('.update-worker-container')[worker.id -1], 'cost-auto-container-worker');
         moneyEverySecFunctionWithoutAddingMoney();
         borderDuringUpdate(document.querySelectorAll('.worker-machine')[worker.id -1]);
       }
@@ -233,19 +233,27 @@ const borderDuringUpdate = (actual) => {
     }, 1200)
   }, 200)
 }
-const buy = (item, ObjectToManipulate, classAdd, classRemove) => {
+const buy = (item, ObjectToManipulate, classAdd, classRemove, children, childrenClassName) => {
   if((money >= (item.cost - (item.cost * tax))) && (item.bought == false)) {
     money = Math.round( money - (item.cost - (item.cost * tax)));
     item.bought = true;
     moneyObject.innerHTML = money;
-    if(classAdd === !null){
+    if(classAdd != null){
       setTimeout(() => {
         ObjectToManipulate.classList.add(classAdd);
-      },900)
+      }, 900);
+      setTimeout(() => {
+        ObjectToManipulate.removeChild(ObjectToManipulate.childNodes[1]);
+      }, 1400);
+    } else {
+      setTimeout(() => {
+        console.log(children)
+        children.classList.remove(childrenClassName);
+      }, 1400)
     }
     setTimeout(() => {
       ObjectToManipulate.classList.remove(classRemove);
-    }, 700)
+    }, 700);
   }
 }
 //starting game
