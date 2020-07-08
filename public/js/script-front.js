@@ -30,11 +30,25 @@ const loadUser = () => {
   document.querySelector('.workers-bonus').innerHTML = userData[0].workers.bonus;
   document.querySelector('.upgrade-workers-bonus-cost').innerHTML = Math.round(userData[0].workers.upgradeCost - (userData[0].workers.upgradeCost * tax));
   // main => machines and workers
-  userData[0].autoMachine.forEach( machine => {
-    document.querySelectorAll('.machine-cost')[machine.id -1].innerHTML = Math.round(machine.cost - (machine.cost * tax));
+  userData[0].autoMachine.forEach( factory => {
+    if(factory.bought !== true) {
+      document.querySelectorAll('.cost-auto-container-factory')[factory.id -1].childNodes[1].innerHTML = Math.round(factory.cost - (factory.cost * tax));
+    }
+    else {
+      document.querySelectorAll('.cost-auto-container-factory')[factory.id -1].parentNode.classList.remove('buy-factory', 'upgrade-border');
+      document.querySelectorAll('.cost-auto-container-factory')[factory.id -1].parentNode.classList.add('factory-gif');
+    }
   });
+  extraRemovingFactoryOpacity(userData[0].autoMachine);
   userData[0].workerMachine.forEach( worker => {
-    document.querySelectorAll('.worker-cost')[worker.id -1].innerHTML = Math.round(worker.cost - (worker.cost * tax));
+    if(worker.bought !== true){
+      document.querySelectorAll('.worker-cost')[worker.id -1].innerHTML = Math.round(worker.cost - (worker.cost * tax));
+    }
+    else {
+      document.querySelectorAll('.update-worker-container')[worker.id -1].classList.remove('cost-auto-container-worker');
+      document.querySelectorAll('.update-worker-container')[worker.id -1].parentNode.classList.remove('buy-worker', 'upgrade-border');
+      document.querySelectorAll('.worker-cost')[worker.id -1].innerHTML = Math.round(worker.upgradeCost - (worker.upgradeCost * tax));
+    }
   });
   // tools => upgrades status
   document.querySelector('.bonus-money-actual-level').innerHTML = userData[0].moneyBoost.actualLevel;
@@ -193,9 +207,11 @@ const buyFactory = () => {
     document.querySelectorAll('.auto-machine')[factory.id -1].addEventListener('click', () => {
       if(factory.bought == true) return 0;
       else {
-        buy(userData[0].autoMachine[factory.id -1], document.querySelectorAll('.auto-machine')[factory.id -1], 'factory-gif', 'buy-factory', document.querySelectorAll('.cost-auto-container-factory')[factory.id -1]);
-        moneyEverySecFunctionWithoutAddingMoney();
-        borderDuringUpdate(document.querySelectorAll('.auto-machine')[factory.id -1]);
+        if(money >= (userData[0].autoMachine[factory.id -1].cost - userData[0].autoMachine[factory.id -1].cost * tax)){
+          buy(userData[0].autoMachine[factory.id -1], document.querySelectorAll('.auto-machine')[factory.id -1], 'factory-gif', 'buy-factory', document.querySelectorAll('.cost-auto-container-factory')[factory.id -1]);
+          moneyEverySecFunctionWithoutAddingMoney();
+          borderDuringUpdate(document.querySelectorAll('.auto-machine')[factory.id -1]);
+        }
       }
     })
   })
@@ -205,9 +221,14 @@ const buyWorker = () => {
     document.querySelectorAll('.worker-machine')[worker.id -1].addEventListener('click', () => {
       if(worker.bought == true) return 0;
       else {
-        buy(userData[0].workerMachine[worker.id -1], document.querySelectorAll('.worker-machine')[worker.id -1], null, 'buy-worker', document.querySelectorAll('.update-worker-container')[worker.id -1], 'cost-auto-container-worker');
-        moneyEverySecFunctionWithoutAddingMoney();
-        borderDuringUpdate(document.querySelectorAll('.worker-machine')[worker.id -1]);
+        if(money >= (userData[0].workerMachine[worker.id -1].cost - userData[0].workerMachine[worker.id -1].cost * tax)){
+          buy(userData[0].workerMachine[worker.id -1], document.querySelectorAll('.worker-machine')[worker.id -1], null, 'buy-worker', document.querySelectorAll('.update-worker-container')[worker.id -1], 'cost-auto-container-worker');
+          moneyEverySecFunctionWithoutAddingMoney();
+          borderDuringUpdate(document.querySelectorAll('.worker-machine')[worker.id -1]);
+          setTimeout(() => {
+            document.querySelectorAll('.worker-cost')[worker.id -1].innerHTML = Math.round(worker.upgradeCost - (worker.upgradeCost * tax));
+          },1400)
+        }
       }
     })
   })
@@ -238,7 +259,7 @@ const buy = (item, ObjectToManipulate, classAdd, classRemove, children, children
     money = Math.round( money - (item.cost - (item.cost * tax)));
     item.bought = true;
     moneyObject.innerHTML = money;
-    if(classAdd != null){
+    if(classAdd !== null){
       setTimeout(() => {
         ObjectToManipulate.classList.add(classAdd);
       }, 900);
@@ -255,6 +276,15 @@ const buy = (item, ObjectToManipulate, classAdd, classRemove, children, children
       ObjectToManipulate.classList.remove(classRemove);
     }, 700);
   }
+}
+
+//shit to rework
+const extraRemovingFactoryOpacity = (factoryTab) => {
+  factoryTab.forEach(factory => {
+    if(factory.bought == true) {
+      document.querySelectorAll('.auto-machine')[factory.id -1].removeChild(document.querySelectorAll('.auto-machine')[factory.id -1].childNodes[1])
+    }
+  })
 }
 //starting game
 const startGame = () =>{
