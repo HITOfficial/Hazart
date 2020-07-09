@@ -57,21 +57,23 @@ const loadUser = () => {
     }
   });
   // tools => upgrades status
+
   document.querySelector('.money-boost-actual-level').innerHTML = userData[0].moneyBoost.actualLevel;
   document.querySelector('.money-boost-max-level').innerHTML = userData[0].moneyBoost.maxLevel;
   document.querySelector('.money-boost-cost').innerHTML = Math.round(userData[0].moneyBoost.upgradeCost - (userData[0].moneyBoost.upgradeCost * tax)) ;
+  insideRemover(userData[0].moneyBoost, document.querySelector('.money-boost'));
   document.querySelector('.bonus-gift-actual-level').innerHTML = userData[0].moneyBoost.actualLevel;
   document.querySelector('.bonus-gift-max-level').innerHTML = userData[0].moneyBoost.maxLevel;
-  document.querySelector('.gift-cost').innerHTML = Math.round(userData[0].moneyBoost.upgradeCost - (userData[0].moneyBoost.upgradeCost * tax));
+  document.querySelector('.bonus-gift-cost').innerHTML = Math.round(userData[0].moneyBoost.upgradeCost - (userData[0].moneyBoost.upgradeCost * tax));
+  insideRemover(userData[0].gift ,document.querySelector('.bonus-gift'));
   document.querySelector('.bonus-tax-actual-level').innerHTML = userData[0].moneyBoost.actualLevel;
   document.querySelector('.bonus-tax-max-level').innerHTML = userData[0].moneyBoost.maxLevel;
-  document.querySelector('.tax-cost').innerHTML = Math.round(userData[0].moneyBoost.upgradeCost - (userData[0].moneyBoost.upgradeCost * tax));
+  document.querySelector('.bonus-tax-cost').innerHTML = Math.round(userData[0].moneyBoost.upgradeCost - (userData[0].moneyBoost.upgradeCost * tax));
+  insideRemover(userData[0].tax ,document.querySelector('.tax'));
   document.querySelector('.bonus-cooldown-actual-level').innerHTML = userData[0].moneyBoost.actualLevel;
   document.querySelector('.bonus-cooldown-max-level').innerHTML = userData[0].moneyBoost.maxLevel;
-  document.querySelector('.cooldown-cost').innerHTML = Math.round(userData[0].moneyBoost.upgradeCost - (userData[0].moneyBoost.upgradeCost * tax));
-  document.querySelector('.gift-cost').innerHTML = Math.round(userData[0].gift.upgradeCost - (userData[0].gift.upgradeCost * tax));
-  document.querySelector('.tax-cost').innerHTML = Math.round(userData[0].tax.upgradeCost - (userData[0].tax.upgradeCost * tax));
-  document.querySelector('.cooldown-cost').innerHTML = Math.round(userData[0].cooldown.upgradeCost - (userData[0].cooldown.upgradeCost * tax));
+  document.querySelector('.bonus-cooldown-cost').innerHTML = Math.round(userData[0].moneyBoost.upgradeCost - (userData[0].moneyBoost.upgradeCost * tax));
+  insideRemover(userData[0].cooldown ,document.querySelector('.cooldown'));
   // tools => upgrades skills
   document.querySelector('.reset-skills-actual-level').innerHTML = userData[0].resetSkillsUpgrade.actualLevel
   document.querySelector('.reset-skills-max-level').innerHTML = userData[0].resetSkillsUpgrade.maxLevel;
@@ -262,24 +264,36 @@ const workerUpgrade = () => {
 const moneyBoostUpgrade = () =>{
   document.querySelector('.money-boost').addEventListener('click', () => {
     objectUpdateData;
-    upgrader(userData[0].moneyBoost, updateData.moneyBoost, document.querySelector('.money-boost-cost'), document.querySelector('.money-boost-actual-level'));
+    upgrader(userData[0].moneyBoost, updateData.moneyBoost, document.querySelector('.money-boost-cost'), document.querySelector('.money-boost-actual-level'), document.querySelector('.money-boost'));
     userData[0].moneyBoost = objectUpdateData;
     moneyEverySecFunctionWithoutAddingMoney();
   })
 }
-
-const upgrader = (object, updateDataObject, classUpgradeCost, clasActualLevel) => {
-  if((object.actualLevel < object.maxLevel) && (money >= (object.upgradeCost - (object.upgradeCost * tax)))) {
-    console.log(updateDataObject[object.actualLevel])
-    money = Math.round(money - (object.upgradeCost - (object.upgradeCost * tax)));
-    object = updateDataObject[object.actualLevel];
-    classUpgradeCost.innerHTML = object.upgradeCost;
-    clasActualLevel.innerHTML = object.actualLevel;
-    console.log(updateDataObject[object.actualLevel])
-     // I created objectUpdateData in every parent function to be able later save data from this function in userData
-    objectUpdateData = object
-  }
+const bonusGiftUpgrade = () =>{
+  document.querySelector('.bonus-gift').addEventListener('click', () => {
+    objectUpdateData;
+    upgrader(userData[0].gift, updateData.gift, document.querySelector('.bonus-gift-cost'), document.querySelector('.bonus-gift-actual-level'), document.querySelector('.money-boost'));
+    userData[0].gift = objectUpdateData;
+    moneyEverySecFunctionWithoutAddingMoney();
+  })
 }
+const taxUpgrade = () =>{
+  document.querySelector('.tax').addEventListener('click', () => {
+    objectUpdateData;
+    upgrader(userData[0].tax, updateData.tax, document.querySelector('.bonus-tax-cost'), document.querySelector('.bonus-tax-actual-level'), document.querySelector('.tax'));
+    userData[0].tax = objectUpdateData;
+    moneyEverySecFunctionWithoutAddingMoney();
+  })
+}
+const cooldownUpgrade = () =>{
+  document.querySelector('.cooldown').addEventListener('click', () => {
+    objectUpdateData;
+    upgrader(userData[0].cooldown, updateData.cooldown, document.querySelector('.bonus-cooldown-cost'), document.querySelector('.bonus-cooldown-actual-level'), document.querySelector('.cooldown'));
+    userData[0].cooldown = objectUpdateData;
+    moneyEverySecFunctionWithoutAddingMoney();
+  })
+}
+
 // packing all updating functions inside one
 const upgrades= () => {
   valueMultiplerBonusUpgrade();
@@ -290,6 +304,9 @@ const upgrades= () => {
   buyWorker();
   workerUpgrade();
   moneyBoostUpgrade();
+  bonusGiftUpgrade();
+  taxUpgrade();
+  cooldownUpgrade();
 }
 //////////////////////////////////////////////////////////////////////
 // functions wchih could be use more time:
@@ -350,6 +367,23 @@ const upgradeWorkerChangeImg = (level, object) => {
         object.style.setProperty('background-image', "url('./images/icons/king-icon.png')");
         break;
   }
+}
+const upgrader = (object, updateDataObject, classUpgradeCost, clasActualLevel, parentObject) => {
+  if((object.actualLevel < object.maxLevel) && (money >= (object.upgradeCost - (object.upgradeCost * tax)))) {
+    money = Math.round(money - (object.upgradeCost - (object.upgradeCost * tax)));
+    object = updateDataObject[object.actualLevel];
+    classUpgradeCost.innerHTML = object.upgradeCost - (object.upgradeCost * tax);
+    clasActualLevel.innerHTML = object.actualLevel;
+     // I created objectUpdateData in every parent function to be able later save data from this function in userData
+    objectUpdateData = object
+    moneyUpdate();
+  }
+  else {
+    insideRemover(object, parentObject);
+  }
+}
+const insideRemover = (object, parent) => {
+  if(object.actualLevel == object.maxLevel) parent.innerHTML = '<span style= "float: right">MAX</span>';
 }
 //shit to rework
 const extraRemovingFactoryOpacity = (factoryTab) => {
