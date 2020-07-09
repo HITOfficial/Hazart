@@ -115,7 +115,7 @@
         {"actualLevel": 17, "maxLevel": 20, "upgradeCost": 1000000, "bonus": 500},
         {"actualLevel": 18, "maxLevel": 20, "upgradeCost": 2000000, "bonus": 600},
         {"actualLevel": 19, "maxLevel": 20, "upgradeCost": 4000000, "bonus": 700},
-        {"actualLevel": 20, "maxLevel": "MAX", "upgradeCost": 10000000, "bonus": 1000}
+        {"actualLevel": 20, "maxLevel": 100, "upgradeCost": 10000000, "bonus": 1000}
     ],
     "moneyBoost": [
         {"actualLevel": 1, "maxLevel": 100, "upgradeCost": 200, "bonus": 1.05},
@@ -217,7 +217,7 @@
         {"actualLevel": 97, "maxLevel": 100, "upgradeCost": 1900000, "bonus": 80.50},
         {"actualLevel": 98, "maxLevel": 100, "upgradeCost": 2000000, "bonus": 85.50},
         {"actualLevel": 99, "maxLevel": 100, "upgradeCost": 5000000, "bonus": 90.50},
-        {"actualLevel": 100, "maxLevel": "MAX", "upgradeCost": 10000000, "bonus": 100}
+        {"actualLevel": 100, "maxLevel": 100, "upgradeCost": 10000000, "bonus": 100}
     ],
     "gift": [
         {"actualLevel": 1, "maxLevel": 100, "upgradeCost": 200, "bonus": 10},
@@ -319,7 +319,7 @@
         {"actualLevel": 97, "maxLevel": 100, "upgradeCost": 1900000, "bonus": 160000},
         {"actualLevel": 98, "maxLevel": 100, "upgradeCost": 2000000, "bonus": 180000},
         {"actualLevel": 99, "maxLevel": 100, "upgradeCost": 5000000, "bonus": 200000},
-        {"actualLevel": 100, "maxLevel": "MAX", "upgradeCost": 10000000, "bonus": 250000}
+        {"actualLevel": 100, "maxLevel": 100, "upgradeCost": 10000000, "bonus": 250000}
     ],
     "tax": [
         {"actualLevel": 1, "maxLevel": 100, "upgradeCost": 200, "bonus": 0.00},
@@ -421,7 +421,7 @@
         {"actualLevel": 97, "maxLevel": 100, "upgradeCost": 1900000, "bonus": 0.96},
         {"actualLevel": 98, "maxLevel": 100, "upgradeCost": 2000000, "bonus": 0.97},
         {"actualLevel": 99, "maxLevel": 100, "upgradeCost": 5000000, "bonus": 0.98},
-        {"actualLevel": 100, "maxLevel": "MAX", "upgradeCost": 10000000, "bonus": 0.99}
+        {"actualLevel": 100, "maxLevel": 100, "upgradeCost": 10000000, "bonus": 0.99}
     ],
     "cooldown": [
         {"actualLevel": 1, "maxLevel": 100, "upgradeCost": 200, "bonus": 0.00},
@@ -523,7 +523,7 @@
         {"actualLevel": 97, "maxLevel": 100, "upgradeCost": 1900000, "bonus": 0.96},
         {"actualLevel": 98, "maxLevel": 100, "upgradeCost": 2000000, "bonus": 0.97},
         {"actualLevel": 99, "maxLevel": 100, "upgradeCost": 5000000, "bonus": 0.98},
-        {"actualLevel": 100, "maxLevel": "MAX", "upgradeCost": 10000000, "bonus": 0.99}
+        {"actualLevel": 100, "maxLevel": 100, "upgradeCost": 10000000, "bonus": 0.99}
     ],
     "resetSkillsUpgrade": [
         {"actualLevel": 0, "maxLevel": 50, "upgradeCost": 2000, "bonus": 0.00},

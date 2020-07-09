@@ -1,4 +1,4 @@
-let valuePerClick, moneyPerAuto, moneyPerClick, moneyTime
+let valuePerClick, moneyPerAuto, moneyPerClick, moneyTime, objectUpdateData
 let moneyObject = document.querySelector('.money');
 let valuePerClickObject = document.querySelector('.money-per-click');
 let moneyPerAutoObject = document.querySelector('.money-per-auto');
@@ -57,9 +57,9 @@ const loadUser = () => {
     }
   });
   // tools => upgrades status
-  document.querySelector('.bonus-money-actual-level').innerHTML = userData[0].moneyBoost.actualLevel;
-  document.querySelector('.bonus-money-max-level').innerHTML = userData[0].moneyBoost.maxLevel;
-  document.querySelector('.bonus-money-cost').innerHTML = Math.round(userData[0].moneyBoost.upgradeCost - (userData[0].moneyBoost.upgradeCost * tax)) ;
+  document.querySelector('.money-boost-actual-level').innerHTML = userData[0].moneyBoost.actualLevel;
+  document.querySelector('.money-boost-max-level').innerHTML = userData[0].moneyBoost.maxLevel;
+  document.querySelector('.money-boost-cost').innerHTML = Math.round(userData[0].moneyBoost.upgradeCost - (userData[0].moneyBoost.upgradeCost * tax)) ;
   document.querySelector('.bonus-gift-actual-level').innerHTML = userData[0].moneyBoost.actualLevel;
   document.querySelector('.bonus-gift-max-level').innerHTML = userData[0].moneyBoost.maxLevel;
   document.querySelector('.gift-cost').innerHTML = Math.round(userData[0].moneyBoost.upgradeCost - (userData[0].moneyBoost.upgradeCost * tax));
@@ -255,10 +255,30 @@ const workerUpgrade = () => {
             document.querySelectorAll('.update-worker-container')[worker.id -1].style.setProperty('visibility','hidden');
           }
         },1400)
-      }
-      else return 0;
+      } else return 0;
     })
   })
+}
+const moneyBoostUpgrade = () =>{
+  document.querySelector('.money-boost').addEventListener('click', () => {
+    objectUpdateData;
+    upgrader(userData[0].moneyBoost, updateData.moneyBoost, document.querySelector('.money-boost-cost'), document.querySelector('.money-boost-actual-level'));
+    userData[0].moneyBoost = objectUpdateData;
+    moneyEverySecFunctionWithoutAddingMoney();
+  })
+}
+
+const upgrader = (object, updateDataObject, classUpgradeCost, clasActualLevel) => {
+  if((object.actualLevel < object.maxLevel) && (money >= (object.upgradeCost - (object.upgradeCost * tax)))) {
+    console.log(updateDataObject[object.actualLevel])
+    money = Math.round(money - (object.upgradeCost - (object.upgradeCost * tax)));
+    object = updateDataObject[object.actualLevel];
+    classUpgradeCost.innerHTML = object.upgradeCost;
+    clasActualLevel.innerHTML = object.actualLevel;
+    console.log(updateDataObject[object.actualLevel])
+     // I created objectUpdateData in every parent function to be able later save data from this function in userData
+    objectUpdateData = object
+  }
 }
 // packing all updating functions inside one
 const upgrades= () => {
@@ -269,6 +289,7 @@ const upgrades= () => {
   buyFactory();
   buyWorker();
   workerUpgrade();
+  moneyBoostUpgrade();
 }
 //////////////////////////////////////////////////////////////////////
 // functions wchih could be use more time:
