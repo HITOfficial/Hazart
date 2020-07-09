@@ -2,6 +2,7 @@ let valuePerClick, moneyPerAuto, moneyPerClick, moneyTime
 let moneyObject = document.querySelector('.money');
 let valuePerClickObject = document.querySelector('.money-per-click');
 let moneyPerAutoObject = document.querySelector('.money-per-auto');
+let waitWithUpgradeWorker = [false, false, false, false, false,] // I added new table to stop upgrade automaticaly within buying a worker if user has enought money
 //fetch GET user_data
 fetch("./user_data.json")
   .then(response => response.json())
@@ -48,6 +49,7 @@ const loadUser = () => {
       document.querySelectorAll('.update-worker-container')[worker.id -1].classList.remove('cost-auto-container-worker');
       document.querySelectorAll('.update-worker-container')[worker.id -1].parentNode.classList.remove('buy-worker', 'upgrade-border');
       document.querySelectorAll('.worker-cost')[worker.id -1].innerHTML = Math.round(worker.upgradeCost - (worker.upgradeCost * tax));
+      waitWithUpgradeWorker[worker.id -1] = true;
     }
   });
   // tools => upgrades status
@@ -86,7 +88,7 @@ const loadUser = () => {
   valuePerClick = Math.round((userData[0].moneyPerClick * userData[0].valueClickBonus.bonus * userData[0].valueMultiplerBonus.bonus * userData[0].moneyBoost.bonus));
   MoneyPerClick = Math.round((userData[0].moneyPerAuto * userData[0].moneyBoost.bonus));
   // main => show bonuses
-  moneyObject.innerHTML = userData[0].money;
+  moneyUpdate();
   valuePerClickObject.innerHTML = valuePerClick;
   moneyPerAutoObject.innerHTML = userData[0].moneyPerAuto;
 }
@@ -105,7 +107,7 @@ const clickerUpdateFunctionWithotAddingMoney = () => {
 // Seperated updating money, becouse clickerUpdateFunctionWithotAddingMoney I'll need later to use also in upgrades
 const clickerUpdateFunctionAddingMoney = () => {
   money = Math.round(money + moneyPerClick);
-  moneyObject.innerHTML = money;
+  moneyUpdate();
 }
 const clickerUpdateFunction = () => {
   clickerUpdateFunctionWithotAddingMoney();
@@ -126,7 +128,7 @@ const moneyEverySecFunctionWithoutAddingMoney = () => {
 // Seperated updating money, becouse moneyEverySecFunctionWithoutAddingMoney I'll need later to use also in upgrades
 const moneyEverySecFunctionAddingMoney = () => {
   money = Math.round(money + moneyTime);
-  moneyObject.innerHTML = money; 
+  moneyUpdate();
 }
 // updating curently money every second function
 const moneyEverySecFunction = () => {
@@ -157,7 +159,7 @@ const valueMultiplerBonusUpgrade = () => {
   document.querySelector('.multipler-click').addEventListener('click', () => {
     if(money >= (userData[0].valueMultiplerBonus.upgradeCost - (userData[0].valueMultiplerBonus.upgradeCost * tax))) {
       money = Math.round(money - (userData[0].valueMultiplerBonus.upgradeCost - (userData[0].valueMultiplerBonus.upgradeCost * tax)))
-      moneyObject.innerHTML = money
+      moneyUpdate();
       userData[0].valueMultiplerBonus = updateData.valueMultiplerBonus[userData[0].valueMultiplerBonus.actualLevel ++];
       document.querySelector('.upgrade-multipler-click-bonus-cost').innerHTML = Math.round(userData[0].valueMultiplerBonus.upgradeCost - (userData[0].valueMultiplerBonus.upgradeCost * tax));
       document.querySelector('.value-multipler-bonus').innerHTML = userData[0].valueMultiplerBonus.bonus;
@@ -170,7 +172,7 @@ const valueClickBonusUpgrade = () => {
   document.querySelector('.value-click').addEventListener('click', () => {
     if(money >= (userData[0].valueClickBonus.upgradeCost - (userData[0].valueClickBonus.upgradeCost * tax))) {
       money = Math.round(money - (userData[0].valueClickBonus.upgradeCost - (userData[0].valueClickBonus.upgradeCost * tax)));
-      moneyObject.innerHTML = money;
+      moneyUpdate();
       userData[0].valueClickBonus = updateData.valueClickBonus[userData[0].valueClickBonus.actualLevel ++];
       document.querySelector('.upgrade-value-click-bonus-cost').innerHTML = Math.round(userData[0].valueClickBonus.upgradeCost - (userData[0].valueClickBonus.upgradeCost * tax));
       document.querySelector('.value-click-bonus').innerHTML = userData[0].valueClickBonus.bonus;
@@ -182,7 +184,7 @@ factoriesBonusUpgrade = () => {
   document.querySelector('.factories-upgrade').addEventListener('click', () => {
     if(money >= (userData[0].factories.upgradeCost - (userData[0].factories.upgradeCost *tax))) {
       money = Math.round(money - (userData[0].factories.upgradeCost - (userData[0].factories.upgradeCost * tax)));
-      moneyObject.innerHTML = money;
+      moneyUpdate();
       userData[0].factories = updateData.factories[userData[0].factories.actualLevel ++];
       document.querySelector('.factories-bonus').innerHTML = userData[0].factories.bonus;
       document.querySelector('.upgrade-factories-bonus-cost').innerHTML = Math.round(userData[0].factories.upgradeCost - (userData[0].factories.upgradeCost * tax));
@@ -194,7 +196,7 @@ workersBonusUpgrade = () => {
   document.querySelector('.workers-upgrade').addEventListener('click', () => {
     if(money >= (userData[0].workers.upgradeCost - (userData[0].workers.upgradeCost *tax))) {
       money = Math.round(money - (userData[0].workers.upgradeCost - (userData[0].workers.upgradeCost * tax)));
-      moneyObject.innerHTML = money;
+      moneyUpdate();
       userData[0].workers = updateData.workers[userData[0].workers.actualLevel ++];
       document.querySelector('.workers-bonus').innerHTML = userData[0].workers.bonus;
       document.querySelector('.upgrade-workers-bonus-cost').innerHTML = Math.round(userData[0].workers.upgradeCost - (userData[0].workers.upgradeCost * tax));
@@ -227,13 +229,29 @@ const buyWorker = () => {
           borderDuringUpdate(document.querySelectorAll('.worker-machine')[worker.id -1]);
           setTimeout(() => {
             document.querySelectorAll('.worker-cost')[worker.id -1].innerHTML = Math.round(worker.upgradeCost - (worker.upgradeCost * tax));
+            waitWithUpgradeWorker[worker.id -1] = true;
           },1400)
         }
       }
     })
   })
 }
-
+const workerUpgrade = () => {
+  userData[0].workerMachine.forEach(worker => {
+    document.querySelectorAll('.worker-machine')[worker.id -1].addEventListener('click', () => {
+      if((worker.bought == true) && (money >= (userData[0].workerMachine[worker.id -1].upgradeCost - userData[0].workerMachine[worker.id -1].upgradeCost * tax)) && (userData[0].workerMachine[worker.id -1].level < 5) && (waitWithUpgradeWorker[worker.id -1] == true)){
+        money = money - (userData[0].workerMachine[worker.id -1].upgradeCost - (userData[0].workerMachine[worker.id -1].upgradeCost * tax));
+        moneyUpdate();
+        upgradeWorkerDataUpdate(userData[0].workerMachine[worker.id -1]);
+        moneyEverySecFunctionWithoutAddingMoney();
+        setTimeout(() => {
+          document.querySelectorAll('.worker-cost')[worker.id -1].innerHTML = Math.round(worker.upgradeCost - (worker.upgradeCost * tax));
+        },1400)
+      }
+      else return 0;
+    })
+  })
+}
 // packing all updating functions inside one
 const upgrades= () => {
   valueMultiplerBonusUpgrade();
@@ -242,6 +260,7 @@ const upgrades= () => {
   workersBonusUpgrade();
   buyFactory();
   buyWorker();
+  workerUpgrade();
 }
 //////////////////////////////////////////////////////////////////////
 // functions wchih could be use more time:
@@ -258,7 +277,7 @@ const buy = (item, ObjectToManipulate, classAdd, classRemove, children, children
   if((money >= (item.cost - (item.cost * tax))) && (item.bought == false)) {
     money = Math.round( money - (item.cost - (item.cost * tax)));
     item.bought = true;
-    moneyObject.innerHTML = money;
+    moneyUpdate();
     if(classAdd !== null){
       setTimeout(() => {
         ObjectToManipulate.classList.add(classAdd);
@@ -268,7 +287,6 @@ const buy = (item, ObjectToManipulate, classAdd, classRemove, children, children
       }, 1400);
     } else {
       setTimeout(() => {
-        console.log(children)
         children.classList.remove(childrenClassName);
       }, 1400)
     }
@@ -277,7 +295,14 @@ const buy = (item, ObjectToManipulate, classAdd, classRemove, children, children
     }, 700);
   }
 }
-
+const upgradeWorkerDataUpdate = (worker) => {
+  worker.effectivity = updateData.workerMachine[worker.level].effectivity;
+  worker.level = updateData.workerMachine[worker.level].level;
+  worker.upgradeCost = updateData.workerMachine[worker.level].upgradeCost;
+}
+const moneyUpdate = () => {
+  moneyObject.innerHTML = money;
+}
 //shit to rework
 const extraRemovingFactoryOpacity = (factoryTab) => {
   factoryTab.forEach(factory => {

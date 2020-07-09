@@ -738,10 +738,10 @@
         {"actualLevel": 50, "maxLevel": "MAX", "upgradeCost": 8000000, "bonus": 50.0, "duration": 10000}
     ],
     "workerMachine" : [
-        { "bought": true, "cost" : 5000, "effectivity" : 100, "level" : 1, "upgradeCost": 50000},
-        { "bought": true, "cost" : 5000, "effectivity" : 200, "level" : 2, "upgradeCost": 250000},
-        { "bought": true, "cost" : 5000, "effectivity" : 500, "level" : 3, "upgradeCost": 1000000},
-        { "bought": true, "cost" : 5000, "effectivity" : 2000, "level" : 4, "upgradeCost": 5000000},
-        { "bought": true, "cost" : 5000, "effectivity" : 5000, "level" : 5, "upgradeCost": 10000000}
+        { "bought": true, "effectivity" : 100, "level" : 1, "upgradeCost": 50000},
+        { "bought": true, "effectivity" : 200, "level" : 2, "upgradeCost": 250000},
+        { "bought": true, "effectivity" : 500, "level" : 3, "upgradeCost": 1000000},
+        { "bought": true, "effectivity" : 2000, "level" : 4, "upgradeCost": 5000000},
+        { "bought": true, "effectivity" : 5000, "level" : 5, "upgradeCost": 10000000}
     ]
 }
