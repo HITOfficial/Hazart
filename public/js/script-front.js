@@ -46,10 +46,14 @@ const loadUser = () => {
       document.querySelectorAll('.worker-cost')[worker.id -1].innerHTML = Math.round(worker.cost - (worker.cost * tax));
     }
     else {
+      upgradeWorkerChangeImg(worker.level, document.querySelectorAll('.worker-machine')[worker.id -1]);
       document.querySelectorAll('.update-worker-container')[worker.id -1].classList.remove('cost-auto-container-worker');
       document.querySelectorAll('.update-worker-container')[worker.id -1].parentNode.classList.remove('buy-worker', 'upgrade-border');
       document.querySelectorAll('.worker-cost')[worker.id -1].innerHTML = Math.round(worker.upgradeCost - (worker.upgradeCost * tax));
       waitWithUpgradeWorker[worker.id -1] = true;
+      if(worker.level == 5) {
+        document.querySelectorAll('.update-worker-container')[worker.id -1].style.setProperty('visibility','hidden');
+      }
     }
   });
   // tools => upgrades status
@@ -246,6 +250,10 @@ const workerUpgrade = () => {
         moneyEverySecFunctionWithoutAddingMoney();
         setTimeout(() => {
           document.querySelectorAll('.worker-cost')[worker.id -1].innerHTML = Math.round(worker.upgradeCost - (worker.upgradeCost * tax));
+          upgradeWorkerChangeImg(worker.level, document.querySelectorAll('.worker-machine')[worker.id -1]);
+          if(worker.level == 5) {
+            document.querySelectorAll('.update-worker-container')[worker.id -1].style.setProperty('visibility','hidden');
+          }
         },1400)
       }
       else return 0;
@@ -302,6 +310,25 @@ const upgradeWorkerDataUpdate = (worker) => {
 }
 const moneyUpdate = () => {
   moneyObject.innerHTML = money;
+}
+const upgradeWorkerChangeImg = (level, object) => {
+  switch(level) {
+      case 1:
+        object.style.setProperty('background-image', "url('./images/icons/baby-icon.png')");
+        break;
+      case 2:
+        object.style.setProperty('background-image', "url('./images/icons/boy-icon.png')");
+        break;
+      case 3:
+        object.style.setProperty('background-image', "url('./images/icons/confederate-soldier-icon.png')");
+        break;
+      case 4:
+        object.style.setProperty('background-image', "url('./images/icons/construction-worker-icon.png')");
+        break;   
+      case 5:
+        object.style.setProperty('background-image', "url('./images/icons/king-icon.png')");
+        break;
+  }
 }
 //shit to rework
 const extraRemovingFactoryOpacity = (factoryTab) => {

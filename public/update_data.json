@@ -742,6 +742,7 @@
         { "bought": true, "effectivity" : 200, "level" : 2, "upgradeCost": 250000},
         { "bought": true, "effectivity" : 500, "level" : 3, "upgradeCost": 1000000},
         { "bought": true, "effectivity" : 2000, "level" : 4, "upgradeCost": 5000000},
+        { "bought": true, "effectivity" : 5000, "level" : 5, "upgradeCost": 10000000},
         { "bought": true, "effectivity" : 5000, "level" : 5, "upgradeCost": 10000000}
     ]
 }
