@@ -34,7 +34,7 @@
         {"actualLevel": 32, "maxLevel": 35, "upgradeCost": 20000000, "bonus": 1700},
         {"actualLevel": 33, "maxLevel": 35, "upgradeCost": 50000000, "bonus": 2500},
         {"actualLevel": 34, "maxLevel": 35, "upgradeCost": 100000000, "bonus": 5000},
-        {"actualLevel": 35, "maxLevel": "MAX", "upgradeCost": false, "bonus": 10000}
+        {"actualLevel": 35, "maxLevel": 35, "upgradeCost": false, "bonus": 10000}
     ],
     "valueClickBonus": [
         {"actualLevel": 1, "maxLevel": 35, "upgradeCost": 500, "bonus": 1},
@@ -71,7 +71,7 @@
         {"actualLevel": 32, "maxLevel": 35, "upgradeCost": 20000000, "bonus": 1700},
         {"actualLevel": 33, "maxLevel": 35, "upgradeCost": 50000000, "bonus": 2500},
         {"actualLevel": 34, "maxLevel": 35, "upgradeCost": 100000000, "bonus": 5000},
-        {"actualLevel": 35, "maxLevel": "MAX", "upgradeCost": false, "bonus": 10000}
+        {"actualLevel": 35, "maxLevel": 35, "upgradeCost": false, "bonus": 10000}
     ],
     "factories": [
         {"actualLevel": 1, "maxLevel": 20, "upgradeCost": 10000, "bonus": 100},
@@ -93,7 +93,7 @@
         {"actualLevel": 17, "maxLevel": 20, "upgradeCost": 1000000, "bonus": 500},
         {"actualLevel": 18, "maxLevel": 20, "upgradeCost": 2000000, "bonus": 600},
         {"actualLevel": 19, "maxLevel": 20, "upgradeCost": 4000000, "bonus": 700},
-        {"actualLevel": 20, "maxLevel": "MAX", "upgradeCost": 10000000, "bonus": 1000}
+        {"actualLevel": 20, "maxLevel": 20, "upgradeCost": 10000000, "bonus": 1000}
     ],
     "workers": [
         {"actualLevel": 1, "maxLevel": 20, "upgradeCost": 10000, "bonus": 100},
@@ -575,7 +575,7 @@
         {"actualLevel": 47, "maxLevel": 50, "upgradeCost": 600000, "bonus": 0.46},
         {"actualLevel": 48, "maxLevel": 50, "upgradeCost": 650000, "bonus": 0.47},
         {"actualLevel": 49, "maxLevel": 50, "upgradeCost": 700000, "bonus": 0.48},
-        {"actualLevel": 50, "maxLevel": "MAX", "upgradeCost": 800000, "bonus": 0.50}
+        {"actualLevel": 50, "maxLevel": 50, "upgradeCost": 800000, "bonus": 0.50}
     ],
     "multipleClickSkillUpgrade": [
         {"actualLevel": 1, "maxLevel": 50, "upgradeCost": 2000, "bonus": 1.50, "duration": 10000},
@@ -627,7 +627,7 @@
         {"actualLevel": 47, "maxLevel": 50, "upgradeCost": 600000, "bonus": 28.0, "duration": 10000},
         {"actualLevel": 48, "maxLevel": 50, "upgradeCost": 650000, "bonus": 30.0, "duration": 10000},
         {"actualLevel": 49, "maxLevel": 50, "upgradeCost": 700000, "bonus": 35.0, "duration": 10000},
-        {"actualLevel": 50, "maxLevel": "MAX", "upgradeCost": 800000, "bonus": 50.0, "duration": 10000}
+        {"actualLevel": 50, "maxLevel": 50, "upgradeCost": 800000, "bonus": 50.0, "duration": 10000}
     ],
     "multipleMoneySkillUpgrade": [
         {"actualLevel": 1, "maxLevel": 50, "upgradeCost": 20000, "bonus": 1.50, "duration": 10000},
@@ -679,7 +679,7 @@
         {"actualLevel": 47, "maxLevel": 50, "upgradeCost": 6000000, "bonus": 28.0, "duration": 10000},
         {"actualLevel": 48, "maxLevel": 50, "upgradeCost": 6500000, "bonus": 30.0, "duration": 10000},
         {"actualLevel": 49, "maxLevel": 50, "upgradeCost": 7000000, "bonus": 35.0, "duration": 10000},
-        {"actualLevel": 50, "maxLevel": "MAX", "upgradeCost": 8000000, "bonus": 50.0, "duration": 10000}
+        {"actualLevel": 50, "maxLevel": 50, "upgradeCost": 8000000, "bonus": 50.0, "duration": 10000}
     ],
     "multipleGiftSkillUpgrade": [
         {"actualLevel": 1, "maxLevel": 50, "upgradeCost": 20000, "bonus": 1.50, "duration": 10000},
@@ -731,7 +731,7 @@
         {"actualLevel": 47, "maxLevel": 50, "upgradeCost": 6000000, "bonus": 28.0, "duration": 10000},
         {"actualLevel": 48, "maxLevel": 50, "upgradeCost": 6500000, "bonus": 30.0, "duration": 10000},
         {"actualLevel": 49, "maxLevel": 50, "upgradeCost": 7000000, "bonus": 35.0, "duration": 10000},
-        {"actualLevel": 50, "maxLevel": "MAX", "upgradeCost": 8000000, "bonus": 50.0, "duration": 10000}
+        {"actualLevel": 50, "maxLevel": 50, "upgradeCost": 8000000, "bonus": 50.0, "duration": 10000}
     ],
     "workerMachine" : [
         { "bought": true, "effectivity" : 100, "level" : 1, "upgradeCost": 50000},

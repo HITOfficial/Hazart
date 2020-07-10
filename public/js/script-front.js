@@ -299,14 +299,62 @@ const resetSkillsUpgrade = () => {
     if(userData[0].resetSkills.visible == false){
       buySkill(userData[0].resetSkills, userData[0].resetSkillsUpgrade);
       userData[0].resetSkills.visible = visibleValue;
-      document.querySelector('.reset-skills-upgrade-actual-level').innerHTML = userData[0].resetSkillsUpgrade.actualLevel;
       userData[0].resetSkillsUpgrade.actualLevel = 1;
+      document.querySelector('.reset-skills-upgrade-actual-level').innerHTML = userData[0].resetSkillsUpgrade.actualLevel;
     }
     else {
       objectUpdateData;
-      console.log(objectUpdateData);
       upgrader(userData[0].resetSkillsUpgrade, updateData.resetSkillsUpgrade, document.querySelector('.reset-skills-upgrade-cost'), document.querySelector('.reset-skills-upgrade-actual-level'), document.querySelector('.reset-skills-upgrade'));
       userData[0].resetSkillsUpgrade = objectUpdateData;
+      hideSkillLevel(userData[0].resetSkillsUpgrade, document.querySelector('.reset-skills-upgrade-cost-container'));
+    }
+  })
+}
+const multipleClickSkillUpgrade = () => {
+  document.querySelector('.multiple-click-skill-upgrade').addEventListener('click', () => {
+    if(userData[0].multipleClickSkill.visible == false){
+      buySkill(userData[0].multipleClickSkill, userData[0].multipleClickSkillUpgrade);
+      userData[0].multipleClickSkill.visible = visibleValue;
+      userData[0].multipleClickSkillUpgrade.actualLevel = 1;
+      document.querySelector('.multiple-click-skill-upgrade-actual-level').innerHTML = userData[0].multipleClickSkillUpgrade.actualLevel;
+    }
+    else {
+      objectUpdateData;
+      upgrader(userData[0].multipleClickSkillUpgrade, updateData.multipleClickSkillUpgrade, document.querySelector('.multiple-click-skill-upgrade-cost'), document.querySelector('.multiple-click-skill-upgrade-actual-level'), document.querySelector('.multiple-click-skill-upgrade'));
+      userData[0].multipleClickSkillUpgrade = objectUpdateData;
+      hideSkillLevel(userData[0].multipleClickSkillUpgrade, document.querySelector('.multiple-click-skill-upgrade-cost-container'));
+    }
+  })
+}
+const multipleMoneySkillUpgrade = () => {
+  document.querySelector('.multiple-money-skill-upgrade').addEventListener('click', () => {
+    if(userData[0].multipleMoneySkill.visible == false){
+      buySkill(userData[0].multipleMoneySkill, userData[0].multipleMoneySkillUpgrade);
+      userData[0].multipleMoneySkill.visible = visibleValue;
+      userData[0].multipleMoneySkillUpgrade.actualLevel = 1;
+      document.querySelector('.multiple-money-skill-upgrade-actual-level').innerHTML = userData[0].multipleMoneySkillUpgrade.actualLevel;
+    }
+    else {
+      objectUpdateData;
+      upgrader(userData[0].multipleMoneySkillUpgrade, updateData.multipleMoneySkillUpgrade, document.querySelector('.multiple-money-skill-upgrade-cost'), document.querySelector('.multiple-money-skill-upgrade-actual-level'), document.querySelector('.multiple-money-skill-upgrade'));
+      userData[0].multipleMoneySkillUpgrade = objectUpdateData;
+      hideSkillLevel(userData[0].multipleMoneySkillUpgrade, document.querySelector('.multiple-money-skill-upgrade-cost-container'));
+    }
+  })
+}
+const multipleGiftSkillUpgrade = () => {
+  document.querySelector('.multiple-gift-skill-upgrade').addEventListener('click', () => {
+    if(userData[0].multipleGiftSkill.visible == false){
+      buySkill(userData[0].multipleGiftSkill, userData[0].multipleGiftSkillUpgrade);
+      userData[0].multipleGiftSkill.visible = visibleValue;
+      userData[0].multipleGiftSkillUpgrade.actualLevel = 1;
+      document.querySelector('.multiple-gift-skill-upgrade-actual-level').innerHTML = userData[0].multipleGiftSkillUpgrade.actualLevel;
+    }
+    else {
+      objectUpdateData;
+      upgrader(userData[0].multipleGiftSkillUpgrade, updateData.multipleGiftSkillUpgrade, document.querySelector('.multiple-gift-skill-upgrade-cost'), document.querySelector('.multiple-gift-skill-upgrade-actual-level'), document.querySelector('.multiple-gift-skill-upgrade'));
+      userData[0].multipleGiftSkillUpgrade = objectUpdateData;
+      hideSkillLevel(userData[0].multipleMoneySkillUpgrade, document.querySelector('.multiple-gift-skill-upgrade-cost-container'));
     }
   })
 }
@@ -324,6 +372,9 @@ const upgrades= () => {
   taxUpgrade();
   cooldownUpgrade();
   resetSkillsUpgrade();
+  multipleClickSkillUpgrade();
+  multipleMoneySkillUpgrade();
+  multipleGiftSkillUpgrade();
 }
 //////////////////////////////////////////////////////////////////////
 // functions wchih could be use more time:
@@ -406,6 +457,11 @@ const buySkill = (skill, upgradeSkill, levelClass) => {
   if(money >= upgradeSkill.upgradeCost - (upgradeSkill.upgradeCost * tax)){
     skill.visible = true;
     visibleValue = skill.visible;
+  }
+}
+const hideSkillLevel = (skillUpgrade ,classToHide) => {
+  if(skillUpgrade.actualLevel == skillUpgrade.maxLevel) {
+    classToHide.classList.add('visibility-hidden');
   }
 }
 //shit to rework
