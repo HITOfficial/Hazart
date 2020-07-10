@@ -367,18 +367,37 @@ const multipleGiftSkillUpgrade = () => {
     }
   })
 }
+// I did not do a multi function to resetSkills becouse, this one is difrent inside
 const resetSkills = () => {
   document.querySelector('.reset-skills').addEventListener('click', () => {
-    if(userData[0].resetSkills.visible == true){
-      userData[0].resetSkills
+    if((userData[0].resetSkills.visible == true) && (userData[0].resetSkills.active == false)){
+      userData[0].resetSkills.active = true;
+      userData[0].multipleClickSkill.active = false;
+      userData[0].multipleMoneySkill.active = false;
+      userData[0].multipleGiftSkill.active = false;
+      setTimeout( () => {
+        userData[0].resetSkills.active = false; 
+      }, userData[0].resetSkills.cooldown)
+      clickerUpdateFunctionWithotAddingMoney();
+      moneyEverySecFunctionWithoutAddingMoney();
     }
     else return 0;
   })
 }
-const showSkill = (skill, classToUnhide) => {
-  if(skill.visible == true){
-    classToUnhide.classList.remove('visibility-hidden');
-  }
+const multipleClickSkill = () => {
+  document.querySelector('.multiple-click-skill').addEventListener('click', () => {
+    turnOnSkill(userData[0].multipleClickSkill);
+  })
+}
+const multipleMoneySkill = () => {
+  document.querySelector('.multiple-money-skill').addEventListener('click', () => {
+    turnOnSkill(userData[0].multipleMoneySkill);
+  })
+}
+const multipleGiftSkill = () => {
+  document.querySelector('.multiple-gift-skill').addEventListener('click', () => {
+    turnOnSkill(userData[0].multipleGiftSkill);
+  })
 }
 // packing all updating functions inside one
 const upgrades= () => {
@@ -398,6 +417,9 @@ const upgrades= () => {
   multipleMoneySkillUpgrade();
   multipleGiftSkillUpgrade();
   resetSkills();
+  multipleClickSkill();
+  multipleMoneySkill();
+  multipleGiftSkill();
 }
 //////////////////////////////////////////////////////////////////////
 // functions wchih could be use more time:
@@ -482,9 +504,27 @@ const buySkill = (skill, upgradeSkill, levelClass) => {
     visibleValue = skill.visible;
   }
 }
+const turnOnSkill = (skill) => {
+  if((skill.visible == true) && (skill.active == false)){
+    skill.active = true;
+    setTimeout( () => {
+      skill.active = false; 
+      clickerUpdateFunctionWithotAddingMoney();
+      moneyEverySecFunctionWithoutAddingMoney();
+    }, skill.cooldown);
+    clickerUpdateFunctionWithotAddingMoney();
+    moneyEverySecFunctionWithoutAddingMoney();
+  }
+  else return 0;
+}
 const hideSkillLevel = (skillUpgrade ,classToHide) => {
   if(skillUpgrade.actualLevel == skillUpgrade.maxLevel) {
     classToHide.classList.add('visibility-hidden');
+  }
+}
+const showSkill = (skill, classToUnhide) => {
+  if(skill.visible == true){
+    classToUnhide.classList.remove('visibility-hidden');
   }
 }
 //shit to rework
