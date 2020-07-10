@@ -526,7 +526,6 @@
         {"actualLevel": 100, "maxLevel": 100, "upgradeCost": 10000000, "bonus": 0.99}
     ],
     "resetSkillsUpgrade": [
-        {"actualLevel": 0, "maxLevel": 50, "upgradeCost": 2000, "bonus": 0.00},
         {"actualLevel": 1, "maxLevel": 50, "upgradeCost": 2000, "bonus": 0.00},
         {"actualLevel": 2, "maxLevel": 50, "upgradeCost": 3000, "bonus": 0.01},
         {"actualLevel": 3, "maxLevel": 50, "upgradeCost": 4000, "bonus": 0.02},
@@ -579,7 +578,6 @@
         {"actualLevel": 50, "maxLevel": "MAX", "upgradeCost": 800000, "bonus": 0.50}
     ],
     "multipleClickSkillUpgrade": [
-        {"actualLevel": 1,"maxLevel": 50, "upgradeCost": 2000, "bonus": 1.0, "duration": 10000},
         {"actualLevel": 1, "maxLevel": 50, "upgradeCost": 2000, "bonus": 1.50, "duration": 10000},
         {"actualLevel": 2, "maxLevel": 50, "upgradeCost": 3000, "bonus": 2.0, "duration": 10000},
         {"actualLevel": 3, "maxLevel": 50, "upgradeCost": 4000, "bonus": 2.5, "duration": 10000},
@@ -632,7 +630,6 @@
         {"actualLevel": 50, "maxLevel": "MAX", "upgradeCost": 800000, "bonus": 50.0, "duration": 10000}
     ],
     "multipleMoneySkillUpgrade": [
-        {"actualLevel": 1,"maxLevel": 50, "upgradeCost": 20000, "bonus": 1.0, "duration": 10000},
         {"actualLevel": 1, "maxLevel": 50, "upgradeCost": 20000, "bonus": 1.50, "duration": 10000},
         {"actualLevel": 2, "maxLevel": 50, "upgradeCost": 30000, "bonus": 2.0, "duration": 10000},
         {"actualLevel": 3, "maxLevel": 50, "upgradeCost": 40000, "bonus": 2.5, "duration": 10000},
@@ -685,7 +682,6 @@
         {"actualLevel": 50, "maxLevel": "MAX", "upgradeCost": 8000000, "bonus": 50.0, "duration": 10000}
     ],
     "multipleGiftSkillUpgrade": [
-        {"actualLevel": 1,"maxLevel": 50, "upgradeCost": 20000, "bonus": 1.0, "duration": 10000},
         {"actualLevel": 1, "maxLevel": 50, "upgradeCost": 20000, "bonus": 1.50, "duration": 10000},
         {"actualLevel": 2, "maxLevel": 50, "upgradeCost": 30000, "bonus": 2.0, "duration": 10000},
         {"actualLevel": 3, "maxLevel": 50, "upgradeCost": 40000, "bonus": 2.5, "duration": 10000},

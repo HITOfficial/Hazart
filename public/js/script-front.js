@@ -1,4 +1,4 @@
-let valuePerClick, moneyPerAuto, moneyPerClick, moneyTime, objectUpdateData
+let valuePerClick, moneyPerAuto, moneyPerClick, moneyTime, objectUpdateData, visibleValue
 let moneyObject = document.querySelector('.money');
 let valuePerClickObject = document.querySelector('.money-per-click');
 let moneyPerAutoObject = document.querySelector('.money-per-auto');
@@ -75,17 +75,17 @@ const loadUser = () => {
   document.querySelector('.bonus-cooldown-cost').innerHTML = Math.round(userData[0].moneyBoost.upgradeCost - (userData[0].moneyBoost.upgradeCost * tax));
   insideRemover(userData[0].cooldown ,document.querySelector('.cooldown'));
   // tools => upgrades skills
-  document.querySelector('.reset-skills-actual-level').innerHTML = userData[0].resetSkillsUpgrade.actualLevel
-  document.querySelector('.reset-skills-max-level').innerHTML = userData[0].resetSkillsUpgrade.maxLevel;
+  document.querySelector('.reset-skills-upgrade-actual-level').innerHTML = userData[0].resetSkillsUpgrade.actualLevel
+  document.querySelector('.reset-skills-upgrade-max-level').innerHTML = userData[0].resetSkillsUpgrade.maxLevel;
   document.querySelector('.reset-skills-upgrade-cost').innerHTML = Math.round(userData[0].resetSkillsUpgrade.upgradeCost - (userData[0].resetSkillsUpgrade.upgradeCost * tax));
-  document.querySelector('.multiple-click-skill-actual-level').innerHTML = userData[0].multipleClickSkillUpgrade.actualLevel
-  document.querySelector('.multiple-click-skill-max-level').innerHTML = userData[0].multipleClickSkillUpgrade.maxLevel;
+  document.querySelector('.multiple-click-skill-upgrade-actual-level').innerHTML = userData[0].multipleClickSkillUpgrade.actualLevel
+  document.querySelector('.multiple-click-skill-upgrade-max-level').innerHTML = userData[0].multipleClickSkillUpgrade.maxLevel;
   document.querySelector('.multiple-click-skill-upgrade-cost').innerHTML = Math.round(userData[0].multipleClickSkillUpgrade.upgradeCost - (userData[0].multipleClickSkillUpgrade.upgradeCost * tax));
-  document.querySelector('.multiple-money-skill-actual-level').innerHTML = userData[0].multipleMoneySkillUpgrade.actualLevel
-  document.querySelector('.multiple-money-skill-max-level').innerHTML = userData[0].multipleMoneySkillUpgrade.maxLevel;
+  document.querySelector('.multiple-money-skill-upgrade-actual-level').innerHTML = userData[0].multipleMoneySkillUpgrade.actualLevel
+  document.querySelector('.multiple-money-skill-upgrade-max-level').innerHTML = userData[0].multipleMoneySkillUpgrade.maxLevel;
   document.querySelector('.multiple-money-skill-upgrade-cost').innerHTML = Math.round(userData[0].multipleMoneySkillUpgrade.upgradeCost - (userData[0].multipleMoneySkillUpgrade.upgradeCost * tax));
-  document.querySelector('.multiple-gift-skill-actual-level').innerHTML = userData[0].multipleGiftSkillUpgrade.actualLevel
-  document.querySelector('.multiple-gift-skill-max-level').innerHTML = userData[0].multipleGiftSkillUpgrade.maxLevel;
+  document.querySelector('.multiple-gift-skill-upgrade-actual-level').innerHTML = userData[0].multipleGiftSkillUpgrade.actualLevel
+  document.querySelector('.multiple-gift-skill-upgrade-max-level').innerHTML = userData[0].multipleGiftSkillUpgrade.maxLevel;
   document.querySelector('.multiple-gift-skill-upgrade-cost').innerHTML = Math.round(userData[0].multipleGiftSkillUpgrade.upgradeCost - (userData[0].multipleGiftSkillUpgrade.upgradeCost * tax));
   // tools => clickers
   document.querySelector('.auto-clicker-cost').innerHTML = Math.round(userData[0].autoClicker.cost - (userData[0].autoClicker.cost * tax));
@@ -282,6 +282,7 @@ const taxUpgrade = () =>{
     objectUpdateData;
     upgrader(userData[0].tax, updateData.tax, document.querySelector('.bonus-tax-cost'), document.querySelector('.bonus-tax-actual-level'), document.querySelector('.tax'));
     userData[0].tax = objectUpdateData;
+    tax = userData[0].tax.bonus;
     moneyEverySecFunctionWithoutAddingMoney();
   })
 }
@@ -293,7 +294,22 @@ const cooldownUpgrade = () =>{
     moneyEverySecFunctionWithoutAddingMoney();
   })
 }
-
+const resetSkillsUpgrade = () => {
+  document.querySelector('.reset-skills-upgrade').addEventListener('click', () => {
+    if(userData[0].resetSkills.visible == false){
+      buySkill(userData[0].resetSkills, userData[0].resetSkillsUpgrade);
+      userData[0].resetSkills.visible = visibleValue;
+      document.querySelector('.reset-skills-upgrade-actual-level').innerHTML = userData[0].resetSkillsUpgrade.actualLevel;
+      userData[0].resetSkillsUpgrade.actualLevel = 1;
+    }
+    else {
+      objectUpdateData;
+      console.log(objectUpdateData);
+      upgrader(userData[0].resetSkillsUpgrade, updateData.resetSkillsUpgrade, document.querySelector('.reset-skills-upgrade-cost'), document.querySelector('.reset-skills-upgrade-actual-level'), document.querySelector('.reset-skills-upgrade'));
+      userData[0].resetSkillsUpgrade = objectUpdateData;
+    }
+  })
+}
 // packing all updating functions inside one
 const upgrades= () => {
   valueMultiplerBonusUpgrade();
@@ -307,6 +323,7 @@ const upgrades= () => {
   bonusGiftUpgrade();
   taxUpgrade();
   cooldownUpgrade();
+  resetSkillsUpgrade();
 }
 //////////////////////////////////////////////////////////////////////
 // functions wchih could be use more time:
@@ -375,7 +392,7 @@ const upgrader = (object, updateDataObject, classUpgradeCost, clasActualLevel, p
     classUpgradeCost.innerHTML = object.upgradeCost - (object.upgradeCost * tax);
     clasActualLevel.innerHTML = object.actualLevel;
      // I created objectUpdateData in every parent function to be able later save data from this function in userData
-    objectUpdateData = object
+    objectUpdateData = object;
     moneyUpdate();
   }
   else {
@@ -384,6 +401,12 @@ const upgrader = (object, updateDataObject, classUpgradeCost, clasActualLevel, p
 }
 const insideRemover = (object, parent) => {
   if(object.actualLevel == object.maxLevel) parent.innerHTML = '<span style= "float: right">MAX</span>';
+}
+const buySkill = (skill, upgradeSkill, levelClass) => {
+  if(money >= upgradeSkill.upgradeCost - (upgradeSkill.upgradeCost * tax)){
+    skill.visible = true;
+    visibleValue = skill.visible;
+  }
 }
 //shit to rework
 const extraRemovingFactoryOpacity = (factoryTab) => {

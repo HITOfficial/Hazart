@@ -337,25 +337,25 @@ body > .app > .tools > .investments > .skill-shop > .flex > .upgrades-box {
 body > .app > .tools > .investments > .skill-shop > .flex .upgrade {
     transform: translate(-50%, -2%);
 }
-body > .app > .tools > .investments > .skill-shop > .flex > .reset-skills {
+body > .app > .tools > .investments > .skill-shop > .flex > .reset-skills-upgrade {
     background-image: url('../images/icons/icons8-reset-64.png');
     background-size: auto;
     background-position: center;
     background-repeat: no-repeat;
 }
-body > .app > .tools > .investments > .skill-shop > .flex > .multiple-click-skill {
+body > .app > .tools > .investments > .skill-shop > .flex > .multiple-click-skill-upgrade {
     background-image: url('../images/icons/icons8-left-click-64.png');
     background-size: auto;
     background-position: center;
     background-repeat: no-repeat;
 }
-body > .app > .tools > .investments > .skill-shop > .flex > .multiple-money-skill {
+body > .app > .tools > .investments > .skill-shop > .flex > .multiple-money-skill-upgrade {
     background-image: url('../images/icons/icons8-profit-64.png');
     background-size: auto;
     background-position: center;
     background-repeat: no-repeat;
 }
-body > .app > .tools > .investments > .skill-shop > .flex > .multiple-gift-skill {
+body > .app > .tools > .investments > .skill-shop > .flex > .multiple-gift-skill-upgrade {
     background-image: url('../images/icons/icons8-gift-64.png');
     background-size: auto;
     background-position: center;
