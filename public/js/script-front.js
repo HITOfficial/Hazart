@@ -1,4 +1,4 @@
-let valuePerClick, moneyPerAuto, moneyPerClick, moneyTime, objectUpdateData, visibleValue
+let valuePerClick, moneyPerAuto, moneyPerClick, moneyTime, objectUpdateData, visibleValue, giftMoney
 let moneyObject = document.querySelector('.money');
 let valuePerClickObject = document.querySelector('.money-per-click');
 let moneyPerAutoObject = document.querySelector('.money-per-auto');
@@ -155,6 +155,14 @@ const autoMoneyUpdate = () => {
 const saveUserData = () => {
   document.querySelector('.save-game').addEventListener('click', () => {
     userData[0].money = money
+    userData[0].resetSkills.ready = true
+    userData[0].multipleClickSkill.ready = true
+    userData[0].multipleMoneySkill.ready = true
+    userData[0].multipleGiftSkill.ready = true
+    userData[0].resetSkills.active = false
+    userData[0].multipleClickSkill.active = false
+    userData[0].multipleMoneySkill.active = false
+    userData[0].multipleGiftSkill.active = false
     fetch('/',{
       method: 'POST',
       headers: {
@@ -370,14 +378,19 @@ const multipleGiftSkillUpgrade = () => {
 // I did not do a multi function to resetSkills becouse, this one is difrent inside
 const resetSkills = () => {
   document.querySelector('.reset-skills').addEventListener('click', () => {
-    if((userData[0].resetSkills.visible == true) && (userData[0].resetSkills.active == false)){
-      userData[0].resetSkills.active = true;
-      userData[0].multipleClickSkill.active = false;
-      userData[0].multipleMoneySkill.active = false;
-      userData[0].multipleGiftSkill.active = false;
+    if((userData[0].resetSkills.visible == true) && (userData[0].resetSkills.ready == true)){
+      userData[0].resetSkills.ready = false;
+      userData[0].multipleClickSkill.ready = true;
+      userData[0].multipleMoneySkill.ready = true;
+      userData[0].multipleGiftSkill.ready = true;
+      document.querySelector('.reset-skills').classList.add('white');
+      document.querySelector('.multiple-click-skill').classList.remove('white');
+      document.querySelector('.multiple-money-skill').classList.remove('white');
+      document.querySelector('.multiple-gift-skill').classList.remove('white');
       setTimeout( () => {
-        userData[0].resetSkills.active = false; 
-      }, userData[0].resetSkills.cooldown)
+        userData[0].resetSkills.ready = true; 
+        document.querySelector('.reset-skills').classList.add('white');
+      }, userData[0].resetSkills.cooldown - (userData[0].resetSkills.cooldown * userData[0].cooldown))
       clickerUpdateFunctionWithotAddingMoney();
       moneyEverySecFunctionWithoutAddingMoney();
     }
@@ -386,17 +399,17 @@ const resetSkills = () => {
 }
 const multipleClickSkill = () => {
   document.querySelector('.multiple-click-skill').addEventListener('click', () => {
-    turnOnSkill(userData[0].multipleClickSkill);
+    turnOnSkill(userData[0].multipleClickSkill, document.querySelector('.multiple-click-skill'));
   })
 }
 const multipleMoneySkill = () => {
   document.querySelector('.multiple-money-skill').addEventListener('click', () => {
-    turnOnSkill(userData[0].multipleMoneySkill);
+    turnOnSkill(userData[0].multipleMoneySkill, document.querySelector('.multiple-money-skill'));
   })
 }
 const multipleGiftSkill = () => {
   document.querySelector('.multiple-gift-skill').addEventListener('click', () => {
-    turnOnSkill(userData[0].multipleGiftSkill);
+    turnOnSkill(userData[0].multipleGiftSkill, document.querySelector('.multiple-gift-skill'));
   })
 }
 // packing all updating functions inside one
@@ -504,11 +517,23 @@ const buySkill = (skill, upgradeSkill, levelClass) => {
     visibleValue = skill.visible;
   }
 }
-const turnOnSkill = (skill) => {
-  if((skill.visible == true) && (skill.active == false)){
+const turnOnSkill = (skill, objectClass) => {
+  if((skill.visible == true) && (skill.ready == true)){
+    skill.ready = false;
     skill.active = true;
+    objectClass.classList.add('white');
+    if(skill == userData[0].multipleGiftSkill) {
+      giftMoney = Math.round(userData[0].moneyBoost.bonus * userData[0].gift.bonus);
+      if(userData[0].multipleMoneySkill.active) {
+        giftMoney *= userData[0].multipleMoneySkillUpgrade.bonus;
+      }
+      money += Math.round(giftMoney);
+      moneyUpdate();
+    }
     setTimeout( () => {
+      skill.ready = true; 
       skill.active = false; 
+      objectClass.classList.remove('white');
       clickerUpdateFunctionWithotAddingMoney();
       moneyEverySecFunctionWithoutAddingMoney();
     }, skill.cooldown);
