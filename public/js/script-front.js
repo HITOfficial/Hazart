@@ -113,7 +113,7 @@ const clickerUpdateFunctionWithotAddingMoney = () => {
   if(userData[0].multipleMoneySkill.active) {
     moneyPerClick *= userData[0].multipleMoneySkillUpgrade.bonus;
   }
-  valuePerClickObject.innerHTML = Math.round(moneyPerClick);
+  moneyUpdate();
 }
 // Seperated updating money, becouse clickerUpdateFunctionWithotAddingMoney I'll need later to use also in upgrades
 const clickerUpdateFunctionAddingMoney = () => {
@@ -123,6 +123,7 @@ const clickerUpdateFunctionAddingMoney = () => {
 const clickerUpdateFunction = () => {
   clickerUpdateFunctionWithotAddingMoney();
   clickerUpdateFunctionAddingMoney();
+  console.log('x');
 }
 // Runing Clicker Function with skills
 const clickerUpdate = () => {
@@ -412,6 +413,70 @@ const multipleGiftSkill = () => {
     turnOnSkill(userData[0].multipleGiftSkill, document.querySelector('.multiple-gift-skill'));
   })
 }
+const AutoClicker = () => {
+  document.querySelector('.auto-clicker').addEventListener('click', () => {
+    if(userData[0].autoClicker.bought == false) {
+      autoBuy(userData[0].autoClicker, document.querySelector('.auto-clicker-cost-container'));
+      userData[0].autoClicker.bought = objectUpdateData;
+      console.log(userData[0].autoClicker.bought)
+    } else {
+        if(userData[0].autoClicker.active == false) {
+          userData[0].autoClicker.active = true;
+          console.log(userData[0].autoClicker.active)
+        }
+        else if(userData[0].autoClicker.active == true) {
+          userData[0].autoClicker.active = false;
+          console.log(userData[0].autoClicker.active)
+          clearInterval(intervalClicker);
+        }
+        if(userData[0].autoClicker.active == true) {
+          intervalClicker = setInterval(clickerUpdateFunction, 1000);
+      }
+    }
+  })
+}
+const AutoSkills = () => {
+  document.querySelector('.auto-skills').addEventListener('click', () => {
+    if(userData[0].autoSkills.bought == false) {
+      autoBuy(userData[0].autoSkills.bought, document.querySelector('.auto-skills-cost-container'));
+      userData[0].autoSkills.bought = objectUpdateData;
+      console.log(userData[0].autoClicker.bought)
+    } else {
+        if(userData[0].autoSkills.active == false) {
+          userData[0].autoSkills.active = true;
+          console.log(userData[0].autoSkills.active)
+        }
+        else if(userData[0].autoSkills.active == true) {
+          userData[0].autoSkills.active = false;
+          console.log(userData[0].autoSkills.active)
+          clearInterval(intervalClicker);
+        }
+        if(userData[0].autoSkills.active == true) {
+          intervalSkill = setInterval(skills, 1000);
+      }
+    }
+  })
+}
+
+const skills = () => {
+  resetSkills();
+  multipleClickSkill();
+  multipleMoneySkill();
+  multipleGiftSkill();
+}
+let intervalClicker = setInterval(clickerUpdateFunction, 1000);
+let intervalSkill = setInterval(skills, 1000);
+clearInterval(intervalClicker);
+const autoBuy = (object, classToHide) => {
+  if(money >= (object.cost - (object.cost * tax))) {
+    money -= (object.cost - (object.cost * tax));
+    object.bought = true;
+    objectUpdateData = object.bought;
+    hideAutoCost(object, classToHide);
+    moneyUpdate();
+  }
+}
+// }
 // packing all updating functions inside one
 const upgrades= () => {
   valueMultiplerBonusUpgrade();
@@ -433,6 +498,8 @@ const upgrades= () => {
   multipleClickSkill();
   multipleMoneySkill();
   multipleGiftSkill();
+  AutoClicker();
+  AutoSkills();
 }
 //////////////////////////////////////////////////////////////////////
 // functions wchih could be use more time:
@@ -551,6 +618,9 @@ const showSkill = (skill, classToUnhide) => {
   if(skill.visible == true){
     classToUnhide.classList.remove('visibility-hidden');
   }
+}
+const hideAutoCost = (object, classToHide) => {
+  if(object.bought == true ) classToHide.classList.add('visibility-hidden');
 }
 //shit to rework
 const extraRemovingFactoryOpacity = (factoryTab) => {
