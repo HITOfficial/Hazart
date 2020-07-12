@@ -155,15 +155,17 @@ const autoMoneyUpdate = () => {
 // exporting data to the server with fetch POST, and then on a server automaticaly save as JSON file
 const saveUserData = () => {
   document.querySelector('.save-game').addEventListener('click', () => {
-    userData[0].money = money
-    userData[0].resetSkills.ready = true
-    userData[0].multipleClickSkill.ready = true
-    userData[0].multipleMoneySkill.ready = true
-    userData[0].multipleGiftSkill.ready = true
-    userData[0].resetSkills.active = false
-    userData[0].multipleClickSkill.active = false
-    userData[0].multipleMoneySkill.active = false
-    userData[0].multipleGiftSkill.active = false
+    userData[0].money = money;
+    userData[0].resetSkills.ready = true;
+    userData[0].multipleClickSkill.ready = true;
+    userData[0].multipleMoneySkill.ready = true;
+    userData[0].multipleGiftSkill.ready = true;
+    userData[0].resetSkills.active = false;
+    userData[0].multipleClickSkill.active = false;
+    userData[0].multipleMoneySkill.active = false;
+    userData[0].multipleGiftSkill.active = false;
+    userData[0].autoSkills.active = false;
+    userData[0].autoClicker.active = false;
     fetch('/',{
       method: 'POST',
       headers: {
@@ -378,56 +380,59 @@ const multipleGiftSkillUpgrade = () => {
 }
 // I did not do a multi function to resetSkills becouse, this one is difrent inside
 const resetSkills = () => {
-  document.querySelector('.reset-skills').addEventListener('click', () => {
-    if((userData[0].resetSkills.visible == true) && (userData[0].resetSkills.ready == true)){
-      userData[0].resetSkills.ready = false;
-      userData[0].multipleClickSkill.ready = true;
-      userData[0].multipleMoneySkill.ready = true;
-      userData[0].multipleGiftSkill.ready = true;
+  document.querySelector('.reset-skills').addEventListener('click',resetSkillsFunction);
+}
+const resetSkillsFunction = () => {
+  if((userData[0].resetSkills.visible == true) && (userData[0].resetSkills.ready == true)){
+    userData[0].resetSkills.ready = false;
+    userData[0].multipleClickSkill.ready = true;
+    userData[0].multipleMoneySkill.ready = true;
+    userData[0].multipleGiftSkill.ready = true;
+    document.querySelector('.reset-skills').classList.add('white');
+    document.querySelector('.multiple-click-skill').classList.remove('white');
+    document.querySelector('.multiple-money-skill').classList.remove('white');
+    document.querySelector('.multiple-gift-skill').classList.remove('white');
+    setTimeout( () => {
+      userData[0].resetSkills.ready = true; 
       document.querySelector('.reset-skills').classList.add('white');
-      document.querySelector('.multiple-click-skill').classList.remove('white');
-      document.querySelector('.multiple-money-skill').classList.remove('white');
-      document.querySelector('.multiple-gift-skill').classList.remove('white');
-      setTimeout( () => {
-        userData[0].resetSkills.ready = true; 
-        document.querySelector('.reset-skills').classList.add('white');
-      }, userData[0].resetSkills.cooldown - (userData[0].resetSkills.cooldown * userData[0].cooldown))
-      clickerUpdateFunctionWithotAddingMoney();
-      moneyEverySecFunctionWithoutAddingMoney();
-    }
-    else return 0;
-  })
+    }, userData[0].resetSkills.cooldown - (userData[0].resetSkills.cooldown * userData[0].cooldown))
+    clickerUpdateFunctionWithotAddingMoney();
+    moneyEverySecFunctionWithoutAddingMoney();
+  }
+  else return 0;
 }
 const multipleClickSkill = () => {
-  document.querySelector('.multiple-click-skill').addEventListener('click', () => {
-    turnOnSkill(userData[0].multipleClickSkill, document.querySelector('.multiple-click-skill'));
-  })
+  document.querySelector('.multiple-click-skill').addEventListener('click', multipleClickSkillFunction );
+}
+multipleClickSkillFunction = () => {
+  turnOnSkill(userData[0].multipleClickSkill, document.querySelector('.multiple-click-skill'));
 }
 const multipleMoneySkill = () => {
-  document.querySelector('.multiple-money-skill').addEventListener('click', () => {
-    turnOnSkill(userData[0].multipleMoneySkill, document.querySelector('.multiple-money-skill'));
-  })
+  document.querySelector('.multiple-money-skill').addEventListener('click', multipleMoneySkillFunction);
+}
+const multipleMoneySkillFunction = () => {
+  turnOnSkill(userData[0].multipleMoneySkill, document.querySelector('.multiple-money-skill'));
 }
 const multipleGiftSkill = () => {
-  document.querySelector('.multiple-gift-skill').addEventListener('click', () => {
-    turnOnSkill(userData[0].multipleGiftSkill, document.querySelector('.multiple-gift-skill'));
-  })
+  document.querySelector('.multiple-gift-skill').addEventListener('click', multipleGiftSkillFunction);
+}
+const multipleGiftSkillFunction = () => {
+  turnOnSkill(userData[0].multipleGiftSkill, document.querySelector('.multiple-gift-skill'));
 }
 const AutoClicker = () => {
   document.querySelector('.auto-clicker').addEventListener('click', () => {
     if(userData[0].autoClicker.bought == false) {
       autoBuy(userData[0].autoClicker, document.querySelector('.auto-clicker-cost-container'));
       userData[0].autoClicker.bought = objectUpdateData;
-      console.log(userData[0].autoClicker.bought)
     } else {
         if(userData[0].autoClicker.active == false) {
           userData[0].autoClicker.active = true;
-          console.log(userData[0].autoClicker.active)
+          document.querySelector('.auto-clicker').classList.add('auto-box-clicked');
         }
         else if(userData[0].autoClicker.active == true) {
           userData[0].autoClicker.active = false;
-          console.log(userData[0].autoClicker.active)
           clearInterval(intervalClicker);
+          document.querySelector('.auto-clicker').classList.remove('auto-box-clicked');
         }
         if(userData[0].autoClicker.active == true) {
           intervalClicker = setInterval(clickerUpdateFunction, 1000);
@@ -438,18 +443,19 @@ const AutoClicker = () => {
 const AutoSkills = () => {
   document.querySelector('.auto-skills').addEventListener('click', () => {
     if(userData[0].autoSkills.bought == false) {
-      autoBuy(userData[0].autoSkills.bought, document.querySelector('.auto-skills-cost-container'));
+      autoBuy(userData[0].autoSkills, document.querySelector('.auto-skills-cost-container'));
+      console.log(objectUpdateData)
       userData[0].autoSkills.bought = objectUpdateData;
-      console.log(userData[0].autoClicker.bought)
+      console.log(userData[0].autoSkills.bought)
     } else {
         if(userData[0].autoSkills.active == false) {
           userData[0].autoSkills.active = true;
-          console.log(userData[0].autoSkills.active)
+          document.querySelector('.auto-skills').classList.add('auto-box-clicked');
         }
         else if(userData[0].autoSkills.active == true) {
           userData[0].autoSkills.active = false;
-          console.log(userData[0].autoSkills.active)
-          clearInterval(intervalClicker);
+          clearInterval(intervalSkill);
+          document.querySelector('.auto-skills').classList.remove('auto-box-clicked');
         }
         if(userData[0].autoSkills.active == true) {
           intervalSkill = setInterval(skills, 1000);
@@ -459,10 +465,12 @@ const AutoSkills = () => {
 }
 
 const skills = () => {
-  resetSkills();
-  multipleClickSkill();
-  multipleMoneySkill();
-  multipleGiftSkill();
+  resetSkillsFunction();
+  multipleClickSkillFunction();
+  multipleMoneySkillFunction();
+  multipleGiftSkillFunction();
+  clickerUpdateFunctionWithotAddingMoney();
+  moneyEverySecFunctionWithoutAddingMoney();
 }
 let intervalClicker = setInterval(clickerUpdateFunction, 1000);
 let intervalSkill = setInterval(skills, 1000);

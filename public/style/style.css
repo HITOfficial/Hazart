@@ -368,7 +368,7 @@ body > .app > .tools > .investments > .skill-shop > .flex > .multiple-gift-skill
 .cursor-pointer {
     cursor: pointer;
 }
-body > .app > .tools > .investments > .auto-container > .auto-shop > .auto-box-clicked:hover {
+body > .app > .tools > .investments > .auto-container > .auto-shop > .auto-box-clicked {
     box-shadow: 0 0 0 0 , -0.2vh 0.3vh 1.2vh 0.6vh rgb(199, 51, 51);
 }
 .pickaxe {
@@ -422,9 +422,6 @@ body > .app > .main > .upgrades-container > .content-box > .sort >  .worker-mach
 }
 body > .app > .main > .upgrades-container > .content-box > .sort   .worker-active{
     box-shadow: 0 0 0 0 , -0.2vh 0.3vh 1.2vh 0.6vh rgb(199, 51, 51);
-}
-body > .app > .main > .upgrades-container > .content-box > .sort >  .buy-worker {
-    
 }
 body > .app > .main > .upgrades-container > .content-box > .sort >  .buy-worker::after {
     position: absolute;
