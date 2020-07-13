@@ -113,6 +113,7 @@ const clickerUpdateFunctionWithotAddingMoney = () => {
   if(userData[0].multipleMoneySkill.active) {
     moneyPerClick *= userData[0].multipleMoneySkillUpgrade.bonus;
   }
+  valuePerClickObject.innerHTML = Math.round(moneyPerClick);
   moneyUpdate();
 }
 // Seperated updating money, becouse clickerUpdateFunctionWithotAddingMoney I'll need later to use also in upgrades
@@ -123,7 +124,6 @@ const clickerUpdateFunctionAddingMoney = () => {
 const clickerUpdateFunction = () => {
   clickerUpdateFunctionWithotAddingMoney();
   clickerUpdateFunctionAddingMoney();
-  console.log('x');
 }
 // Runing Clicker Function with skills
 const clickerUpdate = () => {
@@ -393,9 +393,9 @@ const resetSkillsFunction = () => {
     document.querySelector('.multiple-money-skill').classList.remove('white');
     document.querySelector('.multiple-gift-skill').classList.remove('white');
     setTimeout( () => {
-      userData[0].resetSkills.ready = true; 
+      userData[0].resetSkills.ready = true;
       document.querySelector('.reset-skills').classList.add('white');
-    }, userData[0].resetSkills.cooldown - (userData[0].resetSkills.cooldown * userData[0].cooldown))
+    }, userData[0].resetSkills.cooldown - (userData[0].resetSkills.cooldown * userData[0].cooldown.bonus))
     clickerUpdateFunctionWithotAddingMoney();
     moneyEverySecFunctionWithoutAddingMoney();
   }
@@ -444,9 +444,7 @@ const AutoSkills = () => {
   document.querySelector('.auto-skills').addEventListener('click', () => {
     if(userData[0].autoSkills.bought == false) {
       autoBuy(userData[0].autoSkills, document.querySelector('.auto-skills-cost-container'));
-      console.log(objectUpdateData)
       userData[0].autoSkills.bought = objectUpdateData;
-      console.log(userData[0].autoSkills.bought)
     } else {
         if(userData[0].autoSkills.active == false) {
           userData[0].autoSkills.active = true;
@@ -463,18 +461,18 @@ const AutoSkills = () => {
     }
   })
 }
-
 const skills = () => {
-  resetSkillsFunction();
   multipleClickSkillFunction();
   multipleMoneySkillFunction();
   multipleGiftSkillFunction();
   clickerUpdateFunctionWithotAddingMoney();
   moneyEverySecFunctionWithoutAddingMoney();
+  resetSkillsFunction();
 }
 let intervalClicker = setInterval(clickerUpdateFunction, 1000);
 let intervalSkill = setInterval(skills, 1000);
 clearInterval(intervalClicker);
+clearInterval(intervalSkill);
 const autoBuy = (object, classToHide) => {
   if(money >= (object.cost - (object.cost * tax))) {
     money -= (object.cost - (object.cost * tax));
@@ -586,7 +584,7 @@ const upgrader = (object, updateDataObject, classUpgradeCost, clasActualLevel, p
 const insideRemover = (object, parent) => {
   if(object.actualLevel == object.maxLevel) parent.innerHTML = '<span style= "float: right">MAX</span>';
 }
-const buySkill = (skill, upgradeSkill, levelClass) => {
+const buySkill = (skill, upgradeSkill) => {
   if(money >= upgradeSkill.upgradeCost - (upgradeSkill.upgradeCost * tax)){
     skill.visible = true;
     visibleValue = skill.visible;
@@ -611,7 +609,7 @@ const turnOnSkill = (skill, objectClass) => {
       objectClass.classList.remove('white');
       clickerUpdateFunctionWithotAddingMoney();
       moneyEverySecFunctionWithoutAddingMoney();
-    }, skill.cooldown);
+    }, skill.cooldown - (skill.cooldown * userData[0].cooldown.bonus));
     clickerUpdateFunctionWithotAddingMoney();
     moneyEverySecFunctionWithoutAddingMoney();
   }
