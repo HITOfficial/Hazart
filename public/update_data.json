@@ -115,7 +115,7 @@
         {"actualLevel": 17, "maxLevel": 20, "upgradeCost": 1000000, "bonus": 500},
         {"actualLevel": 18, "maxLevel": 20, "upgradeCost": 2000000, "bonus": 600},
         {"actualLevel": 19, "maxLevel": 20, "upgradeCost": 4000000, "bonus": 700},
-        {"actualLevel": 20, "maxLevel": 100, "upgradeCost": 10000000, "bonus": 1000}
+        {"actualLevel": 20, "maxLevel": 20, "upgradeCost": 10000000, "bonus": 1000}
     ],
     "moneyBoost": [
         {"actualLevel": 1, "maxLevel": 100, "upgradeCost": 200, "bonus": 1.05},

@@ -1,8 +1,11 @@
-let valuePerClick, moneyPerAuto, moneyPerClick, moneyTime, objectUpdateData, visibleValue, giftMoney
+let valuePerClick, moneyPerAuto, moneyPerClick, moneyTime, objectUpdateData, visibleValue, giftMoney, intervalClicker, intervalSkill
 let moneyObject = document.querySelector('.money');
 let valuePerClickObject = document.querySelector('.money-per-click');
 let moneyPerAutoObject = document.querySelector('.money-per-auto');
 let waitWithUpgradeWorker = [false, false, false, false, false,] // I added new table to stop upgrade automaticaly within buying a worker if user has enought money
+let effectivity = 0;
+let autoMachineBonus = 0;
+let workerMachineBonus = 0;
 //fetch GET user_data
 fetch("./user_data.json")
   .then(response => response.json())
@@ -30,7 +33,7 @@ const loadUser = () => {
   hideSkillLevel(userData[0].valueClickBonus, document.querySelector('.upgrade-value-click-cost-container'));
   document.querySelector('.factories-bonus').innerHTML = userData[0].factories.bonus;
   document.querySelector('.upgrade-factories-bonus-cost').innerHTML = Math.round(userData[0].factories.upgradeCost - (userData[0].factories.upgradeCost * tax));
-
+  hideSkillLevel(userData[0].factories, document.querySelector('.upgrade-factories-bonus-cost-container'));
   document.querySelector('.workers-bonus').innerHTML = userData[0].workers.bonus;
   document.querySelector('.upgrade-workers-bonus-cost').innerHTML = Math.round(userData[0].workers.upgradeCost - (userData[0].workers.upgradeCost * tax));
   
@@ -106,10 +109,33 @@ const loadUser = () => {
   MoneyPerClick = Math.round((userData[0].moneyPerAuto * userData[0].moneyBoost.bonus));
   // main => show bonuses
   moneyUpdate();
-  valuePerClickObject.innerHTML = valuePerClick;
-  moneyPerAutoObject.innerHTML = userData[0].moneyPerAuto;
+  moneyEverySecFunctionWithoutAddingMoney();
+  clickerUpdateFunctionWithotAddingMoney()
 }
 //////////////////////////////////////////////////////////////////////
+//Counting Bonuses of every single factory and worker
+const countBonus = (object) => {
+  object.forEach(obj => {
+    if(obj.bought == true) {
+      effectivity += obj.effectivity;
+    }
+  })
+  effectivity /= 100
+}
+// to factories i need only to count a number of bought factories
+const factoriesBonus = () => {
+  effectivity = 0;
+  countBonus(userData[0].autoMachine);
+  autoMachineBonus = effectivity;
+  return autoMachineBonus;
+}
+const workersBonus = () => {
+  effectivity = 0;
+  countBonus(userData[0].workerMachine)
+  workerMachineBonus = effectivity;
+  return workerMachineBonus;
+}
+// factoriesBonus();
 // Clicker Function with skills
 const clickerUpdateFunctionWithotAddingMoney = () => {
   moneyPerClick = (userData[0].moneyPerClick * userData[0].valueClickBonus.bonus * userData[0].valueMultiplerBonus.bonus * userData[0].moneyBoost.bonus);
@@ -137,7 +163,7 @@ const clickerUpdate = () => {
 }
 //////////////////////////////////////////////////////////////////////
 const moneyEverySecFunctionWithoutAddingMoney = () => {
-  moneyTime = (userData[0].moneyPerAuto * userData[0].moneyBoost.bonus) 
+  moneyTime = (userData[0].moneyPerAuto * userData[0].moneyBoost.bonus * factoriesBonus() * workersBonus());
   if(userData[0].multipleMoneySkill.active) {
     moneyTime *= userData[0].multipleMoneySkillUpgrade.bonus;
   }
@@ -462,20 +488,6 @@ const skills = () => {
   moneyEverySecFunctionWithoutAddingMoney();
   resetSkillsFunction();
 }
-let intervalClicker = setInterval(clickerUpdateFunction, 1000);
-let intervalSkill = setInterval(skills, 1000);
-clearInterval(intervalClicker);
-clearInterval(intervalSkill);
-const autoBuy = (object, classToHide) => {
-  if(money >= (object.cost - (object.cost * tax))) {
-    money -= (object.cost - (object.cost * tax));
-    object.bought = true;
-    objectUpdateData = object.bought;
-    hideAutoCost(object, classToHide);
-    moneyUpdate();
-  }
-}
-// }
 // packing all updating functions inside one
 const upgrades= () => {
   valueMultiplerBonusUpgrade();
@@ -617,6 +629,15 @@ const turnOnSkill = (skill, objectClass) => {
     moneyEverySecFunctionWithoutAddingMoney();
   }
   else return 0;
+}
+const autoBuy = (object, classToHide) => {
+  if(money >= (object.cost - (object.cost * tax))) {
+    money -= (object.cost - (object.cost * tax));
+    object.bought = true;
+    objectUpdateData = object.bought;
+    hideAutoCost(object, classToHide);
+    moneyUpdate();
+  }
 }
 const hideSkillLevel = (skillUpgrade ,classToHide) => {
   if(skillUpgrade.actualLevel == skillUpgrade.maxLevel) {
