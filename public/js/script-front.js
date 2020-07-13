@@ -113,29 +113,6 @@ const loadUser = () => {
   clickerUpdateFunctionWithotAddingMoney()
 }
 //////////////////////////////////////////////////////////////////////
-//Counting Bonuses of every single factory and worker
-const countBonus = (object) => {
-  object.forEach(obj => {
-    if(obj.bought == true) {
-      effectivity += obj.effectivity;
-    }
-  })
-  effectivity /= 100
-}
-// to factories i need only to count a number of bought factories
-const factoriesBonus = () => {
-  effectivity = 0;
-  countBonus(userData[0].autoMachine);
-  autoMachineBonus = effectivity;
-  return autoMachineBonus;
-}
-const workersBonus = () => {
-  effectivity = 0;
-  countBonus(userData[0].workerMachine)
-  workerMachineBonus = effectivity;
-  return workerMachineBonus;
-}
-// factoriesBonus();
 // Clicker Function with skills
 const clickerUpdateFunctionWithotAddingMoney = () => {
   moneyPerClick = (userData[0].moneyPerClick * userData[0].valueClickBonus.bonus * userData[0].valueMultiplerBonus.bonus * userData[0].moneyBoost.bonus);
@@ -480,6 +457,21 @@ const AutoSkills = () => {
     }
   })
 }
+//Counting Bonuses of every single factory and worker
+const factoriesBonus = () => {
+  effectivity = 0;
+  countBonus(userData[0].autoMachine);
+  autoMachineBonus = effectivity;
+  autoMachineBonus *= (userData[0].factories.bonus / 100)
+  return autoMachineBonus;
+}
+const workersBonus = () => {
+  effectivity = 0;
+  countBonus(userData[0].workerMachine)
+  workerMachineBonus = effectivity;
+  workerMachineBonus *= (userData[0].workers.bonus / 100)
+  return workerMachineBonus;
+}
 const skills = () => {
   multipleClickSkillFunction();
   multipleMoneySkillFunction();
@@ -651,6 +643,14 @@ const showSkill = (skill, classToUnhide) => {
 }
 const hideAutoCost = (object, classToHide) => {
   if(object.bought == true ) classToHide.classList.add('visibility-hidden');
+}
+const countBonus = (object) => {
+  object.forEach(obj => {
+    if(obj.bought == true) {
+      effectivity += obj.effectivity;
+    }
+  })
+  effectivity /= 100
 }
 //shit to rework
 const extraRemovingFactoryOpacity = (factoryTab) => {
