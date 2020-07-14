@@ -499,24 +499,27 @@ body > .app > .main > .buttons-container > .buttons > .game-box > .game-upgrades
 /* LOGIN */
 input {
     outline: none;
+    font-size: 2vh;
+    color: #888888;
+    cursor: auto;
 }
 body > .menu {
     position: relative;
     width: 100vw;
     height: 100vh;
-    background: rgb(255,255,255);
-    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(203,203,203,1) 48%, rgba(236,233,233,1) 100%, rgba(255,255,255,1) 100%);
+    background: rgb(117, 117, 117);
+    background: linear-gradient(90deg, rgb(221, 221, 221) 0%, rgb(196, 196, 196) 48%, rgba(221, 221, 221)) 100%,);
+    cursor: default;
 }
 body > .menu > .menu-container {
     position: absolute;
-    width: 30vw;
-    height: 40vh;
+    width: 25vw;
+    height: 35vh;
     background-color: whitesmoke;
-    border-radius: 5%;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    box-shadow: 2vh 2vh 3vh 1vh #888888;
+    box-shadow: 0vh 0vh 4vh 2vh white;
 }
 body > .menu > .menu-container .header {
 text-align: center;
@@ -527,8 +530,31 @@ body > .menu > .menu-container input {
     border: none;
     background: none;   
 }
+body > .menu > .menu-container > .login-panel > .login-menu > .login-options {
+    width: 25vw;
+    color: #888888;
+    text-align: right;
+    font-size: 1.3vh;
+}
+body > .menu > .menu-container > .login-panel > .login-menu > .login-options > .forgotten-password {
+    transition: 0.3s linear;
+    cursor: pointer;
+    margin-right: 3vw;
+}
+body > .menu > .menu-container > .login-panel > .login-menu > .login-options > .forgotten-password:hover {
+    color: rgb(50, 200, 205);
+}
+body > .menu > .menu-container > .login-panel > .login-menu > .login-options > .forgotten-password > .question-mark {
+    margin-right: 2px;
+    display: inline-block;
+}
+body > .menu > .menu-container > .login-panel > .login-menu > .login-options > .forgotten-password:hover > .question-mark {
+    animation: skew-line 1s infinite;
+}
 body > .menu .input {
-position: relative;
+    padding-top: 2vh;
+    position: relative;
+    margin-left: 1vw;
 }
 body > .menu > .menu-container .input > .line {
     content: '';
@@ -539,18 +565,60 @@ body > .menu > .menu-container .input > .line {
 }
 body > .menu > .menu-container .input > input:focus  ~ .line {
     background-color: rgb(50, 200, 205);
-    animation: line 2s linear;
-    transform:  scaleX(8) translateX(45%);
+    animation: line 0.5s linear;
+    transform:  scaleX(11) translateX(45%);
 }
 body > .menu > .line {
     position: absolute;
-    background-color: springgreen;
+    background-color: rgb(50, 200, 205);
     box-shadow: 2vh 2vh 3vh 0vh #888888;
     width: 1vh;
     height: 100vh;
     right: 15%;
     animation: resizeY 10s infinite linear;
 }
+body > .menu > .menu-container > .login-panel {
+    margin-top: 3vh;
+}
+body > .menu > .menu-container > .login-panel > .click-bar {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 7vw;
+    height:  5vh;
+    background-color: rgb(50, 200, 205);
+    margin-top: 2vh;
+    color: white;
+}
+body > .menu > .menu-container > .login-panel > .login-button {
+    transition: 0.6s linear;
+    position: relative;
+}
+body > .menu > .menu-container > .login-panel > .login-button:hover {
+    background-color: transparent;
+    box-shadow: 0 0  5px 1px rgb(50, 200, 205);
+    color:rgb(50, 200, 205);
+    cursor: pointer;
+}
+body > .menu > .menu-container > .login-panel > .register > .registration {
+    font-size: 1.3vh;
+    
+}
+body > .menu > .menu-container > .login-panel > .register  {
+    margin-top: 3vh;
+    text-align: center;
+}
+body > .menu > .menu-container > .login-panel > .register > .registration:hover > .register-text {
+    color: rgb(50, 200, 205);
+
+}
+body > .menu > .menu-container > .login-panel > .register > .registration > .register-text {
+    transition: color 0.2s linear;
+    border-bottom: 1px solid transparent;
+    cursor: pointer;
+}
+
 
 
 
@@ -614,22 +682,22 @@ body > .menu > .line {
 }
 @keyframes skew-line {
     0% {
-        transform: skew(5deg, 5deg);
+        transform: skew(5deg, 5deg) scale(1) scale(1.25);
     }
     20% {
-        transform: skew(-5deg, -5deg);
+        transform: skew(-5deg, -5deg) scale(1.25);
     }
     40% {
-        transform: skew(5deg, 5deg);
+        transform: skew(5deg, 5deg) scale(1.25);
     }
     60% {
-        transform: skew(-5deg, -5deg);
+        transform: skew(-5deg, -5deg) scale(1.25);
     }
     80% {
-        transform: skew(5deg, 5deg);
+        transform: skew(5deg, 5deg) scale(1.25);
     }
     100% {
-        transform: skew(-5deg, -5deg);
+        transform: skew(5deg, 5deg) scale(1.25);
     }
 }
 @keyframes resizeY {
@@ -655,10 +723,12 @@ body > .menu > .line {
         transform: translateX(0);
     }
     50% {
-        transform: scaleX(4) translateX(40%);
+        transform: scaleX(7) translateX(40%);
     }
     100% {
-        transform:  scaleX(8) translateX(45%);
+        transform:  scaleX(11) translateX(45%);
     }
 }
+@keyframes click {
 
+}
