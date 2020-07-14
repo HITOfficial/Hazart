@@ -3,6 +3,7 @@ body {
     padding: 0;
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
+    overflow: hidden;
 }
 
 body > .app {
@@ -495,6 +496,61 @@ body > .app > .main > .buttons-container > .buttons > .game-box > .game-upgrades
     height: 20%;
     margin: 0 auto;
 }
+/* LOGIN */
+input {
+    outline: none;
+}
+body > .menu {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(203,203,203,1) 48%, rgba(236,233,233,1) 100%, rgba(255,255,255,1) 100%);
+}
+body > .menu > .menu-container {
+    position: absolute;
+    width: 30vw;
+    height: 40vh;
+    background-color: whitesmoke;
+    border-radius: 5%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 2vh 2vh 3vh 1vh #888888;
+}
+body > .menu > .menu-container .header {
+text-align: center;
+}
+body > .menu > .menu-container input {
+    height: 4vh;
+    width: 10vw;
+    border: none;
+    background: none;   
+}
+body > .menu .input {
+position: relative;
+}
+body > .menu > .menu-container .input > .line {
+    content: '';
+    position: absolute;
+    width: 1vw;
+    height: 1px;
+    background-color: transparent;
+}
+body > .menu > .menu-container .input > input:focus  ~ .line {
+    background-color: rgb(50, 200, 205);
+    animation: line 2s linear;
+    transform:  scaleX(8) translateX(45%);
+}
+body > .menu > .line {
+    position: absolute;
+    background-color: springgreen;
+    box-shadow: 2vh 2vh 3vh 0vh #888888;
+    width: 1vh;
+    height: 100vh;
+    right: 15%;
+    animation: resizeY 10s infinite linear;
+}
 
 
 
@@ -556,3 +612,53 @@ body > .app > .main > .buttons-container > .buttons > .game-box > .game-upgrades
         transform: translateY(1vh);
     }
 }
+@keyframes skew-line {
+    0% {
+        transform: skew(5deg, 5deg);
+    }
+    20% {
+        transform: skew(-5deg, -5deg);
+    }
+    40% {
+        transform: skew(5deg, 5deg);
+    }
+    60% {
+        transform: skew(-5deg, -5deg);
+    }
+    80% {
+        transform: skew(5deg, 5deg);
+    }
+    100% {
+        transform: skew(-5deg, -5deg);
+    }
+}
+@keyframes resizeY {
+    0% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(100%);
+    }
+    50% {
+        transform: translateY(0);
+    }
+    75% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+@keyframes line {
+    0% {
+        transform: scaleX(0);
+        transform: translateX(0);
+    }
+    50% {
+        transform: scaleX(4) translateX(40%);
+    }
+    100% {
+        transform:  scaleX(8) translateX(45%);
+    }
+}
+
