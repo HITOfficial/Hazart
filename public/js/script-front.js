@@ -1,10 +1,25 @@
 // MENU
-document.querySelector('.arrow-register').addEventListener('click', () => {
-  document.querySelector('.arrow-forgotten-password').classList.toggle('visibility-hidden');
-  document.querySelector('.arrow-register').classList.toggle('rotate-arrow');
-  document.querySelector('.register-panel').classList.toggle('register-hide');
-  document.querySelector('.register-panel').classList.toggle('register-unhide');
-})
+const changePanel = (arrowToHide, arrowToRotate, panel, panelHide, panelUnhide) => {
+  arrowToHide.classList.toggle('visibility-hidden');
+  arrowToRotate.classList.toggle('rotate-arrow');
+  panel.classList.toggle(`${panelHide}`);
+  panel.classList.toggle(`${panelUnhide}`);
+}
+const panelRegister = () => {
+  changePanel(document.querySelector('.arrow-forgotten-password'), document.querySelector('.arrow-register'), document.querySelector('.register-panel'), 'register-hide', 'register-unhide');
+}
+const panelForgottenPassword = () => {
+  changePanel(document.querySelector('.arrow-register'), document.querySelector('.arrow-forgotten-password'), document.querySelector('.forgotten-password-panel'), 'forgotten-password-hide', 'forgotten-password-unhide');
+}
+document.querySelector('.arrow-register').addEventListener('click', panelRegister);
+document.querySelector('.registration-return').addEventListener('click', panelRegister);
+document.querySelector('.register-text').addEventListener('click', panelRegister);
+document.querySelector('.arrow-forgotten-password').addEventListener('click', panelForgottenPassword);
+document.querySelector('.forgotten-password-return').addEventListener('click', panelForgottenPassword);
+document.querySelector('.forgotten-password').addEventListener('click', panelForgottenPassword);
+
+
+
 //GAME
 let valuePerClick, moneyPerAuto, moneyPerClick, moneyTime, objectUpdateData, visibleValue, giftMoney, intervalClicker, intervalSkill
 let moneyObject = document.querySelector('.money');
