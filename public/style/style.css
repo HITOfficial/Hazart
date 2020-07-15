@@ -508,7 +508,6 @@ body > .menu {
     width: 100vw;
     height: 100vh;
     background: rgb(117, 117, 117);
-    background: linear-gradient(90deg, rgb(221, 221, 221) 0%, rgb(196, 196, 196) 48%, rgba(221, 221, 221)) 100%,);
     cursor: default;
 }
 body > .menu > .menu-container {
@@ -522,13 +521,22 @@ body > .menu > .menu-container {
     box-shadow: 0vh 0vh 4vh 2vh white;
 }
 body > .menu > .menu-container .header {
-text-align: center;
+    margin-top: 3vh;
+    text-align: center;
+    text-transform: uppercase;
 }
+
 body > .menu > .menu-container input {
     height: 4vh;
     width: 10vw;
     border: none;
     background: none;   
+}
+body > .menu > .menu-container .register-panel input,
+body > .menu > .menu-container .register-panel input::placeholder,
+body > .menu > .menu-container .forgotten-password-panel input,
+body > .menu > .menu-container .forgotten-password-panel input::placeholder {
+    color: white;
 }
 body > .menu > .menu-container > .login-panel > .login-menu > .login-options {
     width: 25vw;
@@ -568,6 +576,13 @@ body > .menu > .menu-container .input > input:focus  ~ .line {
     animation: line 0.5s linear;
     transform:  scaleX(11) translateX(45%);
 }
+body > .menu > .menu-container > .register-panel .input > input:focus  ~ .line {
+    background-color: white;
+}
+body > .menu > .menu-container > .register-panel,
+body > .menu > .menu-container > .forgotten-password-panel {
+    color: whitesmoke;
+}
 body > .menu > .line {
     position: absolute;
     background-color: rgb(50, 200, 205);
@@ -577,10 +592,7 @@ body > .menu > .line {
     right: 15%;
     animation: resizeY 10s infinite linear;
 }
-body > .menu > .menu-container > .login-panel {
-    margin-top: 3vh;
-}
-body > .menu > .menu-container > .login-panel > .click-bar {
+body > .menu > .menu-container .click-bar {
     margin: 0 auto;
     display: flex;
     justify-content: center;
@@ -594,12 +606,6 @@ body > .menu > .menu-container > .login-panel > .click-bar {
 body > .menu > .menu-container > .login-panel > .login-button {
     transition: 0.6s linear;
     position: relative;
-}
-body > .menu > .menu-container > .login-panel > .login-button:hover {
-    background-color: transparent;
-    box-shadow: 0 0  5px 1px rgb(50, 200, 205);
-    color:rgb(50, 200, 205);
-    cursor: pointer;
 }
 body > .menu > .menu-container > .login-panel > .register > .registration {
     font-size: 1.3vh;
@@ -618,11 +624,62 @@ body > .menu > .menu-container > .login-panel > .register > .registration > .reg
     border-bottom: 1px solid transparent;
     cursor: pointer;
 }
+/* register */
+body > .menu > .menu-container > .register-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgb(50, 200, 205);
+    height: 100%;
+    width: 90%;
+    animation: register-menu-unhide 2s linear;
+    z-index: 1;
+}
+body > .menu > .menu-container > .register-panel > .register-button {
+    transition: 0.2s linear;
+}
+
+body > .menu > .menu-container > .register-panel > .register-button:hover {
+    background-color: transparent;
+    box-shadow: 0 0 4px 1px white;
+    color: white;
+    cursor: pointer;
+    background-color: white;
+    color: rgb(50, 200, 205);
+}
+body > .menu > .menu-container > .register-panel > .login-options {
+    margin-top: 2vh;
+    text-align: center;
+    font-size: 1.3vh;
+}
+body > .menu > .menu-container > .register-panel > .login-options > .registration-return {
+    transition: 0.3s linear;
+    cursor: pointer;
+}
+body > .menu > .menu-container > .register-panel > .login-options > .registration-return:hover {
+    border-bottom: 1px solid white;
+}
+.arrow {
+    animation: return-unhide 1s;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-image: url("../images/icons/arrow.png");
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+    z-index: 2;
+}
+.arrow-register {
+    right: 1vw;
+    top: 1vh;
+    transform: rotate(180deg);
+}
 
 
+@keyframes {
 
-
-
+}
 
 
 
@@ -729,6 +786,33 @@ body > .menu > .menu-container > .login-panel > .register > .registration > .reg
         transform:  scaleX(11) translateX(45%);
     }
 }
-@keyframes click {
-
+@keyframes register-menu-unhide {
+    0% {
+        z-index: -1;
+        display: none;
+    }
+    50% {
+        z-index: 1;
+        transform: translateX(-105%);
+    }
+    100% {
+        z-index: 1;
+        transform: translateX(0);
+    }
 }
+@keyframes register-menu-hide {
+    0% {
+        z-index: 1;
+        transform: translateX(0);
+        display: hidden;
+    }
+    50% {
+        display: hidden;
+        transform: translateX(-105%);
+    }
+    100% {
+        display: hidden;
+        transform: translateX(0);
+    }
+}
+
