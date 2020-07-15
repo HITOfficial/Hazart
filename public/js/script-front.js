@@ -1,3 +1,11 @@
+// MENU
+document.querySelector('.arrow-register').addEventListener('click', () => {
+  document.querySelector('.arrow-forgotten-password').classList.toggle('visibility-hidden');
+  document.querySelector('.arrow-register').classList.toggle('rotate-arrow');
+  document.querySelector('.register-panel').classList.toggle('register-hide');
+  document.querySelector('.register-panel').classList.toggle('register-unhide');
+})
+//GAME
 let valuePerClick, moneyPerAuto, moneyPerClick, moneyTime, objectUpdateData, visibleValue, giftMoney, intervalClicker, intervalSkill
 let moneyObject = document.querySelector('.money');
 let valuePerClickObject = document.querySelector('.money-per-click');

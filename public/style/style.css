@@ -511,7 +511,7 @@ body > .menu {
     cursor: default;
 }
 body > .menu > .menu-container {
-    position: absolute;
+    position: relative;
     width: 25vw;
     height: 35vh;
     background-color: whitesmoke;
@@ -519,6 +519,15 @@ body > .menu > .menu-container {
     top: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0vh 0vh 4vh 2vh white;
+}
+body > .menu > .menu-container > .login-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    z-index: 0;
 }
 body > .menu > .menu-container .header {
     margin-top: 3vh;
@@ -632,8 +641,7 @@ body > .menu > .menu-container > .register-panel {
     background-color: rgb(50, 200, 205);
     height: 100%;
     width: 90%;
-    animation: register-menu-unhide 2s linear;
-    z-index: 1;
+    z-index: -1;
 }
 body > .menu > .menu-container > .register-panel > .register-button {
     transition: 0.2s linear;
@@ -662,26 +670,40 @@ body > .menu > .menu-container > .register-panel > .login-options > .registratio
 .arrow {
     animation: return-unhide 1s;
     position: absolute;
-    right: 0;
-    top: 0;
     background-image: url("../images/icons/arrow.png");
     background-size: cover;
     width: 20px;
     height: 20px;
-    z-index: 2;
+    z-index: 1;
+    transition: 1s linear;
 }
 .arrow-register {
     right: 1vw;
     top: 1vh;
     transform: rotate(180deg);
 }
-
-
-@keyframes {
-
+.arrow-forgotten-password {
+    left: 1vw;
+    top: 1vh;
+    transform: rotate(180deg);
 }
-
-
+body > .menu > .menu-container > .register-unhide {
+    animation: register-menu-unhide 2s linear;
+    background-color: rgb(50, 200, 205);
+    z-index: 1;
+}
+body > .menu > .menu-container > .register-hide {
+    animation: register-menu-hide 2s linear;
+    z-index: -1;
+}
+.register-hide::after {
+    content: '';
+    background-color: tomato;
+}
+.rotate-arrow {
+    transition: 1s linear;
+    transform: rotateX(180deg);
+}
 
 
 
@@ -789,11 +811,10 @@ body > .menu > .menu-container > .register-panel > .login-options > .registratio
 @keyframes register-menu-unhide {
     0% {
         z-index: -1;
-        display: none;
     }
-    50% {
-        z-index: 1;
-        transform: translateX(-105%);
+    40% {
+        z-index: -1;
+        transform: translateX(-115%);
     }
     100% {
         z-index: 1;
@@ -804,14 +825,40 @@ body > .menu > .menu-container > .register-panel > .login-options > .registratio
     0% {
         z-index: 1;
         transform: translateX(0);
-        display: hidden;
     }
-    50% {
-        display: hidden;
-        transform: translateX(-105%);
+    40% {
+        z-index: -1;
+        transform: translateX(-115%);
     }
     100% {
-        display: hidden;
+        z-index: -1;
+        transform: translateX(0);
+    }
+}
+@keyframes forgotten-password-menu-unhide {
+    0% {
+        z-index: -1;
+    }
+    40% {
+        z-index: -1;
+        transform: translateX(-115%);
+    }
+    100% {
+        z-index: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes forgotten-password-register-menu-hide {
+    0% {
+        z-index: 1;
+        transform: translateX(0);
+    }
+    40% {
+        z-index: -1;
+        transform: translateX(-115%);
+    }
+    100% {
+        z-index: -1;
         transform: translateX(0);
     }
 }
