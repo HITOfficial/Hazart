@@ -1,4 +1,10 @@
 // MENU
+let login, password, email
+let availableData = {
+  login: true,
+  password: true,
+  email: true
+}
 const changePanel = (arrowToHide, arrowToRotate, panel, panelHide, panelUnhide) => {
   arrowToHide.classList.toggle('visibility-hidden');
   arrowToRotate.classList.toggle('rotate-arrow');
@@ -18,7 +24,28 @@ document.querySelector('.arrow-forgotten-password').addEventListener('click', pa
 document.querySelector('.forgotten-password-return').addEventListener('click', panelForgottenPassword);
 document.querySelector('.forgotten-password').addEventListener('click', panelForgottenPassword);
 
-
+const createAccount = () => {
+  availableData = {
+    login: true,
+    password: true,
+    email: true
+  }
+ login = document.querySelector('.login-registration').value;
+ email = document.querySelector('.e-mail-registration').value
+ password = document.querySelector('.password-registration').value;
+ userData.forEach((user) => {
+   if(user.login == login) {
+     availableData.login = false
+   }
+   if(user.email == email) {
+     availableData.email = false;
+   }
+ })
+ if(availableData.login == false || availableData.email == false) {
+  console.log('try another data');
+ }
+}
+document.querySelector('.register-button').addEventListener('click', createAccount);
 
 //GAME
 let valuePerClick, moneyPerAuto, moneyPerClick, moneyTime, objectUpdateData, visibleValue, giftMoney, intervalClicker, intervalSkill
@@ -44,7 +71,11 @@ fetch("./update_data.json")
   .then(updateDataJson => {
     updateData = updateDataJson;
   })
-
+  fetch("./new_user_data.json")
+  .then(response => response.json())
+  .then(data => {
+    newUserData = data;
+  })
 
 const loadUser = () => {
   // main => upgrades (four squares)
