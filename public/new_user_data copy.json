@@ -4,7 +4,7 @@
         "password": "default",
         "money": 500,
         "moneyPerClick": 2.00,
-        "moneyPerAuto": 2.00,
+        "moneyPerAuto": 1.00,
         "valueMultiplerBonus": {"actualLevel": 1, "maxLevel": 35, "upgradeCost": 500, "bonus": 1},
         "valueClickBonus": {"actualLevel": 1, "maxLevel": 35, "upgradeCost": 500, "bonus": 1},
         "factoriesBonus": {"actualLevel": 1, "maxLevel": 20, "upgradeCost": 10000, "bonus": 100},

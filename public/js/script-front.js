@@ -1,63 +1,48 @@
-//fetch GET user_data
-fetch("./user_data.json")
-  .then(response => response.json())
-  .then(data => {
-    userData = data;
-  })
-  .catch(error => console.log(error))
-// fetch GET upgrade_data
-fetch("./update_data.json")
-  .then(response => response.json())
-  .then(updateDataJson => {
-    updateData = updateDataJson;
-  })
-  fetch("./new_user_data.json")
-  .then(response => response.json())
-  .then(data => {
-    newUserData = data;
-  })
-// MENU
+// all Java Script connected to MENU 
 let login, password, email, id;
 let availableData = {
   login: true,
   password: true,
   email: true
+};
+const LoadMenuListener = () => {
+  fetchData();
+  document.querySelector('.arrow-register').addEventListener('click', panelRegister);
+  document.querySelector('.registration-return').addEventListener('click', panelRegister);
+  document.querySelector('.register-text').addEventListener('click', panelRegister);
+  document.querySelector('.arrow-forgotten-password').addEventListener('click', panelForgottenPassword);
+  document.querySelector('.forgotten-password-return').addEventListener('click', panelForgottenPassword);
+  document.querySelector('.forgotten-password').addEventListener('click', panelForgottenPassword);
+  document.querySelector('.register-button').addEventListener('click', createAccount);
+  document.querySelector('.login-button').addEventListener('click', loginAccount);
 }
-const changePanel = (arrowToHide, arrowToRotate, panel, panelHide, panelUnhide) => {
-  arrowToHide.classList.toggle('visibility-hidden');
-  arrowToRotate.classList.toggle('rotate-arrow');
-  panel.classList.toggle(`${panelHide}`);
-  panel.classList.toggle(`${panelUnhide}`);
-}
-const panelRegister = () => {
-  changePanel(document.querySelector('.arrow-forgotten-password'), document.querySelector('.arrow-register'), document.querySelector('.register-panel'), 'register-hide', 'register-unhide');
-}
-const panelForgottenPassword = () => {
-  changePanel(document.querySelector('.arrow-register'), document.querySelector('.arrow-forgotten-password'), document.querySelector('.forgotten-password-panel'), 'forgotten-password-hide', 'forgotten-password-unhide');
-}
-// warining about wrong data
-wrongData = (classToAddWarning) => {
-  classToAddWarning.classList.add('wrong-data');
-  classToAddWarning.addEventListener('focus', () => {
-    classToAddWarning.classList.remove('wrong-data');
-  });
-}
-const hideMenu = () => {
-  document.querySelector('.menu').classList.add('display-none');
-}
-document.querySelector('.arrow-register').addEventListener('click', panelRegister);
-document.querySelector('.registration-return').addEventListener('click', panelRegister);
-document.querySelector('.register-text').addEventListener('click', panelRegister);
-document.querySelector('.arrow-forgotten-password').addEventListener('click', panelForgottenPassword);
-document.querySelector('.forgotten-password-return').addEventListener('click', panelForgottenPassword);
-document.querySelector('.forgotten-password').addEventListener('click', panelForgottenPassword);
-
+const fetchData = () => {
+  //fetch GET user_data
+  fetch("./user_data.json")
+    .then(response => response.json())
+    .then(data => {
+      userData = data;
+    })
+    .catch(error => console.log(error))
+  // fetch GET upgrade_data
+  fetch("./update_data.json")
+    .then(response => response.json())
+    .then(updateDataJson => {
+      updateData = updateDataJson;
+    })
+  // fetch GET newUserData
+    fetch("./new_user_data.json")
+    .then(response => response.json())
+    .then(data => {
+      newUserData = data;
+    })
+  }
 const createAccount = () => {
-availableData = {
-  login: true,
-  password: true,
-  email: true
-}
+  availableData = {
+    login: true,
+    password: true,
+    email: true
+  }
   login = document.querySelector('.login-registration').value;
   email = document.querySelector('.e-mail-registration').value
   password = document.querySelector('.password-registration').value;
@@ -91,6 +76,7 @@ availableData = {
     id = newUserData.id;
     userData.push(newUserData);
     startGame();
+    saveDataFunction();
   }
 }
 const loginAccount = () => {
@@ -128,8 +114,29 @@ const loginAccount = () => {
     }
    }
 }
-document.querySelector('.register-button').addEventListener('click', createAccount);
-document.querySelector('.login-button').addEventListener('click', loginAccount);
+const changePanel = (arrowToHide, arrowToRotate, panel, panelHide, panelUnhide) => {
+  arrowToHide.classList.toggle('visibility-hidden');
+  arrowToRotate.classList.toggle('rotate-arrow');
+  panel.classList.toggle(`${panelHide}`);
+  panel.classList.toggle(`${panelUnhide}`);
+}
+const panelRegister = () => {
+  changePanel(document.querySelector('.arrow-forgotten-password'), document.querySelector('.arrow-register'), document.querySelector('.register-panel'), 'register-hide', 'register-unhide');
+}
+const panelForgottenPassword = () => {
+  changePanel(document.querySelector('.arrow-register'), document.querySelector('.arrow-forgotten-password'), document.querySelector('.forgotten-password-panel'), 'forgotten-password-hide', 'forgotten-password-unhide');
+}
+// warining about wrong data
+wrongData = (classToAddWarning) => {
+  classToAddWarning.classList.add('wrong-data');
+  classToAddWarning.addEventListener('focus', () => {
+    classToAddWarning.classList.remove('wrong-data');
+  });
+}
+const hideMenu = () => {
+  document.querySelector('.menu').classList.add('display-none');
+}
+window.onload = LoadMenuListener;
 //GAME
 let valuePerClick, moneyPerAuto, moneyPerClick, moneyTime, objectUpdateData, visibleValue, giftMoney, intervalClicker, intervalSkill, tax, money;
 let moneyObject = document.querySelector('.money');
@@ -139,7 +146,6 @@ let waitWithUpgradeWorker = [false, false, false, false, false,] // I added new 
 let effectivity = 0;
 let autoMachineBonus = 0;
 let workerMachineBonus = 0;
-
 const loadUser = () => {
   // main => upgrades (four squares)
   document.querySelector('.value-multipler-bonus').innerHTML = userData[id-1].valueMultiplerBonus.bonus;
@@ -223,7 +229,7 @@ const loadUser = () => {
   hideAutoCost(userData[id-1].autoSkills, document.querySelector('.auto-skills-cost-container'));
   // valuePerClick and moneyPerAuto with included bonuses
   valuePerClick = Math.round((userData[id-1].moneyPerClick * userData[id-1].valueClickBonus.bonus * userData[id-1].valueMultiplerBonus.bonus * userData[id-1].moneyBoost.bonus));
-  MoneyPerClick = Math.round((userData[id-1].moneyPerAuto * userData[id-1].moneyBoost.bonus));
+  moneyPerAuto = Math.round((userData[id-1].moneyPerAuto * userData[id-1].moneyBoost.bonus));
   // main => show bonuses
   moneyUpdate();
   moneyEverySecFunctionWithoutAddingMoney();
@@ -257,7 +263,9 @@ const clickerUpdate = () => {
 }
 //////////////////////////////////////////////////////////////////////
 const moneyEverySecFunctionWithoutAddingMoney = () => {
-  moneyTime = (userData[id-1].moneyPerAuto * userData[id-1].moneyBoost.bonus * factoriesBonus() * workersBonus());
+  moneyTime = (userData[id-1].moneyPerAuto * userData[id-1].moneyBoost.bonus );
+  if(workersBonus()>0) moneyTime *= workersBonus();
+  if(factoriesBonus()>0) moneyTime *= factoriesBonus();
   if(userData[id-1].multipleMoneySkill.active) {
     moneyTime *= userData[id-1].multipleMoneySkillUpgrade.bonus;
   }
@@ -280,28 +288,28 @@ const autoMoneyUpdate = () => {
 //////////////////////////////////////////////////////////////////////
 // exporting data to the server with fetch POST, and then on a server automaticaly save as JSON file
 const saveUserData = () => {
-  document.querySelector('.save-game').addEventListener('click', () => {
-    userData[id-1].money = money;
-    userData[id-1].resetSkills.ready = true;
-    userData[id-1].multipleClickSkill.ready = true;
-    userData[id-1].multipleMoneySkill.ready = true;
-    userData[id-1].multipleGiftSkill.ready = true;
-    userData[id-1].resetSkills.active = false;
-    userData[id-1].multipleClickSkill.active = false;
-    userData[id-1].multipleMoneySkill.active = false;
-    userData[id-1].multipleGiftSkill.active = false;
-    userData[id-1].autoSkills.active = false;
-    userData[id-1].autoClicker.active = false;
-    fetch('/',{
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(userData)
-    });
-  })
+  document.querySelector('.save-game').addEventListener('click', saveDataFunction)
 }
-
+const saveDataFunction = () => {
+  userData[id-1].money = money;
+  userData[id-1].resetSkills.ready = true;
+  userData[id-1].multipleClickSkill.ready = true;
+  userData[id-1].multipleMoneySkill.ready = true;
+  userData[id-1].multipleGiftSkill.ready = true;
+  userData[id-1].resetSkills.active = false;
+  userData[id-1].multipleClickSkill.active = false;
+  userData[id-1].multipleMoneySkill.active = false;
+  userData[id-1].multipleGiftSkill.active = false;
+  userData[id-1].autoSkills.active = false;
+  userData[id-1].autoClicker.active = false;
+  fetch('/',{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(userData)
+  });
+};
 //                      UPGRADES
 const valueMultiplerBonusUpgrade = () => {
   document.querySelector('.multipler-click').addEventListener('click', () => {
@@ -790,5 +798,4 @@ const startGame = () =>{
   saveUserData();
   upgrades();
   hideMenu();
-
 }
