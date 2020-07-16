@@ -1,5 +1,6 @@
 {
-    "login": "deafult",
+    "id": "default",
+    "login": "default",
     "password": "default",
     "email": "default@default.default",
     "money": 500,

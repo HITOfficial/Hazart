@@ -5,13 +5,6 @@ body {
     font-weight: 700;
     overflow: hidden;
 }
-
-body > .app {
-    width: 100vw;
-    height: 100vh;
-    background-color: #fafffa;
-    display: flex;  
-}
 .no-select {
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -27,6 +20,9 @@ body > .app {
 .visibility-visible {
     visibility: visible;
 }
+.display-none {
+    display: none;
+}
 li {
     list-style-type: none;
 }
@@ -38,6 +34,12 @@ li {
 }
 .block {
     display: block;
+}
+body > .app {
+    width: 100vw;
+    height: 100vh;
+    background-color: #fafffa;
+    display: flex;
 }
 body > .app > .main {
     height: 100vh;
@@ -537,7 +539,7 @@ body > .menu > .menu-container .header {
 
 body > .menu > .menu-container input {
     height: 4vh;
-    width: 10vw;
+    width: 12.5vw;
     border: none;
     background: none;   
 }
@@ -583,7 +585,7 @@ body > .menu > .menu-container .input > .line {
 body > .menu > .menu-container .input > input:focus  ~ .line {
     background-color: rgb(50, 200, 205);
     animation: line 0.5s linear;
-    transform:  scaleX(11) translateX(45%);
+    transform:  scaleX(13) translateX(45%);
 }
 body > .menu > .menu-container > .register-panel .input > input:focus  ~ .line {
     background-color: white;
@@ -730,6 +732,11 @@ body > .menu > .menu-container > .forgotten-password-hide {
     animation: forgotten-password-menu-hide 2s linear;
     z-index: -1;
 }
+/* LOGIN WARNING */ 
+.wrong-data {
+    border-bottom: 1px solid red !important;
+    transition: 0.4s linear;
+}
 
 
 
@@ -828,10 +835,10 @@ body > .menu > .menu-container > .forgotten-password-hide {
         transform: translateX(0);
     }
     50% {
-        transform: scaleX(7) translateX(40%);
+        transform: scaleX(7) translateX(37%);
     }
     100% {
-        transform:  scaleX(11) translateX(45%);
+        transform:  scaleX(13) translateX(45%);
     }
 }
 @keyframes register-menu-hide {
@@ -888,4 +895,3 @@ body > .menu > .menu-container > .forgotten-password-hide {
         transform: translateX(0);
     }
 }
-

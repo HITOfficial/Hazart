@@ -1,61 +1,3 @@
-// MENU
-let login, password, email
-let availableData = {
-  login: true,
-  password: true,
-  email: true
-}
-const changePanel = (arrowToHide, arrowToRotate, panel, panelHide, panelUnhide) => {
-  arrowToHide.classList.toggle('visibility-hidden');
-  arrowToRotate.classList.toggle('rotate-arrow');
-  panel.classList.toggle(`${panelHide}`);
-  panel.classList.toggle(`${panelUnhide}`);
-}
-const panelRegister = () => {
-  changePanel(document.querySelector('.arrow-forgotten-password'), document.querySelector('.arrow-register'), document.querySelector('.register-panel'), 'register-hide', 'register-unhide');
-}
-const panelForgottenPassword = () => {
-  changePanel(document.querySelector('.arrow-register'), document.querySelector('.arrow-forgotten-password'), document.querySelector('.forgotten-password-panel'), 'forgotten-password-hide', 'forgotten-password-unhide');
-}
-document.querySelector('.arrow-register').addEventListener('click', panelRegister);
-document.querySelector('.registration-return').addEventListener('click', panelRegister);
-document.querySelector('.register-text').addEventListener('click', panelRegister);
-document.querySelector('.arrow-forgotten-password').addEventListener('click', panelForgottenPassword);
-document.querySelector('.forgotten-password-return').addEventListener('click', panelForgottenPassword);
-document.querySelector('.forgotten-password').addEventListener('click', panelForgottenPassword);
-
-const createAccount = () => {
-  availableData = {
-    login: true,
-    password: true,
-    email: true
-  }
- login = document.querySelector('.login-registration').value;
- email = document.querySelector('.e-mail-registration').value
- password = document.querySelector('.password-registration').value;
- userData.forEach((user) => {
-   if(user.login == login) {
-     availableData.login = false
-   }
-   if(user.email == email) {
-     availableData.email = false;
-   }
- })
- if(availableData.login == false || availableData.email == false) {
-  console.log('try another data');
- }
-}
-document.querySelector('.register-button').addEventListener('click', createAccount);
-
-//GAME
-let valuePerClick, moneyPerAuto, moneyPerClick, moneyTime, objectUpdateData, visibleValue, giftMoney, intervalClicker, intervalSkill
-let moneyObject = document.querySelector('.money');
-let valuePerClickObject = document.querySelector('.money-per-click');
-let moneyPerAutoObject = document.querySelector('.money-per-auto');
-let waitWithUpgradeWorker = [false, false, false, false, false,] // I added new table to stop upgrade automaticaly within buying a worker if user has enought money
-let effectivity = 0;
-let autoMachineBonus = 0;
-let workerMachineBonus = 0;
 //fetch GET user_data
 fetch("./user_data.json")
   .then(response => response.json())
@@ -76,6 +18,95 @@ fetch("./update_data.json")
   .then(data => {
     newUserData = data;
   })
+// MENU
+let login, password, email, id;
+let availableData = {
+  login: true,
+  password: true,
+  email: true
+}
+const changePanel = (arrowToHide, arrowToRotate, panel, panelHide, panelUnhide) => {
+  arrowToHide.classList.toggle('visibility-hidden');
+  arrowToRotate.classList.toggle('rotate-arrow');
+  panel.classList.toggle(`${panelHide}`);
+  panel.classList.toggle(`${panelUnhide}`);
+}
+const panelRegister = () => {
+  changePanel(document.querySelector('.arrow-forgotten-password'), document.querySelector('.arrow-register'), document.querySelector('.register-panel'), 'register-hide', 'register-unhide');
+}
+const panelForgottenPassword = () => {
+  changePanel(document.querySelector('.arrow-register'), document.querySelector('.arrow-forgotten-password'), document.querySelector('.forgotten-password-panel'), 'forgotten-password-hide', 'forgotten-password-unhide');
+}
+// warining about wrong data
+wrongData = (classToAddWarning) => {
+  classToAddWarning.classList.add('wrong-data');
+  classToAddWarning.addEventListener('focus', () => {
+    classToAddWarning.classList.remove('wrong-data');
+  });
+}
+document.querySelector('.arrow-register').addEventListener('click', panelRegister);
+document.querySelector('.registration-return').addEventListener('click', panelRegister);
+document.querySelector('.register-text').addEventListener('click', panelRegister);
+document.querySelector('.arrow-forgotten-password').addEventListener('click', panelForgottenPassword);
+document.querySelector('.forgotten-password-return').addEventListener('click', panelForgottenPassword);
+document.querySelector('.forgotten-password').addEventListener('click', panelForgottenPassword);
+
+const createAccount = () => {
+availableData = {
+  login: true,
+  password: true,
+  email: true
+}
+  login = document.querySelector('.login-registration').value;
+  email = document.querySelector('.e-mail-registration').value
+  password = document.querySelector('.password-registration').value;
+  userData.forEach((user) => {
+    if(user.login == login || login.length <1) {
+      availableData.login = false
+    }
+    if(user.email == email || email.length <1) {
+      availableData.email = false;
+    }
+    if(password.length <1) {
+      availableData.password = false;
+    }
+  })
+  if(availableData.login == false || availableData.email == false || availableData.password == false) {
+   if(availableData.login == false){
+     wrongData(document.querySelector('.login-registration'));
+   }
+   if(availableData.email == false){
+     wrongData(document.querySelector('.e-mail-registration'));
+   }
+   if(availableData.password == false){
+     wrongData(document.querySelector('.password-registration'));
+   }
+  }
+  else {
+    newUserData.login = login;
+    newUserData.email = email;
+    newUserData.password = password;
+    newUserData.id = userData.length +1;
+    id = newUserData.id;
+    userData.push(newUserData);
+    startGame();
+    hideMenu();
+  }
+}
+document.querySelector('.register-button').addEventListener('click', createAccount);
+const hideMenu = () => {
+  document.querySelector('.menu').classList.add('display-none');
+}
+
+//GAME
+let valuePerClick, moneyPerAuto, moneyPerClick, moneyTime, objectUpdateData, visibleValue, giftMoney, intervalClicker, intervalSkill
+let moneyObject = document.querySelector('.money');
+let valuePerClickObject = document.querySelector('.money-per-click');
+let moneyPerAutoObject = document.querySelector('.money-per-auto');
+let waitWithUpgradeWorker = [false, false, false, false, false,] // I added new table to stop upgrade automaticaly within buying a worker if user has enought money
+let effectivity = 0;
+let autoMachineBonus = 0;
+let workerMachineBonus = 0;
 
 const loadUser = () => {
   // main => upgrades (four squares)
@@ -722,4 +753,3 @@ const startGame = () =>{
   saveUserData();
   upgrades();
 }
-window.onload = startGame
