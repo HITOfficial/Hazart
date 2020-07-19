@@ -147,23 +147,21 @@ let effectivity = 0;
 let autoMachineBonus = 0;
 let workerMachineBonus = 0;
 const loadUser = () => {
+  upgradeCostUpdate();
   // main => upgrades (four squares)
   document.querySelector('.value-multipler-bonus').innerHTML = userData[id-1].valueMultiplerBonus.bonus;
-  document.querySelector('.upgrade-multipler-click-bonus-cost').innerHTML = Math.round(userData[id-1].valueMultiplerBonus.upgradeCost- (userData[id-1].valueMultiplerBonus.upgradeCost * tax));
   hideSkillLevel(userData[id-1].valueMultiplerBonus, document.querySelector('.upgrade-multipler-click-cost-container'));
   document.querySelector('.value-click-bonus').innerHTML = userData[id-1].valueClickBonus.bonus;
-  document.querySelector('.upgrade-value-click-bonus-cost').innerHTML = Math.round(userData[id-1].valueClickBonus.upgradeCost - (userData[id-1].valueClickBonus.upgradeCost * tax));
   hideSkillLevel(userData[id-1].valueClickBonus, document.querySelector('.upgrade-value-click-cost-container'));
   document.querySelector('.factories-bonus').innerHTML = userData[id-1].factories.bonus;
-  document.querySelector('.upgrade-factories-bonus-cost').innerHTML = Math.round(userData[id-1].factories.upgradeCost - (userData[id-1].factories.upgradeCost * tax));
   hideSkillLevel(userData[id-1].factories, document.querySelector('.upgrade-factories-bonus-cost-container'));
   document.querySelector('.workers-bonus').innerHTML = userData[id-1].workers.bonus;
-  document.querySelector('.upgrade-workers-bonus-cost').innerHTML = Math.round(userData[id-1].workers.upgradeCost - (userData[id-1].workers.upgradeCost * tax));
-  
   // main => machines and workers
   userData[id-1].autoMachine.forEach( factory => {
     if(factory.bought !== true) {
-      document.querySelectorAll('.cost-auto-container-factory')[factory.id -1].childNodes[1].innerHTML = Math.round(factory.cost - (factory.cost * tax));
+      if (document.querySelectorAll('.cost-auto-container-factory')[factory.id -1].childNodes[1] =! null){
+        document.querySelectorAll('.cost-auto-container-factory')[factory.id -1].childNodes[1].innerHTML = Math.round(factory.cost - (factory.cost * tax));
+      }
     }
     else {
       document.querySelectorAll('.cost-auto-container-factory')[factory.id -1].parentNode.classList.remove('buy-factory', 'upgrade-border');
@@ -187,46 +185,29 @@ const loadUser = () => {
     }
   });
   // tools => upgrades status
-
   document.querySelector('.money-boost-actual-level').innerHTML = userData[id-1].moneyBoost.actualLevel;
   document.querySelector('.money-boost-max-level').innerHTML = userData[id-1].moneyBoost.maxLevel;
-  document.querySelector('.money-boost-cost').innerHTML = Math.round(userData[id-1].moneyBoost.upgradeCost - (userData[id-1].moneyBoost.upgradeCost * tax)) ;
-  insideRemover(userData[id-1].moneyBoost, document.querySelector('.money-boost'));
   document.querySelector('.bonus-gift-actual-level').innerHTML = userData[id-1].moneyBoost.actualLevel;
   document.querySelector('.bonus-gift-max-level').innerHTML = userData[id-1].moneyBoost.maxLevel;
-  document.querySelector('.bonus-gift-cost').innerHTML = Math.round(userData[id-1].moneyBoost.upgradeCost - (userData[id-1].moneyBoost.upgradeCost * tax));
-  insideRemover(userData[id-1].gift ,document.querySelector('.bonus-gift'));
   document.querySelector('.bonus-tax-actual-level').innerHTML = userData[id-1].moneyBoost.actualLevel;
   document.querySelector('.bonus-tax-max-level').innerHTML = userData[id-1].moneyBoost.maxLevel;
-  document.querySelector('.bonus-tax-cost').innerHTML = Math.round(userData[id-1].moneyBoost.upgradeCost - (userData[id-1].moneyBoost.upgradeCost * tax));
-  insideRemover(userData[id-1].tax ,document.querySelector('.tax'));
   document.querySelector('.bonus-cooldown-actual-level').innerHTML = userData[id-1].moneyBoost.actualLevel;
   document.querySelector('.bonus-cooldown-max-level').innerHTML = userData[id-1].moneyBoost.maxLevel;
-  document.querySelector('.bonus-cooldown-cost').innerHTML = Math.round(userData[id-1].moneyBoost.upgradeCost - (userData[id-1].moneyBoost.upgradeCost * tax));
-  insideRemover(userData[id-1].cooldown ,document.querySelector('.cooldown'));
   // tools => upgrades skills
   document.querySelector('.reset-skills-upgrade-actual-level').innerHTML = userData[id-1].resetSkillsUpgrade.actualLevel
   document.querySelector('.reset-skills-upgrade-max-level').innerHTML = userData[id-1].resetSkillsUpgrade.maxLevel;
-  document.querySelector('.reset-skills-upgrade-cost').innerHTML = Math.round(userData[id-1].resetSkillsUpgrade.upgradeCost - (userData[id-1].resetSkillsUpgrade.upgradeCost * tax));
   document.querySelector('.multiple-click-skill-upgrade-actual-level').innerHTML = userData[id-1].multipleClickSkillUpgrade.actualLevel
   document.querySelector('.multiple-click-skill-upgrade-max-level').innerHTML = userData[id-1].multipleClickSkillUpgrade.maxLevel;
-  document.querySelector('.multiple-click-skill-upgrade-cost').innerHTML = Math.round(userData[id-1].multipleClickSkillUpgrade.upgradeCost - (userData[id-1].multipleClickSkillUpgrade.upgradeCost * tax));
   document.querySelector('.multiple-money-skill-upgrade-actual-level').innerHTML = userData[id-1].multipleMoneySkillUpgrade.actualLevel
   document.querySelector('.multiple-money-skill-upgrade-max-level').innerHTML = userData[id-1].multipleMoneySkillUpgrade.maxLevel;
-  document.querySelector('.multiple-money-skill-upgrade-cost').innerHTML = Math.round(userData[id-1].multipleMoneySkillUpgrade.upgradeCost - (userData[id-1].multipleMoneySkillUpgrade.upgradeCost * tax));
   document.querySelector('.multiple-gift-skill-upgrade-actual-level').innerHTML = userData[id-1].multipleGiftSkillUpgrade.actualLevel
   document.querySelector('.multiple-gift-skill-upgrade-max-level').innerHTML = userData[id-1].multipleGiftSkillUpgrade.maxLevel;
-  document.querySelector('.multiple-gift-skill-upgrade-cost').innerHTML = Math.round(userData[id-1].multipleGiftSkillUpgrade.upgradeCost - (userData[id-1].multipleGiftSkillUpgrade.upgradeCost * tax));
   //main => top container - unhide skills 
   showSkill(userData[id-1].resetSkills, document.querySelector('.reset-skills'));
   showSkill(userData[id-1].multipleClickSkill, document.querySelector('.multiple-click-skill'));
   showSkill(userData[id-1].multipleMoneySkill, document.querySelector('.multiple-money-skill'));
   showSkill(userData[id-1].multipleGiftSkill, document.querySelector('.multiple-gift-skill'));
   // tools => clickers
-  document.querySelector('.auto-clicker-cost').innerHTML = Math.round(userData[id-1].autoClicker.cost - (userData[id-1].autoClicker.cost * tax));
-  document.querySelector('.auto-skills-cost').innerHTML = Math.round(userData[id-1].autoSkills.cost - (userData[id-1].autoSkills.cost * tax));
-  hideAutoCost(userData[id-1].autoClicker, document.querySelector('.auto-clicker-cost-container'));
-  hideAutoCost(userData[id-1].autoSkills, document.querySelector('.auto-skills-cost-container'));
   // valuePerClick and moneyPerAuto with included bonuses
   valuePerClick = Math.round((userData[id-1].moneyPerClick * userData[id-1].valueClickBonus.bonus * userData[id-1].valueMultiplerBonus.bonus * userData[id-1].moneyBoost.bonus));
   moneyPerAuto = Math.round((userData[id-1].moneyPerAuto * userData[id-1].moneyBoost.bonus));
@@ -234,6 +215,44 @@ const loadUser = () => {
   moneyUpdate();
   moneyEverySecFunctionWithoutAddingMoney();
   clickerUpdateFunctionWithotAddingMoney()
+}
+const upgradeCostUpdate = () => { // I separate loading data with money and level, becouse this first one i'll use also in taxes update function 
+  document.querySelector('.upgrade-value-click-bonus-cost').innerHTML = Math.round(userData[id-1].valueClickBonus.upgradeCost - (userData[id-1].valueClickBonus.upgradeCost * tax));
+  hideSkillLevel(userData[id-1].valueClickBonus, document.querySelector('.upgrade-value-click-cost-container'));
+  document.querySelector('.upgrade-multipler-click-bonus-cost').innerHTML = Math.round(userData[id-1].valueMultiplerBonus.upgradeCost- (userData[id-1].valueMultiplerBonus.upgradeCost * tax));
+  hideSkillLevel(userData[id-1].valueMultiplerBonus, document.querySelector('.upgrade-multipler-click-cost-container'));
+  document.querySelector('.upgrade-factories-bonus-cost').innerHTML = Math.round(userData[id-1].factories.upgradeCost - (userData[id-1].factories.upgradeCost * tax));
+  hideSkillLevel(userData[id-1].factories, document.querySelector('.upgrade-factories-bonus-cost-container'));
+  document.querySelector('.upgrade-workers-bonus-cost').innerHTML = Math.round(userData[id-1].workers.upgradeCost - (userData[id-1].workers.upgradeCost * tax));
+  document.querySelector('.money-boost-cost').innerHTML = Math.round(userData[id-1].moneyBoost.upgradeCost - (userData[id-1].moneyBoost.upgradeCost * tax));
+  insideRemover(userData[id-1].moneyBoost, document.querySelector('.money-boost'));
+  document.querySelector('.bonus-gift-cost').innerHTML = Math.round(userData[id-1].moneyBoost.upgradeCost - (userData[id-1].moneyBoost.upgradeCost * tax));
+  insideRemover(userData[id-1].gift ,document.querySelector('.bonus-gift'));
+  document.querySelector('.bonus-tax-cost').innerHTML = Math.round(userData[id-1].moneyBoost.upgradeCost - (userData[id-1].moneyBoost.upgradeCost * tax));
+  insideRemover(userData[id-1].tax ,document.querySelector('.tax'));
+  document.querySelector('.bonus-cooldown-cost').innerHTML = Math.round(userData[id-1].moneyBoost.upgradeCost - (userData[id-1].moneyBoost.upgradeCost * tax));
+  insideRemover(userData[id-1].cooldown ,document.querySelector('.cooldown'));
+  document.querySelector('.reset-skills-upgrade-cost').innerHTML = Math.round(userData[id-1].resetSkillsUpgrade.upgradeCost - (userData[id-1].resetSkillsUpgrade.upgradeCost * tax));
+  document.querySelector('.multiple-click-skill-upgrade-cost').innerHTML = Math.round(userData[id-1].multipleClickSkillUpgrade.upgradeCost - (userData[id-1].multipleClickSkillUpgrade.upgradeCost * tax));
+  document.querySelector('.multiple-money-skill-upgrade-cost').innerHTML = Math.round(userData[id-1].multipleMoneySkillUpgrade.upgradeCost - (userData[id-1].multipleMoneySkillUpgrade.upgradeCost * tax));
+  document.querySelector('.multiple-gift-skill-upgrade-cost').innerHTML = Math.round(userData[id-1].multipleGiftSkillUpgrade.upgradeCost - (userData[id-1].multipleGiftSkillUpgrade.upgradeCost * tax));
+  document.querySelector('.auto-clicker-cost').innerHTML = Math.round(userData[id-1].autoClicker.cost - (userData[id-1].autoClicker.cost * tax));
+  document.querySelector('.auto-skills-cost').innerHTML = Math.round(userData[id-1].autoSkills.cost - (userData[id-1].autoSkills.cost * tax));
+  hideAutoCost(userData[id-1].autoClicker, document.querySelector('.auto-clicker-cost-container'));
+  hideAutoCost(userData[id-1].autoSkills, document.querySelector('.auto-skills-cost-container'));
+  userData[id-1].workerMachine.forEach( worker => {
+    if(worker.bought !== true){
+      document.querySelectorAll('.worker-cost')[worker.id -1].innerHTML = Math.round(worker.cost - (worker.cost * tax));
+    }
+    else {
+      document.querySelectorAll('.worker-cost')[worker.id -1].innerHTML = Math.round(worker.upgradeCost - (worker.upgradeCost * tax));
+    }
+  });
+  userData[id-1].autoMachine.forEach( factory => {
+    if(factory.bought !== true) {
+        document.querySelectorAll('.auto-machine')[factory.id -1].childNodes[1].childNodes[1].innerHTML = Math.round(factory.cost - (factory.cost * tax));
+    }
+  });
 }
 //////////////////////////////////////////////////////////////////////
 // Clicker Function with skills
@@ -420,6 +439,7 @@ const taxUpgrade = () =>{
     upgrader(userData[id-1].tax, updateData.tax, document.querySelector('.bonus-tax-cost'), document.querySelector('.bonus-tax-actual-level'), document.querySelector('.tax'));
     userData[id-1].tax = objectUpdateData;
     tax = userData[id-1].tax.bonus;
+    upgradeCostUpdate();
     moneyEverySecFunctionWithoutAddingMoney();
   })
 }
@@ -433,14 +453,14 @@ const cooldownUpgrade = () =>{
 }
 const resetSkillsUpgrade = () => {
   document.querySelector('.reset-skills-upgrade').addEventListener('click', () => {
-    if(userData[id-1].resetSkills.visible == false){
+    if(userData[id-1].resetSkills.visible == false && (money >= userData[id-1].resetSkillsUpgrade.upgradeCost - (userData[id-1].resetSkillsUpgrade.upgradeCost * tax))){
       buySkill(userData[id-1].resetSkills, userData[id-1].resetSkillsUpgrade);
       userData[id-1].resetSkills.visible = visibleValue;
       userData[id-1].resetSkillsUpgrade.actualLevel = 1;
       document.querySelector('.reset-skills-upgrade-actual-level').innerHTML = userData[id-1].resetSkillsUpgrade.actualLevel;
       showSkill(userData[id-1].resetSkills, document.querySelector('.reset-skills'));
     }
-    else {
+    else if(money >= userData[id-1].resetSkillsUpgrade.upgradeCost - (userData[id-1].resetSkillsUpgrade.upgradeCost * tax)) {
       objectUpdateData;
       upgrader(userData[id-1].resetSkillsUpgrade, updateData.resetSkillsUpgrade, document.querySelector('.reset-skills-upgrade-cost'), document.querySelector('.reset-skills-upgrade-actual-level'), document.querySelector('.reset-skills-upgrade'));
       userData[id-1].resetSkillsUpgrade = objectUpdateData;
@@ -450,14 +470,14 @@ const resetSkillsUpgrade = () => {
 }
 const multipleClickSkillUpgrade = () => {
   document.querySelector('.multiple-click-skill-upgrade').addEventListener('click', () => {
-    if(userData[id-1].multipleClickSkill.visible == false){
+    if(userData[id-1].multipleClickSkill.visible == false && (money >= userData[id-1].multipleClickSkillUpgrade.upgradeCost - (userData[id-1].multipleClickSkillUpgrade.upgradeCost * tax))){
       buySkill(userData[id-1].multipleClickSkill, userData[id-1].multipleClickSkillUpgrade);
       userData[id-1].multipleClickSkill.visible = visibleValue;
       userData[id-1].multipleClickSkillUpgrade.actualLevel = 1;
       document.querySelector('.multiple-click-skill-upgrade-actual-level').innerHTML = userData[id-1].multipleClickSkillUpgrade.actualLevel;
       showSkill(userData[id-1].multipleClickSkill, document.querySelector('.multiple-click-skill'));
     }
-    else {
+    else if(money >= userData[id-1].multipleClickSkillUpgrade.upgradeCost - (userData[id-1].multipleClickSkillUpgrade.upgradeCost * tax)){
       objectUpdateData;
       upgrader(userData[id-1].multipleClickSkillUpgrade, updateData.multipleClickSkillUpgrade, document.querySelector('.multiple-click-skill-upgrade-cost'), document.querySelector('.multiple-click-skill-upgrade-actual-level'), document.querySelector('.multiple-click-skill-upgrade'));
       userData[id-1].multipleClickSkillUpgrade = objectUpdateData;
@@ -467,14 +487,14 @@ const multipleClickSkillUpgrade = () => {
 }
 const multipleMoneySkillUpgrade = () => {
   document.querySelector('.multiple-money-skill-upgrade').addEventListener('click', () => {
-    if(userData[id-1].multipleMoneySkill.visible == false){
+    if(userData[id-1].multipleMoneySkill.visible == false && (money >= userData[id-1].multipleMoneySkillUpgrade.upgradeCost - (userData[id-1].multipleMoneySkillUpgrade.upgradeCost * tax))){
       buySkill(userData[id-1].multipleMoneySkill, userData[id-1].multipleMoneySkillUpgrade);
       userData[id-1].multipleMoneySkill.visible = visibleValue;
       userData[id-1].multipleMoneySkillUpgrade.actualLevel = 1;
       document.querySelector('.multiple-money-skill-upgrade-actual-level').innerHTML = userData[id-1].multipleMoneySkillUpgrade.actualLevel;
       showSkill(userData[id-1].multipleMoneySkill, document.querySelector('.multiple-money-skill'));
     }
-    else {
+    else if(money >= userData[id-1].multipleMoneySkillUpgrade.upgradeCost - (userData[id-1].multipleMoneySkillUpgrade.upgradeCost * tax)){
       objectUpdateData;
       upgrader(userData[id-1].multipleMoneySkillUpgrade, updateData.multipleMoneySkillUpgrade, document.querySelector('.multiple-money-skill-upgrade-cost'), document.querySelector('.multiple-money-skill-upgrade-actual-level'), document.querySelector('.multiple-money-skill-upgrade'));
       userData[id-1].multipleMoneySkillUpgrade = objectUpdateData;
@@ -484,14 +504,14 @@ const multipleMoneySkillUpgrade = () => {
 }
 const multipleGiftSkillUpgrade = () => {
   document.querySelector('.multiple-gift-skill-upgrade').addEventListener('click', () => {
-    if(userData[id-1].multipleGiftSkill.visible == false){
+    if(userData[id-1].multipleGiftSkill.visible == false && (money >= userData[id-1].multipleGiftSkillUpgrade.upgradeCost - (userData[id-1].multipleGiftSkillUpgrade.upgradeCost * tax))){
       buySkill(userData[id-1].multipleGiftSkill, userData[id-1].multipleGiftSkillUpgrade);
       userData[id-1].multipleGiftSkill.visible = visibleValue;
       userData[id-1].multipleGiftSkillUpgrade.actualLevel = 1;
       document.querySelector('.multiple-gift-skill-upgrade-actual-level').innerHTML = userData[id-1].multipleGiftSkillUpgrade.actualLevel;
       showSkill(userData[id-1].multipleGiftSkill, document.querySelector('.multiple-gift-skill'));
     }
-    else {
+    else if(money >= userData[id-1].multipleGiftSkillUpgrade.upgradeCost - (userData[id-1].multipleGiftSkillUpgrade.upgradeCost * tax)){
       objectUpdateData;
       upgrader(userData[id-1].multipleGiftSkillUpgrade, updateData.multipleGiftSkillUpgrade, document.querySelector('.multiple-gift-skill-upgrade-cost'), document.querySelector('.multiple-gift-skill-upgrade-actual-level'), document.querySelector('.multiple-gift-skill-upgrade'));
       userData[id-1].multipleGiftSkillUpgrade = objectUpdateData;
