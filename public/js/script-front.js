@@ -617,7 +617,7 @@ const workersBonus = () => {
   workerMachineBonus *= (userData[id-1].workers.bonus / 100)
   return workerMachineBonus;
 }
-
+let borderChangeFromRed, borderChangeFromGreen;
 const skills = () => {
   multipleClickSkillFunction();
   multipleMoneySkillFunction();
@@ -650,9 +650,16 @@ const upgrades= () => {
   AutoClicker();
   AutoSkills();
   document.querySelector('.money-boost').addEventListener('mouseenter', () => {
-    if(money >= userData[id-1].moneyBoost.upgradeCost &&  userData[id-1].moneyBoost.actualLevel < userData[id-1].moneyBoost.maxLevel) {
+    if(money >= userData[id-1].moneyBoost.upgradeCost && userData[id-1].moneyBoost.actualLevel < userData[id-1].moneyBoost.maxLevel) {
         document.querySelector('.money-boost').classList.add('border-upgrade-green');
+        borderChangeFromGreen = setInterval(() => {
+          if(money < userData[id-1].moneyBoost.upgradeCost && userData[id-1].moneyBoost.actualLevel < userData[id-1].moneyBoost.maxLevel) {
+            document.querySelector('.money-boost').classList.add('border-upgrade-red');
+            document.querySelector('.money-boost').classList.remove('border-upgrade-green');
+          }
+        }, 1000)
         document.querySelector('.money-boost').addEventListener('mouseleave', () => {
+          clearInterval(borderChangeFromGreen);
           document.querySelector('.money-boost').classList.forEach(actualClass => {
             if(actualClass == "border-upgrade-green") {
               document.querySelector('.money-boost').classList.remove('border-upgrade-green');
@@ -664,14 +671,29 @@ const upgrades= () => {
           document.querySelector('.money-boost').classList.remove('border-upgrade-green');
         })
     }
-    else if (money < userData[id-1].moneyBoost.upgradeCost &&  userData[id-1].moneyBoost.actualLevel < userData[id-1].moneyBoost.maxLevel) {
-        document.querySelector('.money-boost').classList.add('border-upgrade-red');
-        document.querySelector('.money-boost').addEventListener('mouseleave', () => {
+    else if (money < userData[id-1].moneyBoost.upgradeCost && userData[id-1].moneyBoost.actualLevel < userData[id-1].moneyBoost.maxLevel) {
+      document.querySelector('.money-boost').classList.add('border-upgrade-red');
+      borderChangeFromRed = setInterval(() => {
+        if(money >= userData[id-1].moneyBoost.upgradeCost && userData[id-1].moneyBoost.actualLevel < userData[id-1].moneyBoost.maxLevel) {
+          document.querySelector('.money-boost').classList.add('border-upgrade-green');
+          document.querySelector('.money-boost').classList.remove('border-upgrade-red');
+        }
+      }, 1000)
+      document.querySelector('.money-boost').addEventListener('mouseleave', () => {
+        clearInterval(borderChangeFromRed);
+        document.querySelector('.money-boost').classList.forEach(actualClass => {
+          if(actualClass == "border-upgrade-green") {
+            document.querySelector('.money-boost').classList.remove('border-upgrade-green');
+          }
+          else if(actualClass == "border-upgrade-red") {
+            document.querySelector('.money-boost').classList.remove('border-upgrade-red');
+          }
+        });
         document.querySelector('.money-boost').classList.remove('border-upgrade-green');
-        })
-    }
-  })
-}
+      });
+    };
+  });
+};
 //////////////////////////////////////////////////////////////////////
 // functions wchih could be use more time:
 const borderDuringUpdate = (actual) => {
