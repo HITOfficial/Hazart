@@ -157,14 +157,6 @@ body > .app > .tools > .character-upgrades {
     box-shadow: 1px 1px 5px 2px rgb(223, 0, 86);
     border-color: rgb(223, 0, 86);
 }
-.upgrade-border:hover {
-    box-shadow: 1px 1px 5px 2px rgb(52, 223, 0);
-    border-color: rgb(52, 223, 0);
-}
-.upgrades-box:hover {
-    box-shadow: 1px 1px 5px 2px rgb(52, 223, 0);
-    border-color: rgb(52, 223, 0);
-}
 /* .upgrades-box:hover {
     box-shadow: 1px 1px 5px 2px rgb(223, 15, 0);
     border-color: rgb(223, 15, 0);
@@ -738,13 +730,182 @@ body > .menu > .menu-container > .forgotten-password-hide {
     transition: 0.4s linear;
 }
 
+.border-upgrade-green {
+    position: relative;
+}
+.border-upgrade-green:hover::after {
+    animation: border-update-all 2s linear infinite
+}
+.border-upgrade-green::after {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    background-color: rgb(52, 223, 0);
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 1px 1px rgb(52, 223, 0);
+}
+.border-upgrade-red {
+    position: relative;
+}
+.border-upgrade-red:hover::after {
+    animation: border-update-all 2s linear infinite
+}
+.border-upgrade-red::after {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    background-color: rgb(223, 0, 86);
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 1px 1px rgb(223, 0, 86);
+}
 
+@keyframes border-update-all {
+    0% {
+        top: -1%;
+        left: -1%;
+        width: 102%;
+        height: 1%;
+        transform: scaleX(0);
+        transform-origin: left;
+    }
+    24.99% {
+        top: -1%;
+        left: -1%;
+        width: 102%;
+        height: 1%;
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+    25% {
+        left: 100%;
+        top: -1%;
+        width: 1%;
+        height: 102%;
+        transform: scaleY(0);
+        transform-origin: top;
+    }
+    49.99% {
+        left: 100%;
+        top: -1%;
+        width: 1%;
+        height: 102%;
+        transform: scaleY(1);
+        transform-origin: top;
+    }
+    50% {
+        top: 100%;
+        left: 0%;
+        width: 102%;
+        height: 1%;
+        transform: scaleX(0);
+        transform-origin: right;
+    }
+    74.99% {
+        top: 100%;
+        left: 0%;
+        width: 102%;
+        height: 1%;
+        transform: scaleX(1);
+        transform-origin: right;
+    }
+    75% {
+        top: -1%;
+        left: -1%;
+        width: 1%;
+        height: 102%;
+        transform: scaleY(0);
+        transform-origin: bottom;
+    }
+    100% {
+        top: -1%;
+        left: -1%;
+        width: 1%;
+        height: 102%;
+        transform: scaleY(1);
+        transform-origin: bottom;
+    }
+}
 
-
-
-
-
-
+@keyframes border-update-top {
+    from {
+        top: 0;
+        left: -2%;
+        width: 100%;
+        height: 5%;
+        transform: scaleX(0);
+        transform-origin: left;
+    }
+    to {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5%;
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+}
+@keyframes border-update-right {
+    from {
+        bottom: 0;
+        right: 0;
+        width: 5%;
+        height: 100%;
+        transform: scaleY(0);
+        transform-origin: top;
+    }
+    to {
+        bottom: 0;
+        right: 0;
+        width: 5%;
+        height: 100%;
+        transform: scaleY(1);
+        transform-origin: top;
+    }
+}
+@keyframes border-update-bottom {
+    from {
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 5%;
+        transform: scaleX(0);
+        transform-origin: right;
+    }
+    to {
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 5%;
+        transform: scaleX(1);
+        transform-origin: right;
+    }
+}
+@keyframes border-update-left {
+    from {
+        bottom: 0;
+        left: 0;
+        width: 5%;
+        height: 100%;
+        transform: scaleY(0);
+        transform-origin: bottom;
+    }
+    to {
+        bottom: 0;
+        left: 0;
+        width: 5%;
+        height: 100%;
+        transform: scaleY(1);
+        transform-origin: bottom;
+    }
+}
 
 
 
