@@ -418,12 +418,12 @@ body > .app > .main > .upgrades-container > .content-box > .sort >  .worker-mach
 body > .app > .main > .upgrades-container > .content-box > .sort   .worker-active{
     box-shadow: 0 0 0 0 , -0.2vh 0.3vh 1.2vh 0.6vh rgb(199, 51, 51);
 }
-body > .app > .main > .upgrades-container > .content-box > .sort >  .buy-worker::after {
+body > .app > .main > .upgrades-container > .content-box > .sort >  .buy-worker::before {
     position: absolute;
     content: 'Buy worker';
     transform: translate(20%,250%);
 }
-body > .app > .main > .upgrades-container > .content-box > .sort >  .buy-factory::after {
+body > .app > .main > .upgrades-container > .content-box > .sort >  .buy-factory::before {
     position: absolute;
     content: 'Buy factory';
     transform: translate(20%,250%);
