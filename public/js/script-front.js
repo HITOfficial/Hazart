@@ -626,6 +626,22 @@ const skills = () => {
   moneyEverySecFunctionWithoutAddingMoney();
   resetSkillsFunction();
 }
+const bordersOnObjects = () => {
+  borderUpdate(document.querySelector('.money-boost'), userData[id-1].moneyBoost);
+  borderUpdate(document.querySelector('.bonus-gift'), userData[id-1].gift);
+  borderUpdate(document.querySelector('.tax'), userData[id-1].tax);
+  borderUpdate(document.querySelector('.cooldown'), userData[id-1].cooldown);
+  borderUpdate(document.querySelector('.reset-skills-upgrade'), userData[id-1].resetSkillsUpgrade);
+  borderUpdate(document.querySelector('.multiple-click-skill-upgrade'), userData[id-1].multipleClickSkillUpgrade);
+  borderUpdate(document.querySelector('.multiple-money-skill-upgrade'), userData[id-1].multipleMoneySkillUpgrade);
+  borderUpdate(document.querySelector('.multiple-gift-skill-upgrade'), userData[id-1].multipleGiftSkillUpgrade);
+  userData[id-1].autoMachine.forEach(actualObject => {
+    borderUpdate(document.querySelectorAll('.auto-machine')[actualObject.id-1], actualObject);
+  })
+  userData[id-1].workerMachine.forEach(actualObject => {
+    borderUpdate(document.querySelectorAll('.worker-machine')[actualObject.id-1], actualObject);
+  })
+}
 // packing all updating functions inside one
 const upgrades= () => {
   valueMultiplerBonusUpgrade();
@@ -650,50 +666,6 @@ const upgrades= () => {
   AutoClicker();
   AutoSkills();
   bordersOnObjects();
-  // document.querySelector('.money-boost').addEventListener('mouseenter', () => {
-  //   if(money >= userData[id-1].moneyBoost.upgradeCost && userData[id-1].moneyBoost.actualLevel < userData[id-1].moneyBoost.maxLevel) {
-  //       document.querySelector('.money-boost').classList.add('border-upgrade-green');
-  //       borderChangeFromGreen = setInterval(() => {
-  //         if(money < userData[id-1].moneyBoost.upgradeCost && userData[id-1].moneyBoost.actualLevel < userData[id-1].moneyBoost.maxLevel) {
-  //           document.querySelector('.money-boost').classList.add('border-upgrade-red');
-  //           document.querySelector('.money-boost').classList.remove('border-upgrade-green');
-  //         }
-  //       }, 1000)
-  //       document.querySelector('.money-boost').addEventListener('mouseleave', () => {
-  //         clearInterval(borderChangeFromGreen);
-  //         document.querySelector('.money-boost').classList.forEach(actualClass => {
-  //           if(actualClass == "border-upgrade-green") {
-  //             document.querySelector('.money-boost').classList.remove('border-upgrade-green');
-  //           }
-  //           else if(actualClass == "border-upgrade-red") {
-  //             document.querySelector('.money-boost').classList.remove('border-upgrade-red');
-  //           }
-  //         })
-  //         document.querySelector('.money-boost').classList.remove('border-upgrade-green');
-  //       })
-  //   }
-  //   else if (money < userData[id-1].moneyBoost.upgradeCost && userData[id-1].moneyBoost.actualLevel < userData[id-1].moneyBoost.maxLevel) {
-  //     document.querySelector('.money-boost').classList.add('border-upgrade-red');
-  //     borderChangeFromRed = setInterval(() => {
-  //       if(money >= userData[id-1].moneyBoost.upgradeCost && userData[id-1].moneyBoost.actualLevel < userData[id-1].moneyBoost.maxLevel) {
-  //         document.querySelector('.money-boost').classList.add('border-upgrade-green');
-  //         document.querySelector('.money-boost').classList.remove('border-upgrade-red');
-  //       }
-  //     }, 1000)
-  //     document.querySelector('.money-boost').addEventListener('mouseleave', () => {
-  //       clearInterval(borderChangeFromRed);
-  //       document.querySelector('.money-boost').classList.forEach(actualClass => {
-  //         if(actualClass == "border-upgrade-green") {
-  //           document.querySelector('.money-boost').classList.remove('border-upgrade-green');
-  //         }
-  //         else if(actualClass == "border-upgrade-red") {
-  //           document.querySelector('.money-boost').classList.remove('border-upgrade-red');
-  //         }
-  //       });
-  //       document.querySelector('.money-boost').classList.remove('border-upgrade-green');
-  //     });
-  //   };
-  // });
 };
 //////////////////////////////////////////////////////////////////////
 // functions wchih could be use more time:
@@ -843,29 +815,13 @@ const countBonus = (object) => {
   })
   effectivity /= 100
 }
-const bordersOnObjects = () => {
-  borderUpdate(document.querySelector('.money-boost'), userData[id-1].moneyBoost);
-  borderUpdate(document.querySelector('.bonus-gift'), userData[id-1].gift);
-  borderUpdate(document.querySelector('.tax'), userData[id-1].tax);
-  borderUpdate(document.querySelector('.cooldown'), userData[id-1].cooldown);
-  borderUpdate(document.querySelector('.reset-skills-upgrade'), userData[id-1].resetSkillsUpgrade);
-  borderUpdate(document.querySelector('.multiple-click-skill-upgrade'), userData[id-1].multipleClickSkillUpgrade);
-  borderUpdate(document.querySelector('.multiple-money-skill-upgrade'), userData[id-1].multipleMoneySkillUpgrade);
-  borderUpdate(document.querySelector('.multiple-gift-skill-upgrade'), userData[id-1].multipleGiftSkillUpgrade);
-  userData[id-1].autoMachine.forEach(actualObject => {
-    borderUpdate(document.querySelectorAll('.auto-machine')[actualObject.id-1], actualObject);
-  })
-  userData[id-1].workerMachine.forEach(actualObject => {
-    borderUpdate(document.querySelectorAll('.worker-machine')[actualObject.id-1], actualObject);
-  })
-}
 //border during mouseenter on element
 const borderUpdate = (objectClass, object) => {
   objectClass.addEventListener('mouseenter', () => {
-    if((money >= (object.upgradeCost - object.upgradeCost * tax)) && (object.actualLevel < object.maxLevel) || (money >= (object.cost - object.cost * tax) && object.bought == false)) {
+    if((money >= (object.upgradeCost - object.upgradeCost * tax)) && ((object.actualLevel < object.maxLevel) || (object.level < object.maxLevel)) || (money >= (object.cost - object.cost * tax) && object.bought == false)) {
         objectClass.classList.add('border-upgrade-green');
         borderChangeFromGreen = setInterval(() => {
-          if((money < (object.upgradeCost - object.upgradeCost * tax)) && (object.actualLevel < object.maxLevel)  || (money < (object.cost - object.cost * tax) && object.bought == false)) {
+          if((money >= (object.upgradeCost - object.upgradeCost * tax)) && ((object.actualLevel < object.maxLevel) ||(object.level < object.maxLevel))  || (money < (object.cost - object.cost * tax) && object.bought == false)) {
             objectClass.classList.add('border-upgrade-red');
             objectClass.classList.remove('border-upgrade-green');
           }
@@ -883,10 +839,10 @@ const borderUpdate = (objectClass, object) => {
           objectClass.classList.remove('border-upgrade-green');
         })
     }
-    else if ((money < (object.upgradeCost - object.upgradeCost * tax)) && (object.actualLevel < object.maxLevel)  || (money < (object.cost - object.cost * tax) && object.bought == false)) {
+    else if ((money < (object.upgradeCost - object.upgradeCost * tax)) && ((object.actualLevel < object.maxLevel) || (object.level < object.maxLevel))  || (money < (object.cost - object.cost * tax) && object.bought == false)) {
       objectClass.classList.add('border-upgrade-red');
       borderChangeFromRed = setInterval(() => {
-        if((money >= (object.upgradeCost - object.upgradeCost * tax)) && (object.actualLevel < object.maxLevel)  || (money >= (object.cost - object.cost * tax) && object.bought == false)) {
+        if((money >= (object.upgradeCost - object.upgradeCost * tax)) && ((object.actualLevel < object.maxLevel) ||(object.level < object.maxLevel)) || (money >= (object.cost - object.cost * tax) && object.bought == false)) {
           objectClass.classList.add('border-upgrade-green');
           objectClass.classList.remove('border-upgrade-red');
         }

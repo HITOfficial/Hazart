@@ -58,7 +58,7 @@ body > .app > .main > .top-container {
 }
 body > .app > .main > .top-container > .wallet {
     position: absolute;
-    width: 14vw;
+    width: 24vw;
     height: 4vw;
     background-color: #FF6C6E;
     border-radius: 20%;
@@ -67,7 +67,7 @@ body > .app > .main > .top-container > .wallet {
     align-items: center;
     font-size: 2vw;
     color: white;
-    transform: translate(236%, 60%);
+    transform: translate(116%, 60%);
 }
 body > .app > .main > .top-container > .tab-skills {
     width: 40%;
@@ -422,11 +422,13 @@ body > .app > .main > .upgrades-container > .content-box > .sort >  .buy-worker:
     position: absolute;
     content: 'Buy worker';
     transform: translate(20%,250%);
+    text-shadow: 0 0 1px gray;
 }
 body > .app > .main > .upgrades-container > .content-box > .sort >  .buy-factory::before {
     position: absolute;
     content: 'Buy factory';
     transform: translate(20%,250%);
+    text-shadow: 0 0 1px gray;
 }
 body > .app > .main > .upgrades-container > .content-box > .sort >  .auto-machine .cost-auto-container-factory,
 body > .app > .main > .upgrades-container > .content-box > .sort >  .worker-machine .cost-auto-container-worker {

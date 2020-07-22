@@ -37,15 +37,15 @@
         {"id" : 10, "bought": false, "cost" : 10000, "effectivity" : 100}
     ],
     "workerMachine" : [
-        {"id" : 1, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "upgradeCost": 12000},
-        {"id" : 2, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "upgradeCost": 12000},
-        {"id" : 3, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "upgradeCost": 12000},
-        {"id" : 4, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "upgradeCost": 12000},
-        {"id" : 5, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "upgradeCost": 12000},
-        {"id" : 6, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "upgradeCost": 12000},
-        {"id" : 7, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "upgradeCost": 12000},
-        {"id" : 8, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "upgradeCost": 12000},
-        {"id" : 9, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "upgradeCost": 12000},
-        {"id" : 10, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "upgradeCost": 12000}
+        {"id" : 1, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "maxLevel": 5, "upgradeCost": 12000},
+        {"id" : 2, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "maxLevel": 5, "upgradeCost": 12000},
+        {"id" : 3, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "maxLevel": 5, "upgradeCost": 12000},
+        {"id" : 4, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "maxLevel": 5, "upgradeCost": 12000},
+        {"id" : 5, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "maxLevel": 5, "upgradeCost": 12000},
+        {"id" : 6, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "maxLevel": 5, "upgradeCost": 12000},
+        {"id" : 7, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "maxLevel": 5, "upgradeCost": 12000},
+        {"id" : 8, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "maxLevel": 5, "upgradeCost": 12000},
+        {"id" : 9, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "maxLevel": 5, "upgradeCost": 12000},
+        {"id" : 10, "bought": false, "cost" : 5000, "effectivity" : 100, "level" : 1, "maxLevel": 5, "upgradeCost": 12000}
     ]
 }
