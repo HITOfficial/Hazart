@@ -617,7 +617,7 @@ const workersBonus = () => {
   workerMachineBonus *= (userData[id-1].workers.bonus / 100)
   return workerMachineBonus;
 }
-let borderChangeFromRed, borderChangeFromGreen;
+let borderChangeFromRed, borderChangeFromGreen, borderLookForMaxLevel;
 const skills = () => {
   multipleClickSkillFunction();
   multipleMoneySkillFunction();
@@ -821,13 +821,26 @@ const borderUpdate = (objectClass, object) => {
     if((money >= (object.upgradeCost - object.upgradeCost * tax)) && ((object.actualLevel < object.maxLevel) || (object.level < object.maxLevel)) || (money >= (object.cost - object.cost * tax) && object.bought == false)) {
         objectClass.classList.add('border-upgrade-green');
         borderChangeFromGreen = setInterval(() => {
-          if((money >= (object.upgradeCost - object.upgradeCost * tax)) && ((object.actualLevel < object.maxLevel) ||(object.level < object.maxLevel))  || (money < (object.cost - object.cost * tax) && object.bought == false)) {
+          if((money < (object.upgradeCost - object.upgradeCost * tax)) && ((object.actualLevel < object.maxLevel) ||(object.level < object.maxLevel))  || (money < (object.cost - object.cost * tax) && object.bought == false)) {
             objectClass.classList.add('border-upgrade-red');
             objectClass.classList.remove('border-upgrade-green');
           }
         }, 1000)
+        borderLookForMaxLevel = setInterval(() => {
+          if(object.level == object.maxLevel) {
+            objectClass.classList.forEach(actualClass => {
+              if(actualClass == "border-upgrade-green") {
+                objectClass.classList.remove('border-upgrade-green');
+              }
+              else if(actualClass == "border-upgrade-red") {
+                objectClass.classList.remove('border-upgrade-red');
+              }
+            })
+          }
+        }, 1000)
         objectClass.addEventListener('mouseleave', () => {
           clearInterval(borderChangeFromGreen);
+          clearInterval(borderLookForMaxLevel);
           objectClass.classList.forEach(actualClass => {
             if(actualClass == "border-upgrade-green") {
               objectClass.classList.remove('border-upgrade-green');
@@ -845,10 +858,23 @@ const borderUpdate = (objectClass, object) => {
         if((money >= (object.upgradeCost - object.upgradeCost * tax)) && ((object.actualLevel < object.maxLevel) ||(object.level < object.maxLevel)) || (money >= (object.cost - object.cost * tax) && object.bought == false)) {
           objectClass.classList.add('border-upgrade-green');
           objectClass.classList.remove('border-upgrade-red');
+        };
+      }, 1000);
+      borderLookForMaxLevel = setInterval(() => {
+        if(object.level == object.maxLevel) {
+          objectClass.classList.forEach(actualClass => {
+            if(actualClass == "border-upgrade-green") {
+              objectClass.classList.remove('border-upgrade-green');
+            }
+            else if(actualClass == "border-upgrade-red") {
+              objectClass.classList.remove('border-upgrade-red');
+            }
+          })
         }
       }, 1000)
       objectClass.addEventListener('mouseleave', () => {
         clearInterval(borderChangeFromRed);
+        clearInterval(borderLookForMaxLevel);
         objectClass.classList.forEach(actualClass => {
           if(actualClass == "border-upgrade-green") {
             objectClass.classList.remove('border-upgrade-green');
